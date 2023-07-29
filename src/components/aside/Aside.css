@@ -1,0 +1,5 @@
+.Aside {
+  max-width: 7.2rem;
+  min-height: 100vh;
+  background-color: hsla(0, 0%, 100%, 0.8);
+}
