@@ -14,22 +14,7 @@ import ImageI from "../assets/instagram.svg";
 import ImageB from "../assets/blank.jpg";
 
 const localizer = momentLocalizer(moment);
-const myUsersList = [
-  {
-    userName: "runner",
-    name: "Neringa",
-    facebook: [{username: "poster", image: Image}],
-    instagram: [{username: "poster", image: Image}],
-    linkedin: [{username: "poster", image: Image}],
-    twitter: [{username: "poster", image: Image}],
-    tiktok: [
-      {
-        username: "runner",
-        image: Image,
-      },
-    ],
-  },
-];
+
 // save them in local storage
 const myEventsList = [
   {start: new Date(), end: new Date(), title: "special event"},
@@ -41,12 +26,12 @@ const myEventsList = [
   },
   {
     start: moment("2023-08-08T10:00:00").toDate(),
-    end: moment("2023-08-08T13:00:00").toDate(),
+    end: moment("2023-08-08T11:00:00").toDate(),
     title: "special event3",
   },
   {
-    start: moment("2023-07-30T10:00:00").toDate(),
-    end: moment("2023-07-30T14:00:00").toDate(),
+    start: moment("2023-08-4T10:00:00").toDate(),
+    end: moment("2023-08-4T14:00:00").toDate(),
     title: "special event4",
     data: {
       profile: "Instagram",
@@ -64,77 +49,6 @@ const myEventsList = [
   },
 ];
 
-const components = {
-  event: (props: any) => {
-    const eventType = props?.event?.data?.profile;
-    const isImage = props?.event?.data?.image;
-    // we get this data {start: new Date(), end: new Date(), title: "special event"},
-    // console.log(props);
-    if (isImage) {
-      return (
-        <div
-          style={{
-            backgroundColor: "pink",
-            color: "white",
-            height: "100%",
-            backgroundImage: `url(${props.event.data.image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {props.title}
-        </div>
-      );
-    } else {
-      return (
-        <div
-          style={{
-            backgroundColor: "pink",
-            color: "white",
-            height: "100%",
-            backgroundImage: `url(${ImageB})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {props.title}
-        </div>
-      );
-    }
-    // switch (eventType) {
-    //   case "Instagram":
-    //     return (
-    //       <div
-    //         style={{
-    //           backgroundColor: "pink",
-    //           color: "white",
-    //           height: "100%",
-    //           backgroundImage: `url(${props.event.data.image})`,
-    //           backgroundSize: "contain",
-    //         }}
-    //       >
-    //         {props.title}
-    //       </div>
-    //     );
-    //   case "Facebook":
-    //     return (
-    //       <div
-    //         style={{
-    //           backgroundColor: "blue",
-    //           color: "white",
-    //           height: "100%",
-    //           backgroundImage: `url(${props.event.data.image})`,
-    //           backgroundSize: "contain",
-    //         }}
-    //       >
-    //         {props.title}
-    //       </div>
-    //     );
-    //   default:
-    //     return null;
-    // }
-  },
-};
 const CalendarView = (props: any) => {
   const [newEvent, setNewEvent] = useState<any>({
     title: "",
@@ -144,20 +58,51 @@ const CalendarView = (props: any) => {
   const [allEvents, setAllEvents] = useState<any>(myEventsList);
   const [isDisabled, setIsDisabled] = useState<any>(false);
 
+  // function myEvent(props: any) {
+  //   const isImage = props?.event?.data?.image;
+
+  //   if (isImage) {
+  //     return (
+  //       <div
+  //         style={{
+  //           color: "white",
+  //           height: "100%",
+  //           backgroundImage: `url(${props.event.data.image})`,
+  //           backgroundSize: "cover",
+  //           backgroundPosition: "center",
+  //         }}
+  //       >
+  //         {props.title}
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div
+  //         style={{
+  //           color: "white",
+  //           height: "100%",
+  //           backgroundImage: `url(${ImageB})`,
+  //           backgroundSize: "cover",
+  //           backgroundPosition: "center",
+  //         }}
+  //       >
+  //         {props.title}
+  //       </div>
+  //     );
+  //   }
+  // }
+  let components = {
+    event: EventComponent(props), // used by each view (Month, Day, Week)
+    // toolbar: MyToolbar(props),
+    // agenda: {
+    //   event: MyAgendaEvent, // with the agenda view use a different component to render events
+    // },
+  };
+
   function handleAddEvent() {
     setAllEvents([...allEvents, newEvent]);
   }
 
-  // let components = useMemo(
-  //   {
-  //     // event: MyEvent, // used by each view (Month, Day, Week)
-  //     toolbar: MyToolbar,
-  //     // agenda: {
-  //     //   event: MyAgendaEvent, // with the agenda view use a different component to render events
-  //     // },
-  //   },
-  //   []
-  // );
   return (
     <div>
       <h2>Add new event</h2>
@@ -197,63 +142,74 @@ const CalendarView = (props: any) => {
 
 export default CalendarView;
 
-// const MyEvent =
-//   ({events, change}) =>
-//   (props) => {
-//     return (
-//       <div className="customEventTile" title="This is EventTile">
-//         <h5>{props.event.title}</h5>
-//         <button onClick={props.change}>Do Something</button>
-//       </div>
-//     );
-//   };
+const EventComponent =
+  ({events, change}: any) =>
+  (props: any) => {
+    console.log(props);
+    const isImage = props?.event?.data?.image;
+
+    if (isImage) {
+      return (
+        <div
+          style={{
+            color: "white",
+            height: "100%",
+            backgroundImage: `url(${props.event.data.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {props.title}
+        </div>
+      );
+    } else {
+      return (
+        <div
+          style={{
+            color: "white",
+            height: "100%",
+            backgroundImage: `url(${ImageB})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {props.title}
+        </div>
+      );
+    }
+
+    // return (
+    //   <div className="customEventTile" title="This is EventTile">
+    //     <h5>{props.event.title}</h5>
+    //     <button onClick={props.change}>Review</button>
+    //   </div>
+    // );
+  };
 // design custom design or elements for top navigation toolbaar, for today, next, prev or all views
 
-// var MyToolbar = ({handleChange}) => {
+// const MyToolbar = (props) => {
 //   return class BaseToolBar extends Toolbar {
 //     constructor(props) {
 //       super(props);
 //     }
-//     handleDayChange = (event, mconte) => {
-//       mconte(event.target.value);
-//     };
-//     handleNamvigate = (detail, elem) => {
-//       detail.navigate(elem);
-//     };
+
 //     render() {
 //       return (
 //         <div className="posr">
 //           <div className="rbc-btn-group">
-//             <button
-//               type="button"
-//               className="defaultbtn"
-//               onClick={() => this.handleNamvigate(this, "TODAY")}
-//             >
+//             <button type="button" className="defaultbtn">
 //               Today
 //             </button>
-//             <button
-//               type="button"
-//               className="nextp-btn"
-//               onClick={() => this.handleNamvigate(this, "PREV")}
-//             >
+//             <button type="button" className="nextp-btn">
 //               Prev
 //             </button>
-//             <button
-//               type="button"
-//               className="nextp-btn"
-//               onClick={() => this.handleNamvigate(this, "NEXT")}
-//             >
+//             <button type="button" className="nextp-btn">
 //               Next
 //             </button>
 //           </div>
-//           <div className="rbc-toolbar-label">{this.props.label}</div>
 
 //           <div className="rbc-btn-group">
-//             <select
-//               className="form-control"
-//               onChange={(e) => this.handleDayChange(e, this.view)}
-//               defaultValue={"week"}
-//             >
+//             <select className="form-control" defaultValue={"week"}>
 //               <option className="optionbar" value="day">
 //                 Day
 //               </option>
