@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./App.css";
 import Homepage from "./components/pages/homepage/Homepage";
 import Layout from "./components/pages/Layout/Layout";

@@ -27,9 +27,15 @@ const Aside = () => {
               </a>
             </li>
             <li>
-              <a href="/dashboard">
+              <a href="/publish">
                 <span>📝</span>
                 <span>Publish</span>
+              </a>
+            </li>
+            <li>
+              <a href="/dashboard">
+                <span>📝</span>
+                <span>Dshboard</span>
               </a>
             </li>
           </ul>
