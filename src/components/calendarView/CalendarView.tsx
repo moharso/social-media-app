@@ -15,48 +15,36 @@ import ImageB from "../assets/blank.jpg";
 
 const localizer = momentLocalizer(moment);
 
-// save them in local storage
-const myEventsList = [
-  {start: new Date(), end: new Date(), title: "special event"},
-  {
-    start: new Date(2023, 7 - 1, 31),
-    end: new Date(2023, 8 - 1, 2),
-    allDay: true,
-    title: "special event2",
-  },
-  {
-    start: moment("2023-08-08T10:00:00").toDate(),
-    end: moment("2023-08-08T11:00:00").toDate(),
-    title: "special event3",
-  },
-  {
-    start: moment("2023-08-4T10:00:00").toDate(),
-    end: moment("2023-08-4T14:00:00").toDate(),
-    title: "special event4",
-    data: {
-      profile: "Instagram",
-      image: Image,
-    },
-  },
-  {
-    start: moment("2023-07-30T10:00:00").toDate(),
-    end: moment("2023-07-30T14:00:00").toDate(),
-    title: "special event6",
-    data: {
-      profile: "Facebook",
-      image: ImageF,
-    },
-  },
-];
+const changeType = (a: any) => moment(a).toDate();
 
 const CalendarView = (props: any) => {
-  const [newEvent, setNewEvent] = useState<any>({
-    title: "",
-    start: "",
-    end: "",
-  });
-  const [allEvents, setAllEvents] = useState<any>(myEventsList);
-  const [isDisabled, setIsDisabled] = useState<any>(false);
+  const result = useMemo(() => {
+    return props.allEvents.map((obj: any) => ({
+      ...obj,
+      start: changeType(obj.start),
+      end: changeType(obj.end),
+    }));
+  }, [props.allEvents]);
+
+  // const [bookedPost, setBookedPost] = useState(() => {
+  //   const result = props.allEvents.map((obj: any) => ({
+  //     ...obj,
+  //     start: changeType(obj.start),
+  //     end: changeType(obj.end),
+  //   }));
+  //   return result;
+  // });
+
+  // const [dataWithDates, setdataWithDates]=useState();
+  // const list = props.allEvents;
+  // const [newEvent, setNewEvent] = useState<any>({
+  //   post: "",
+  //   start: "",
+  //   end: "",
+  // });
+  // const [allEvents, setAllEvents] = useState<any>(myEventsList);
+  console.log("THIS IS PROPS.allEvents", props.allEvents);
+  // const [isDisabled, setIsDisabled] = useState<any>(false);
 
   // function myEvent(props: any) {
   //   const isImage = props?.event?.data?.image;
@@ -99,20 +87,21 @@ const CalendarView = (props: any) => {
     // },
   };
 
-  function handleAddEvent() {
-    setAllEvents([...allEvents, newEvent]);
-  }
+  // function handleAddEvent() {
+  //   setAllEvents([...allEvents, newEvent]);
+  //   console.log(allEvents);
+  // }
 
   return (
     <div>
-      <h2>Add new event</h2>
+      {/* <h2>Add new event</h2>
       <div>
         <input
           type="text"
-          placeholder="Add title"
+          placeholder="Add post"
           style={{width: "20%"}}
-          value={newEvent.title}
-          onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+          value={newEvent.post}
+          onChange={(e) => setNewEvent({...newEvent, post: e.target.value})}
         ></input>
         <DatePicker
           placeholderText="Start Date"
@@ -125,10 +114,10 @@ const CalendarView = (props: any) => {
           onChange={(end) => setNewEvent({...newEvent, end})}
         />
         <button onClick={handleAddEvent}>Add event </button>
-      </div>
+      </div> */}
       <Calendar
         localizer={localizer}
-        events={allEvents}
+        events={result}
         startAccessor="start"
         endAccessor="end"
         style={{height: "80vh"}}
@@ -159,7 +148,7 @@ const EventComponent =
             backgroundPosition: "center",
           }}
         >
-          {props.title}
+          {/* {props.title} */}
         </div>
       );
     } else {
@@ -173,7 +162,7 @@ const EventComponent =
             backgroundPosition: "center",
           }}
         >
-          {props.title}
+          {/* {props.title} */}
         </div>
       );
     }

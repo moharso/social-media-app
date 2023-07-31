@@ -1,12 +1,12 @@
 export const myUsersList = [
   {
-    userName: "runner",
+    userName: "admin",
     name: "Neringa",
     surname: "Ne",
-    facebook: [{username: "poster", image: Image}],
-    instagram: [{username: "poster", image: Image}],
-    linkedin: [{username: "poster", image: Image}],
-    twitter: [{username: "poster", image: Image}],
+    facebook: [{username: "runner", image: Image}],
+    instagram: [{username: "animals", image: Image}],
+    linkedin: [{username: "painting", image: Image}],
+    twitter: [{username: "clothes", image: Image}],
     tiktok: [
       {
         username: "runner",

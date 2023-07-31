@@ -43,6 +43,7 @@ const UploadPhoto = () => {
               {!selectedImage && (
                 <input
                   type="file"
+                  accept="image/*"
                   name="myImage"
                   onChange={(e: any) => {
                     console.log(e.target.files[0]);
