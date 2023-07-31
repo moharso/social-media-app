@@ -141,6 +141,7 @@ const EventComponent =
       return (
         <div
           style={{
+            backgroundColor: "yellow",
             color: "white",
             height: "100%",
             backgroundImage: `url(${props.event.data.image})`,

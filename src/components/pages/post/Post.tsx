@@ -56,6 +56,16 @@ const myEventsList = [
 ];
 
 const Post = ({onClickSubmit}: any) => {
+  //   props.setImage(URL.createObjectURL(event.target.files[0]));
+  // };
+
+  const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  function handlePickImage(event: any) {
+    console.log(event.target.files[0]);
+    setSelectedImage(URL.createObjectURL(event.target.files[0]));
+  }
+
   // const [newEvent, setNewEvent] = useState<any>({
   //   post: "",
   //   start: "",
@@ -78,9 +88,11 @@ const Post = ({onClickSubmit}: any) => {
 
   return (
     <div className="flex w-full h-full">
-      <UploadPhoto />
+      <UploadPhoto pickImage={handlePickImage} />
       <AddCaption
         onClickSubmit={onClickSubmit}
+        selectedImage={selectedImage}
+
         // onAddPost={handleAddEvent}
         // newEvent={newEvent}
         // onAddStart={handleDateStart}

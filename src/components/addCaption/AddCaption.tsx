@@ -5,60 +5,60 @@ import {Calendar, momentLocalizer} from "react-big-calendar";
 // @ts-ignore
 import ImageF from "../assets/facebook.svg";
 import moment from "moment";
-import DatePicker from "react-datepicker";
+import DatePicker, {getDefaultLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const myEventsList = [
-  // s
-  {
-    start: moment("2023-08-02T08:00:00").toDate(),
-    end: moment("2023-08-02T10:00:00").toDate(),
-    location: "",
-    // allDay: true,
-    post: "special event2",
-    data: {
-      profile: "Twitter",
-      image: Image,
-    },
-  },
-  {
-    start: moment("2023-08-08T10:00:00").toDate(),
-    end: moment("2023-08-08T12:00:00").toDate(),
-    post: "special event3",
-    location: "Kaunas, Lithuania",
-    data: {
-      profile: "Facebook",
-      image: ImageF,
-    },
-  },
-  {
-    start: moment("2023-08-04T10:00:00").toDate(),
-    end: moment("2023-08-04T11:00:00").toDate(),
-    post: "special event4",
-    location: "",
-    data: {
-      profile: "Instagram",
-      image: Image,
-    },
-  },
-  {
-    start: moment("2023-07-30T10:00:00").toDate(),
-    end: moment("2023-07-30T14:00:00").toDate(),
-    post: "special event6",
-    location: "Vilnius, Lithuania",
-    data: {
-      profile: "LInkedin",
-      image: ImageF,
-    },
-  },
-];
+// const myEventsList = [
+//   // s
+//   {
+//     start: moment("2023-08-02T08:00:00").toDate(),
+//     end: moment("2023-08-02T10:00:00").toDate(),
+//     location: "",
+//     // allDay: true,
+//     post: "special event2",
+//     data: {
+//       profile: "Twitter",
+//       image: Image,
+//     },
+//   },
+//   {
+//     start: moment("2023-08-08T10:00:00").toDate(),
+//     end: moment("2023-08-08T12:00:00").toDate(),
+//     post: "special event3",
+//     location: "Kaunas, Lithuania",
+//     data: {
+//       profile: "Facebook",
+//       image: ImageF,
+//     },
+//   },
+//   {
+//     start: moment("2023-08-04T10:00:00").toDate(),
+//     end: moment("2023-08-04T11:00:00").toDate(),
+//     post: "special event4",
+//     location: "",
+//     data: {
+//       profile: "Instagram",
+//       image: Image,
+//     },
+//   },
+//   {
+//     start: moment("2023-07-30T10:00:00").toDate(),
+//     end: moment("2023-07-30T14:00:00").toDate(),
+//     post: "special event6",
+//     location: "Vilnius, Lithuania",
+//     data: {
+//       profile: "LInkedin",
+//       image: ImageF,
+//     },
+//   },
+// ];
 
-const AddCaption = ({onClickSubmit}: any) => {
+const AddCaption = ({onClickSubmit, selectedImage}: any) => {
   const [newEvent, setNewEvent] = useState<any>({
     post: "",
     start: "",
     end: "",
-    location: "",
+    image: "",
   });
 
   // Jei neveiks reikia enablinti
@@ -159,7 +159,7 @@ const AddCaption = ({onClickSubmit}: any) => {
             </NavLink>
             <button
               // className="flex items-center font-Bold leading-none max-w-full transition duration-100 outline-none bg-sky-500 focus:outline-none justify-center bg-icoBlue text-white hover:bg-sky-400 focus:bg-icoBlue-300 focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 focus:text-white px-10 py-5 min-h-14 min-w-150 text-sm rounded-md disabled:bg-icoGray-300 dark:disabled:bg-white/5 disabled:text-icoGray-400 dark:disabled:text-icoDarkMode-wolf disabled:cursor-not-allowed"
-              onClick={() => onClickSubmit(newEvent)}
+              onClick={() => onClickSubmit({...newEvent, image: selectedImage})}
             >
               Next ▶
             </button>

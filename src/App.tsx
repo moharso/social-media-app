@@ -55,13 +55,19 @@ const myEventsList = [
 ];
 
 // 1. create context
-const PostContext = createContext([]);
+// const PostContext = createContext([]);
 
 function App() {
   const [allEvents, setAllEvents] = useState(function () {
     const storedValue: any = localStorage.getItem("posted");
     return JSON.parse(storedValue);
   });
+
+  // const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  // function handlePickImage(event: any) {
+  //   setSelectedImage(URL.createObjectURL(event.target.files[0]));
+  // }
 
   function handleAddEvent(newEvent: any) {
     // e.preventDefault();
@@ -78,7 +84,6 @@ function App() {
     [allEvents]
   );
 
-  console.log(allEvents);
   return (
     // 2.Provide value to child components
     // <PostContext.Provider
@@ -102,7 +107,12 @@ function App() {
           />
           <Route
             path="post"
-            element={<Post onClickSubmit={handleAddEvent} />}
+            element={
+              <Post
+                onClickSubmit={handleAddEvent}
+                // onPickImage={handlePickImage}
+              />
+            }
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -1,9 +1,11 @@
 import React from "react";
 import {useMemo, useState} from "react";
 import "./UploadPhoto.css";
-
-const UploadPhoto = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+const UploadPhoto = ({pickImage}: any) => {
+  // const pickImage = (event: any) => {
+  //   props.setImage(URL.createObjectURL(event.target.files[0]));
+  // };
+  const [selectedImage, setSelectedImage] = useState<any>(null);
 
   return (
     <div className="w-full h-screen flex px-20 pt-10 pb-15 max-w-[500px] basis-auto bg-gray-100 dark:bg-icoDarkMode-deepBlack flex-col space-y-5">
@@ -28,7 +30,7 @@ const UploadPhoto = () => {
         <div className=" w-full text-icoGray-400 dark:text-icoDarkMode-wolf rounded-md overflow-hidden square">
           <div className="flex  items-center justify-center w-full">
             <div className="flex flex-col items-center space-y-3 text-sm">
-              {selectedImage && (
+              {selectedImage ? (
                 <div>
                   <img
                     alt="not found"
@@ -36,21 +38,26 @@ const UploadPhoto = () => {
                     src={URL.createObjectURL(selectedImage)}
                   />
                   <br />
+                  <br />
                   <button onClick={() => setSelectedImage(null)}>Remove</button>
                 </div>
-              )}
-
-              {!selectedImage && (
+              ) : (
                 <input
                   type="file"
-                  accept="image/*"
                   name="myImage"
                   onChange={(e: any) => {
-                    console.log(e.target.files[0]);
+                    pickImage(e);
                     setSelectedImage(e.target.files[0]);
                   }}
+                  // onChange={(e: any) => {
+                  //   setSelectedImage(e.target.files[0]);
+                  // }}
                 />
               )}
+
+              {/* {!selectedImage && (
+                
+              )} */}
             </div>
           </div>
         </div>
