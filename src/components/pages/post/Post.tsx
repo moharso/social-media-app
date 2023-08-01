@@ -1,59 +1,7 @@
 import UploadPhoto from "../../uploadPhoto/UploadPhoto";
 import AddCaption from "../../addCaption/AddCaption";
-
-import {NavLink} from "react-router-dom";
-import React, {useMemo, useState, useEffect} from "react";
-import {Calendar, momentLocalizer} from "react-big-calendar";
-// @ts-ignore
-
-import moment from "moment";
-import DatePicker from "react-datepicker";
+import React, {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
-
-const myEventsList = [
-  // s
-  {
-    start: moment("2023-08-02T08:00:00").toDate(),
-    end: moment("2023-08-02T10:00:00").toDate(),
-    location: "",
-    // allDay: true,
-    post: "special event2",
-    data: {
-      profile: "Twitter",
-      image: Image,
-    },
-  },
-  {
-    start: moment("2023-08-08T10:00:00").toDate(),
-    end: moment("2023-08-08T12:00:00").toDate(),
-    post: "special event3",
-    location: "Kaunas, Lithuania",
-    data: {
-      profile: "Facebook",
-      image: "",
-    },
-  },
-  {
-    start: moment("2023-07-03T21:00:00.000Z").toDate(),
-    end: moment("2023-07-03T21:00:00.000Z").toDate(),
-    post: "special event4",
-    location: "",
-    data: {
-      profile: "Instagram",
-      image: Image,
-    },
-  },
-  {
-    start: moment("2023-07-30T10:00:00").toDate(),
-    end: moment("2023-07-30T14:00:00").toDate(),
-    post: "special event6",
-    location: "Vilnius, Lithuania",
-    data: {
-      profile: "LInkedin",
-      image: "",
-    },
-  },
-];
 
 const Post = ({onClickSubmit}: any) => {
   //   props.setImage(URL.createObjectURL(event.target.files[0]));

@@ -14,7 +14,7 @@ const UploadPhoto = ({pickImage}: any) => {
           <div className="relative inline-flex items-center justify-center bg-white w-[46px] h-[46px] rounded-full dark:bg-icoDarkMode-deepBlack">
             <img
               src="https://cdn-prod.app.iconosquare.com/avatars/avatar-2156274.jpg"
-              alt="account image"
+              alt="account"
               className="object-fill h-full rounded-full"
             ></img>
           </div>
