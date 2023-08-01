@@ -1,5 +1,3 @@
-import React from "react";
-
 // @ts-ignore
 import Icon from "../assets/brand.png";
 import "./Aside.css";
@@ -30,7 +28,7 @@ const Aside = () => {
                 <img
                   src="https://tecdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
                   className="rounded-full"
-                  style={{height: "22px", width: "22px"}}
+                  style={{height: "40px", width: "40px"}}
                   alt="Avatar"
                   loading="lazy"
                 />
@@ -47,23 +45,6 @@ const Aside = () => {
             </div>
           </div>
         </nav>
-        {/* <ul className="w-full md:flex items-center flex-col space-y-8 overflow-x-hidden scrollbar py-6">
-            <li className="w-full flex justify-center">
-              <a
-                href="/dashboard"
-                className="rounded focus:outline-none focus:ring-2 focus:ring-offset-2 dark:ring-offset-icoDarkMode-deepBlack/80 focus:ring-icoBlue-200 rounded group relative leading-none"
-              >
-                <span>📅</span>
-                <span>Calendar</span>
-              </a>
-            </li>
-            <li>
-              <a href="/dashboard">
-                <span>📝</span>
-                <span>Dashboard</span>
-              </a>
-            </li>
-          </ul> */}
       </div>
     </div>
   );

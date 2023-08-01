@@ -62,7 +62,6 @@ const Post = ({onClickSubmit}: any) => {
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
   function handlePickImage(event: any) {
-    console.log(event.target.files[0]);
     setSelectedImage(URL.createObjectURL(event.target.files[0]));
   }
 
@@ -89,16 +88,7 @@ const Post = ({onClickSubmit}: any) => {
   return (
     <div className="flex w-full h-full">
       <UploadPhoto pickImage={handlePickImage} />
-      <AddCaption
-        onClickSubmit={onClickSubmit}
-        selectedImage={selectedImage}
-
-        // onAddPost={handleAddEvent}
-        // newEvent={newEvent}
-        // onAddStart={handleDateStart}
-        // onAddEnd={handleDateEnd}
-        // onSubmit={handleAddEventSubmit}
-      />
+      <AddCaption onClickSubmit={onClickSubmit} selectedImage={selectedImage} />
     </div>
   );
 };
