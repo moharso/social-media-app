@@ -1,0 +1,12 @@
+.Aside {
+  max-width: 7.2rem;
+  height: 100vh;
+  background-color: hsla(0, 0%, 100%, 0.8);
+  padding-bottom: 3rem;
+}
+
+.AsideContainer {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

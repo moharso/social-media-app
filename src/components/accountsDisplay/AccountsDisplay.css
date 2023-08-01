@@ -1,0 +1,7 @@
+.AccountsDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding-bottom: 3rem;
+}

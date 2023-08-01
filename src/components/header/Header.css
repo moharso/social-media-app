@@ -1,0 +1,12 @@
+.Header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.HeaderTitle {
+  font-family: Gilroy-Bold, Arial;
+}
+.HeaderImg {
+  width: 2rem;
+  stroke: blue;
+}
