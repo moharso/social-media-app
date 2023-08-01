@@ -13,6 +13,7 @@
     "@types/react-datepicker": "^4.15.0",
     "@types/react-dom": "^18.2.7",
     "bootstrap": "^5.3.1",
+    "emoji-picker-react": "^4.4.10",
     "react": "^18.2.0",
     "react-big-calendar": "^1.8.1",
     "react-calendar": "^4.6.0",

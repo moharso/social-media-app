@@ -7,7 +7,8 @@ import ImageF from "../assets/facebook.svg";
 import moment from "moment";
 import DatePicker, {getDefaultLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+// import Picker from "emoji-picker-react";
+// import {Emoji, EmojiStyle} from "emoji-picker-react";
 // const myEventsList = [
 //   // s
 //   {
@@ -63,9 +64,13 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
       image: "",
     },
   });
-  const weekend = (date: any) => new Date() <= date;
+
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [textAreaCount, setTextAreaCount] = useState<any>("");
   const inputEl = useRef<any>(null);
 
+  const weekend = (date: any) => new Date() <= date;
+  console.log(textAreaCount);
   useEffect(function () {
     console.log(inputEl);
     inputEl.current.focus();
@@ -118,23 +123,37 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
                   </span>
                   <textarea
                     id="post"
+                    maxLength={150}
                     // type="text"
                     placeholder="Say something ..."
                     // className="resize-none text-sm z-1 scrollbar placeholder:text-icoGray-400 placeholder:dark:text-icoDarkMode-wolf font-GMedium bg-transparent p-0 border-0 placeholder:text-sm focus:outline-0 focus:ring-0 peer flex-1 leading-5"
                     // type="text"
 
                     value={newEvent.post}
-                    onChange={(e) =>
-                      setNewEvent({...newEvent, post: e.target.value})
-                    }
+                    onChange={(e) => {
+                      setNewEvent({...newEvent, post: e.target.value});
+                      setTextAreaCount(e.target.value.length);
+                    }}
                     ref={inputEl}
+                    // setText={setTextAreaValue}
                     className="w-full resize-none text-sm z-1 scrollbar placeholder:text-icoGray-400 placeholder:dark:text-icoDarkMode-wolf font-GMedium bg-transparent p-0 border-0 placeholder:text-sm focus:outline-0 focus:ring-0 peer flex-1 leading-5"
                   ></textarea>
                 </div>
+
                 <div className="AddcaptionPostText flex items-center z-1">
                   <p className="text-xs flex-1 text-icoGray-500 ">
-                    <span>150</span> characters left
+                    <span>{150 - textAreaCount}</span> characters left
                   </p>
+                  <button
+                    className="WatchedBoxBtnToggle"
+                    onClick={() => setIsOpen1((open) => !open)}
+                  >
+                    {isOpen1 ? "–" : "+"}
+                  </button>
+                  {isOpen1 && <div></div>}
+                  {/* <button className="AddcaptionEmojiBtn">
+                    {/* <Picker onEmojiClick={onEmojiClick} /> */}
+                  {/* </button> */}
                 </div>
               </div>
 

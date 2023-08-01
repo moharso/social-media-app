@@ -10,12 +10,12 @@ import {createContext} from "react";
 import moment from "moment";
 
 const myEventsList = [
-  // s
+  //
   {
     start: moment("2023-08-02T08:00:00").toDate(),
     end: moment("2023-08-02T10:00:00").toDate(),
-
     post: "Let's run to the moon...",
+    tags: ["#running", "#playing", "#dancing"],
     data: {
       profile: "Twitter",
       image: "blob:http://localhost:3002/50f26cb9-9a67-464b-941b-d63ab8fda7f4",
@@ -25,7 +25,7 @@ const myEventsList = [
     start: moment("2023-08-08T10:00:00").toDate(),
     end: moment("2023-08-08T12:00:00").toDate(),
     post: "special event3",
-    location: "Kaunas, Lithuania",
+    tags: ["#running", "#playing", "#dancing"],
     data: {
       profile: "Facebook",
       image: "blob:http://localhost:3002/f46ffab2-a89a-4a6c-8b4e-e14f5a57c58c",

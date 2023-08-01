@@ -2,7 +2,21 @@
   border: 1px solid rgb(14 165 233);
   border-radius: 3px;
   font-family: Gilroy-Medium, Arial;
+  position: relative;
 }
 .AddcaptionPostText {
   color: grey;
+}
+
+.AddcaptionEmojiBtn {
+  width: 5rem;
+  height: 5rem;
+  background: blue;
+}
+
+.PickerEmoji {
+  position: absolute;
+  top: 8rem;
+  right: -8rem;
+  z-index: 2;
 }

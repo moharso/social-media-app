@@ -9,7 +9,7 @@ export const myUsersList = [
     twitter: [{username: "clothes", image: Image}],
     tiktok: [
       {
-        username: "runner",
+        username: "shopping",
         image: Image,
       },
     ],
