@@ -14,12 +14,11 @@ const myEventsList = [
   {
     start: moment("2023-08-02T08:00:00").toDate(),
     end: moment("2023-08-02T10:00:00").toDate(),
-    location: "",
-    // allDay: true,
-    post: "special event2",
+
+    post: "Let's run to the moon...",
     data: {
       profile: "Twitter",
-      image: Image,
+      image: "blob:http://localhost:3002/50f26cb9-9a67-464b-941b-d63ab8fda7f4",
     },
   },
   {
@@ -29,7 +28,7 @@ const myEventsList = [
     location: "Kaunas, Lithuania",
     data: {
       profile: "Facebook",
-      image: "",
+      image: "blob:http://localhost:3002/f46ffab2-a89a-4a6c-8b4e-e14f5a57c58c",
     },
   },
   {
@@ -39,7 +38,7 @@ const myEventsList = [
     location: "",
     data: {
       profile: "Instagram",
-      image: "",
+      image: "blob:http://localhost:3002/54b6539d-6f79-4b27-b6d9-eb43af0e1aea",
     },
   },
   {
@@ -49,19 +48,21 @@ const myEventsList = [
     location: "Vilnius, Lithuania",
     data: {
       profile: "LInkedin",
-      image: "",
+      image: "blob:http://localhost:3002/54b6539d-6f79-4b27-b6d9-eb43af0e1aea",
     },
   },
 ];
 
 // 1. create context
-// const PostContext = createContext([]);
+const PostContext = createContext([]);
 
 function App() {
-  const [allEvents, setAllEvents] = useState(function () {
+  const [allEvents, setAllEvents] = useState<any[]>(function () {
     const storedValue: any = localStorage.getItem("posted");
     return JSON.parse(storedValue);
   });
+
+  const [previousEvents, setpreviousEvents] = useState(myEventsList);
 
   // const [selectedImage, setSelectedImage] = useState<any>(null);
 
@@ -74,14 +75,20 @@ function App() {
 
     // if (!newEvent.post || !newEvent.start || !newEvent.end)
     //   return "Choose required fields";
-    setAllEvents((allEvents: any[]) => [...allEvents, newEvent]);
+    setAllEvents((allEvents: any) => [...allEvents, newEvent]);
   }
-
+  // useEffect(function(){})
   useEffect(
     function () {
       localStorage.setItem("posted", JSON.stringify(allEvents));
     },
     [allEvents]
+  );
+  useEffect(
+    function () {
+      localStorage.setItem("posted", JSON.stringify(previousEvents));
+    },
+    [previousEvents]
   );
 
   return (
@@ -89,9 +96,9 @@ function App() {
     // <PostContext.Provider
     //   value={{
     //     allEvents: allEvents,
+    //     onClickSubmit: handleAddEvent,
     //   }}
     // >
-
     <div>
       <BrowserRouter>
         <Routes>
@@ -100,7 +107,10 @@ function App() {
             element={
               <Layout>
                 <div className="flex h-screen relative">
-                  <Homepage allEvents={allEvents} />
+                  <Homepage
+                    allEvents={allEvents}
+                    previousEvents={previousEvents}
+                  />
                 </div>
               </Layout>
             }

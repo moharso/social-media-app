@@ -4,12 +4,7 @@ import "./CalendarView.css";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// @ts-ignore
-import Image from "../assets/image.jpg";
-// @ts-ignore
-import ImageF from "../assets/facebook.svg";
-// @ts-ignore
-import ImageI from "../assets/instagram.svg";
+
 // @ts-ignore
 import ImageB from "../assets/blank.jpg";
 
@@ -19,12 +14,20 @@ const changeType = (a: any) => moment(a).toDate();
 
 const CalendarView = (props: any) => {
   const result = useMemo(() => {
-    return props.allEvents.map((obj: any) => ({
-      ...obj,
-      start: changeType(obj.start),
-      end: changeType(obj.end),
-    }));
-  }, [props.allEvents]);
+    if (props.allEvents !== null) {
+      return props.allEvents.map((obj: any) => ({
+        ...obj,
+        start: changeType(obj.start),
+        end: changeType(obj.end),
+      }));
+    } else {
+      return props.previousEvents.map((obj: any) => ({
+        ...obj,
+        start: changeType(obj.start),
+        end: changeType(obj.end),
+      }));
+    }
+  }, [props.allEvents, props.previousEvents]);
 
   // const [bookedPost, setBookedPost] = useState(() => {
   //   const result = props.allEvents.map((obj: any) => ({
@@ -122,7 +125,7 @@ const CalendarView = (props: any) => {
         endAccessor="end"
         style={{height: "80vh"}}
         defaultView="week"
-        views={["month", "week", "day"]}
+        views={["month", "week", "day", "agenda"]}
         components={components}
       />
     </div>
@@ -141,12 +144,13 @@ const EventComponent =
       return (
         <div
           style={{
-            backgroundColor: "yellow",
+            // backgroundColor: "yellow",
             color: "white",
             height: "100%",
             backgroundImage: `url(${props.event.data.image})`,
-            backgroundSize: "cover",
+            backgroundSize: "100%",
             backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           {/* {props.title} */}
