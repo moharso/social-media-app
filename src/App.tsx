@@ -17,11 +17,13 @@ function App() {
     return JSON.parse(storedValue);
   });
 
+  const [userSelected, setUserSelected] = useState<any>("");
   const [previousEvents, setpreviousEvents] = useState(myEventsList);
   const [newEvent, setNewEvent] = useState(null);
 
-  console.log("PREVIOUSEVENTS:", previousEvents);
-  console.log("ALLEVENTS:", allEvents);
+  function handleSelected(account: any) {
+    setUserSelected(account);
+  }
 
   function handleAddEvent(item: any) {
     setNewEvent(item);
@@ -29,7 +31,12 @@ function App() {
 
     // if (!newEvent.post || !newEvent.start || !newEvent.end)
     //   return "Choose required fields";
-    setAllEvents((allEvents: any) => [...allEvents, item]);
+    // setAllEvents((allEvents: any) => (Array.isArray(allEvents)) ? [...allEvents, item]):null;
+    if (Array.isArray(allEvents)) {
+      setAllEvents([...allEvents, item]);
+    } else {
+      setAllEvents([...previousEvents, item]);
+    }
   }
 
   useEffect(
@@ -39,12 +46,12 @@ function App() {
     [allEvents]
   );
 
-  useEffect(
-    function () {
-      localStorage.setItem("posted", JSON.stringify(previousEvents));
-    },
-    [previousEvents]
-  );
+  // useEffect(
+  //   function () {
+  //     localStorage.setItem("posted", JSON.stringify(previousEvents));
+  //   },
+  //   [previousEvents]
+  // );
 
   return (
     // 2.Provide value to child components
@@ -65,6 +72,8 @@ function App() {
                   <Homepage
                     allEvents={allEvents}
                     previousEvents={previousEvents}
+                    userSelected={userSelected}
+                    onUserSelected={handleSelected}
                   />
                 </div>
               </Layout>

@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useMemo, useCallback, useEffect} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import "./CalendarView.css";
 import moment from "moment";
@@ -12,14 +12,16 @@ const changeType = (a: any) => moment(a).toDate();
 
 const CalendarView = (props: any) => {
   const result = useMemo(() => {
-    if (props?.allEvents !== null) {
+    console.log(Array.isArray(props?.allEvents));
+    if (Array.isArray(props?.allEvents)) {
       return props.allEvents.map((obj: any) => ({
         ...obj,
         start: changeType(obj.start),
         end: changeType(obj.end),
       }));
     } else {
-      return props?.previousEvents.map((obj: any) => ({
+      // localStorage.setItem("posted", JSON.stringify(props.previousEvents));
+      return props.previousEvents.map((obj: any) => ({
         ...obj,
         start: changeType(obj.start),
         end: changeType(obj.end),
@@ -28,6 +30,7 @@ const CalendarView = (props: any) => {
   }, [props.allEvents, props.previousEvents]);
 
   console.log("THIS IS PROPS.allEvents", props.allEvents);
+  console.log("THIS IS RESULT", result);
 
   let components = {
     event: EventComponent(props), // used by each view (Month, Day, Week)
