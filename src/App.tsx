@@ -7,6 +7,7 @@ import Post from "./components/pages/post/Post";
 import PageNotFound from "./components/pages/pageNotFound/PageNotFound";
 import {createContext} from "react";
 import {myEventsList} from "../src/components/data/data";
+import Confirmation from "./components/pages/confirmation/Confirmation";
 
 // 1. create context
 // const PostContext = createContext([]);
@@ -82,6 +83,10 @@ function App() {
           <Route
             path="post"
             element={<Post onClickSubmit={handleAddEvent} />}
+          />
+          <Route
+            path="confirmation"
+            element={<Confirmation/>}
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
