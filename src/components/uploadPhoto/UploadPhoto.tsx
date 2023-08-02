@@ -1,11 +1,15 @@
 import React from "react";
 import {useMemo, useState} from "react";
 import "./UploadPhoto.css";
+import myUsersList from "../data/data";
+
 const UploadPhoto = ({pickImage}: any) => {
   // const pickImage = (event: any) => {
   //   props.setImage(URL.createObjectURL(event.target.files[0]));
   // };
   const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  const userName = myUsersList[0].userName
 
   return (
     <div className="w-full h-screen flex px-20 pt-10 pb-15 max-w-[500px] basis-auto bg-gray-100 dark:bg-icoDarkMode-deepBlack flex-col space-y-5">
@@ -22,7 +26,7 @@ const UploadPhoto = ({pickImage}: any) => {
         <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
           <span className="text-icoBlue truncate">user ID</span>
           <span className="text-icoGray-500 text-xs dark:text-icoDarkMode-wolf truncate">
-            my name
+            {userName}
           </span>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import NavButton from '../../reusableComponents/navButton/NavButton'
 
 const TopBar = () => {
   return (
@@ -8,7 +9,7 @@ const TopBar = () => {
         <li>Settings</li>
         <li>Confirmation</li>
         </ul>
-        <button type='submit'>Close x</button>
+        <NavButton buttonText='close' to='/' />
     </div>
   )
 }

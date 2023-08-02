@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Switch from "@mui/material/Switch"
 import Checkbox from "@mui/material/Checkbox"
+import myUsersList from '../data/data'
 
 const CrossPost: React.FC = () => {
     const [formVisible, setFormVisible] = useState<boolean>(false);
@@ -8,29 +9,23 @@ const CrossPost: React.FC = () => {
     const activatedSlider = () => {
         setFormVisible(!formVisible)
     };
+    
 
   return (
     <div>
-         <Switch checked={formVisible} onChange={activatedSlider} />
+        <h1>Crosspost</h1>
+         <Switch checked={formVisible} onChange={activatedSlider}/>
         {formVisible && (
-            <form>
-                <label>
-                    <Checkbox/>
-                </label>
-                <br />
-                <label>
-                    <Checkbox/>
-                </label>
-                <br />
-                <label>
-                    <Checkbox/>
-                </label>
-                <br />
-                <label>
-                    <Checkbox/>
-                </label>
-                <br />
-            </form>
+             <form>
+             {myUsersList.map(user => (
+                 user.networks.map(network => (
+                     <label key={network.name}>
+                         <Checkbox />
+                         {network.name}
+                     </label>
+                 ))
+             ))}
+         </form>
         )}
     </div>
   )

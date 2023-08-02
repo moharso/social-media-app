@@ -42,10 +42,7 @@ const Post = ({onClickSubmit}: any) => {
       <TopBar></TopBar>
       <UploadPhoto pickImage={handlePickImage} />
       <AddCaption onClickSubmit={onClickSubmit} selectedImage={selectedImage} />
-      <TimeSchedule></TimeSchedule>
       <CrossPost></CrossPost>
-      <NavButton buttonText='<-return' to="/"></NavButton>
-      <NavButton buttonText='Schedule post' to="/confirmation"></NavButton>
     </div>
   );
 };
