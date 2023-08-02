@@ -3,7 +3,7 @@ import AddCaption from "../../addCaption/AddCaption";
 import React, {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Post = ({onClickSubmit}: any) => {
+const Post = ({onClickSubmit, userSelected}: any) => {
   //   props.setImage(URL.createObjectURL(event.target.files[0]));
   // };
 
@@ -35,7 +35,7 @@ const Post = ({onClickSubmit}: any) => {
 
   return (
     <div className="flex w-full h-full">
-      <UploadPhoto pickImage={handlePickImage} />
+      <UploadPhoto pickImage={handlePickImage} userSelected={userSelected} />
       <AddCaption onClickSubmit={onClickSubmit} selectedImage={selectedImage} />
     </div>
   );

@@ -1,36 +1,34 @@
-import React, {useMemo, useCallback, useEffect} from "react";
+import React, {useMemo, useCallback, useEffect, useContext} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import "./CalendarView.css";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 // @ts-ignore
 import ImageB from "../assets/blank.jpg";
+import {PostContext} from "../../App";
 
 const localizer = momentLocalizer(moment);
 
 const changeType = (a: any) => moment(a).toDate();
 
 const CalendarView = (props: any) => {
+  const {allEvents, previousEvents} = useContext(PostContext);
+
   const result = useMemo(() => {
-    console.log(Array.isArray(props?.allEvents));
-    if (Array.isArray(props?.allEvents)) {
-      return props.allEvents.map((obj: any) => ({
+    if (Array.isArray(allEvents)) {
+      return allEvents.map((obj: any) => ({
         ...obj,
         start: changeType(obj.start),
         end: changeType(obj.end),
       }));
     } else {
-      // localStorage.setItem("posted", JSON.stringify(props.previousEvents));
-      return props.previousEvents.map((obj: any) => ({
+      return previousEvents.map((obj: any) => ({
         ...obj,
         start: changeType(obj.start),
         end: changeType(obj.end),
       }));
     }
-  }, [props.allEvents, props.previousEvents]);
-
-  console.log("THIS IS PROPS.allEvents", props.allEvents);
-  console.log("THIS IS RESULT", result);
+  }, [allEvents, previousEvents]);
 
   let components = {
     event: EventComponent(props), // used by each view (Month, Day, Week)
@@ -39,11 +37,6 @@ const CalendarView = (props: any) => {
     //   event: MyAgendaEvent, // with the agenda view use a different component to render events
     // },
   };
-
-  // function handleAddEvent() {
-  //   setAllEvents([...allEvents, newEvent]);
-  //   console.log(allEvents);
-  // }
 
   return (
     <div>
@@ -67,82 +60,51 @@ const EventComponent =
   ({events, change}: any) =>
   (props: any) => {
     const isImage = props?.event?.data?.image;
+    const isIcon = props?.event?.data?.icon.length !== 0;
 
-    if (isImage) {
-      return (
+    return (
+      <div
+        style={{
+          color: "white",
+          height: "100%",
+          width: "100%",
+          backgroundImage: isImage
+            ? `url(${props.event.data.image})`
+            : `url(${ImageB})`,
+          backgroundSize: "100%",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
         <div
           style={{
-            color: "white",
-            height: "100%",
-            backgroundImage: `url(${props.event.data.image})`,
-            backgroundSize: "100%",
+            minWidth: "1.5rem",
+            minHeight: "1.5rem",
+            borderRadius: "9999px",
+            boxShadow: "0 0 0 2px",
             backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            backgroundImage: isIcon
+              ? props?.event?.data?.icon.map((item: any) => {
+                  return `url(${item})`;
+                })
+              : null,
           }}
         ></div>
-      );
-    } else {
-      return (
-        <div
-          style={{
-            color: "white",
-            height: "100%",
-            backgroundImage: `url(${ImageB})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
-      );
-    }
 
-    // return (
-    //   <div className="customEventTile" title="This is EventTile">
-    //     <h5>{props.event.title}</h5>
-    //     <button onClick={props.change}>Review</button>
-    //   </div>
-    // );
+        <button
+          style={{
+            background: "transparent",
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "9999",
+          }}
+          onClick={props.change}
+        >
+          Open
+        </button>
+      </div>
+    );
   };
-// design custom design or elements for top navigation toolbaar, for today, next, prev or all views
-
-// const MyToolbar = (props) => {
-//   return class BaseToolBar extends Toolbar {
-//     constructor(props) {
-//       super(props);
-//     }
-
-//     render() {
-//       return (
-//         <div className="posr">
-//           <div className="rbc-btn-group">
-//             <button type="button" className="defaultbtn">
-//               Today
-//             </button>
-//             <button type="button" className="nextp-btn">
-//               Prev
-//             </button>
-//             <button type="button" className="nextp-btn">
-//               Next
-//             </button>
-//           </div>
-
-//           <div className="rbc-btn-group">
-//             <select className="form-control" defaultValue={"week"}>
-//               <option className="optionbar" value="day">
-//                 Day
-//               </option>
-//               <option className="optionbar" value="week">
-//                 Week
-//               </option>
-//               <option className="optionbar" value="month">
-//                 Month
-//               </option>
-//               <option className="optionbar" value="agenda">
-//                 Agenda
-//               </option>
-//             </select>
-//           </div>
-//         </div>
-//       );
-//     }
-//   };
-// };

@@ -11,8 +11,9 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
     start: "",
     end: "",
     data: {
-      profile: "",
+      profile: [""],
       image: "",
+      icon: [],
     },
   });
 

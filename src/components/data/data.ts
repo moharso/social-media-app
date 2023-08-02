@@ -17,6 +17,16 @@ import Art from "../assets/art.jpg";
 import Shopper from "../assets/shopper.jpg";
 // @ts-ignore
 import Image from "../assets/image.jpg";
+// @ts-ignore
+import Twitter from "../assets/twitter.svg";
+// @ts-ignore
+import Instagram from "../assets/instagram.svg";
+// @ts-ignore
+import Facebook from "../assets/facebook.svg";
+// @ts-ignore
+import Linkedin from "../assets/linkedin.svg";
+// @ts-ignore
+import Tiktok from "../assets/tiktok.svg";
 
 export const myEventsList = [
   {
@@ -24,8 +34,9 @@ export const myEventsList = [
     end: moment("2023-08-02T10:00:00").toDate(),
     post: "Let's run to the moon...",
     data: {
-      profile: "Twitter",
+      profile: ["twitter"],
       image: Running,
+      icon: [Twitter],
     },
   },
   {
@@ -33,8 +44,9 @@ export const myEventsList = [
     end: moment("2023-08-08T12:00:00").toDate(),
     post: "Ar is relaxing for your body... ",
     data: {
-      profile: "Facebook",
+      profile: ["facebook", "linkedin"],
       image: Art,
+      icon: [Facebook, Linkedin],
     },
   },
   {
@@ -42,8 +54,9 @@ export const myEventsList = [
     end: moment("2023-08-04T11:00:00").toDate(),
     post: "Checkout our new clothing line! ",
     data: {
-      profile: "Instagram",
+      profile: ["instagram"],
       image: Shopper,
+      icon: [Instagram],
     },
   },
   {
@@ -51,8 +64,9 @@ export const myEventsList = [
     end: moment("2023-07-30T14:00:00").toDate(),
     post: "Looking for fashion oriented Sales Manager. If that's you, please contact us via email: sales@fashionstore.com ",
     data: {
-      profile: "LInkedin",
+      profile: ["linkedin"],
       image: Image,
+      icon: [Linkedin],
     },
   },
   {
@@ -60,8 +74,9 @@ export const myEventsList = [
     end: moment("2023-07-08T19:00:00").toDate(),
     post: "Looking for fashion oriented Sales Manager. If that's you, please contact us via email: sales@fashionstore.com ",
     data: {
-      profile: "Tiktok",
+      profile: ["tiktok"],
       image: Image,
+      icon: [Tiktok],
     },
   },
 ];

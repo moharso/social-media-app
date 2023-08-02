@@ -1,5 +1,5 @@
 import React from "react";
-import {useMemo, useState} from "react";
+import { useState} from "react";
 import "./UploadPhoto.css";
 const UploadPhoto = ({pickImage}: any) => {
   // const pickImage = (event: any) => {

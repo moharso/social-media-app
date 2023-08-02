@@ -1,4 +1,9 @@
+import "./Account.css";
+import {useRef} from "react";
+
 const Account = ({network, onSelectAccount}: any) => {
+  const buttonEl = useRef<any>(null);
+
   return (
     <button
       onClick={() => onSelectAccount(network.username)}
