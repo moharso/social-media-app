@@ -27,8 +27,6 @@ function App() {
   }
 
   function handleAddEvent(item: any) {
-    // setNewEvent(item);
-
     if (Array.isArray(allEvents)) {
       setAllEvents([...allEvents, item]);
     } else {

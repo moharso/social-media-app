@@ -8,7 +8,7 @@ import Painting from "../assets/painting.png";
 // @ts-ignore
 import Clothes from "../assets/clothing.png";
 // @ts-ignore
-import Shopping from "../assets/shopper.jpg";
+import Shopping from "../assets/shopping.png";
 // @ts-ignore
 import Running from "../assets/runner.jpg";
 // @ts-ignore
