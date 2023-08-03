@@ -1,28 +1,58 @@
 import React from "react";
-import { useState} from "react";
+import {useState} from "react";
 import "./UploadPhoto.css";
-const UploadPhoto = ({pickImage}: any) => {
+import UserData from "../data/data";
+import Account from "../account/Account";
+
+const UploadPhoto = ({pickImage, userSelected}: any) => {
   // const pickImage = (event: any) => {
   //   props.setImage(URL.createObjectURL(event.target.files[0]));
   // };
   const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  // can be passed as prop
+  const [account, setAccount] = useState(UserData);
+
+  //   {
+  //   start: moment("2023-08-08T10:00:00").toDate(),
+  //   end: moment("2023-08-08T12:00:00").toDate(),
+  //   post: "Ar is relaxing for your body... ",
+  //   data: {
+  //     profile: ["facebook", "linkedin"],
+  //     image: Art,
+  //     icon: [Facebook, Linkedin],
+  //   },
+  // },
 
   return (
     <div className="w-full h-screen flex px-20 pt-10 pb-15 max-w-[500px] basis-auto bg-gray-100 dark:bg-icoDarkMode-deepBlack flex-col space-y-5">
       <div className="flex items-center justify-between gap-x-1">
         <div className="max-w-[66%] flex items-center space-x-4">
           <div className="relative inline-flex items-center justify-center bg-white w-[46px] h-[46px] rounded-full dark:bg-icoDarkMode-deepBlack">
-            <img
+            {account?.map((user) =>
+              user.networks.map((network) =>
+                network.username === userSelected ? (
+                  <Account key={network.username} network={network} />
+                ) : (
+                  <img
+                    key={network.username}
+                    src="https://cdn-prod.app.iconosquare.com/avatars/avatar-2156274.jpg"
+                    alt="account"
+                    className="object-fill h-full rounded-full"
+                  ></img>
+                )
+              )
+            )}
+            {/* <img
               src="https://cdn-prod.app.iconosquare.com/avatars/avatar-2156274.jpg"
               alt="account"
               className="object-fill h-full rounded-full"
-            ></img>
+            ></img> */}
           </div>
         </div>
         <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
-          <span className="text-icoBlue truncate">user ID</span>
-          <span className="text-icoGray-500 text-xs dark:text-icoDarkMode-wolf truncate">
-            my name
+          <span className="text-sky-500 truncate font-bold">
+            {userSelected}
           </span>
         </div>
       </div>
@@ -49,15 +79,8 @@ const UploadPhoto = ({pickImage}: any) => {
                     pickImage(e);
                     setSelectedImage(e.target.files[0]);
                   }}
-                  // onChange={(e: any) => {
-                  //   setSelectedImage(e.target.files[0]);
-                  // }}
                 />
               )}
-
-              {/* {!selectedImage && (
-                
-              )} */}
             </div>
           </div>
         </div>

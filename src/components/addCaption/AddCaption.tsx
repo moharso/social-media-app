@@ -112,7 +112,10 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
             <button
               // className="flex items-center font-Bold leading-none max-w-full transition duration-100 outline-none bg-sky-500 focus:outline-none justify-center bg-icoBlue text-white hover:bg-sky-400 focus:bg-icoBlue-300 focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 focus:text-white px-10 py-5 min-h-14 min-w-150 text-sm rounded-md disabled:bg-icoGray-300 dark:disabled:bg-white/5 disabled:text-icoGray-400 dark:disabled:text-icoDarkMode-wolf disabled:cursor-not-allowed"
               onClick={() =>
-                onClickSubmit({...newEvent, data: {image: selectedImage}})
+                onClickSubmit({
+                  ...newEvent,
+                  data: {image: selectedImage, icon: "", profile: []},
+                })
               }
             >
               Next ▶

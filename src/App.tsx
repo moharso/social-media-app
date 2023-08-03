@@ -20,14 +20,14 @@ function App() {
 
   const [userSelected, setUserSelected] = useState<any>("");
   const [previousEvents, setpreviousEvents] = useState(myEventsList);
-  const [newEvent, setNewEvent] = useState(null);
+  // const [newEvent, setNewEvent] = useState(null);
 
   function handleSelected(account: any) {
     setUserSelected(account);
   }
 
   function handleAddEvent(item: any) {
-    setNewEvent(item);
+    // setNewEvent(item);
 
     if (Array.isArray(allEvents)) {
       setAllEvents([...allEvents, item]);
@@ -74,8 +74,8 @@ function App() {
               path="post"
               element={
                 <Post
-                  userSelected={userSelected}
                   onClickSubmit={handleAddEvent}
+                  userSelected={userSelected}
                 />
               }
             />

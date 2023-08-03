@@ -30,13 +30,15 @@ const CalendarView = (props: any) => {
     }
   }, [allEvents, previousEvents]);
 
-  let components = {
-    event: EventComponent(props), // used by each view (Month, Day, Week)
-    // toolbar: MyToolbar(props),
-    // agenda: {
-    //   event: MyAgendaEvent, // with the agenda view use a different component to render events
-    // },
-  };
+  let components = useMemo(() => {
+    return {
+      event: EventComponent(props), // used by each view (Month, Day, Week)
+      // toolbar: MyToolbar(props),
+      // agenda: {
+      //   event: MyAgendaEvent, // with the agenda view use a different component to render events
+      // },
+    };
+  }, [props]);
 
   return (
     <div>
