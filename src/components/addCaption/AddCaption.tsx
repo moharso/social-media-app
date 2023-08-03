@@ -1,11 +1,11 @@
 import "./AddCaption.css";
-import {NavLink} from "react-router-dom";
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import NavButton from "../../reusableComponents/navButton/NavButton";
 
-const AddCaption = ({onClickSubmit, selectedImage}: any) => {
+const AddCaption = ({ onClickSubmit, selectedImage }: any) => {
   const [newEvent, setNewEvent] = useState<any>({
     post: "",
     start: "",
@@ -51,7 +51,7 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
                     placeholder="Say something ..."
                     value={newEvent.post}
                     onChange={(e) => {
-                      setNewEvent({...newEvent, post: e.target.value});
+                      setNewEvent({ ...newEvent, post: e.target.value });
                       setTextAreaCount(e.target.value.length);
                     }}
                     ref={inputEl}
@@ -78,7 +78,7 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
                   selectsStart
                   placeholderText="Start Date"
                   selected={newEvent.start}
-                  onChange={(start) => setNewEvent({...newEvent, start})}
+                  onChange={(start) => setNewEvent({ ...newEvent, start })}
                   startDate={newEvent.start}
                   showTimeSelect
                   filterDate={weekend}
@@ -90,7 +90,7 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
                   selectsEnd
                   placeholderText="End Date"
                   selected={newEvent.end}
-                  onChange={(end) => setNewEvent({...newEvent, end})}
+                  onChange={(end) => setNewEvent({ ...newEvent, end })}
                   startDate={newEvent.start}
                   minDate={newEvent.start}
                   showTimeSelect
@@ -102,20 +102,14 @@ const AddCaption = ({onClickSubmit, selectedImage}: any) => {
             </div>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
-            <NavLink
-              to="/"
-              // className="flex items-center font-Bold leading-none max-w-full transition duration-100 outline-none bg-sky-300 focus:outline-none justify-center bg-icoBlue text-white hover:bg-sky-400 focus:bg-icoBlue-300 focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 focus:text-white px-10 py-5 min-h-14 min-w-150 text-sm rounded-md disabled:bg-icoGray-300 dark:disabled:bg-white/5 disabled:text-icoGray-400 dark:disabled:text-icoDarkMode-wolf disabled:cursor-not-allowed"
-            >
-              ◀ Previous: Calendar
-            </NavLink>
-            <button
-              // className="flex items-center font-Bold leading-none max-w-full transition duration-100 outline-none bg-sky-500 focus:outline-none justify-center bg-icoBlue text-white hover:bg-sky-400 focus:bg-icoBlue-300 focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 focus:text-white px-10 py-5 min-h-14 min-w-150 text-sm rounded-md disabled:bg-icoGray-300 dark:disabled:bg-white/5 disabled:text-icoGray-400 dark:disabled:text-icoDarkMode-wolf disabled:cursor-not-allowed"
+            <NavButton buttonText="<-return" to="/"></NavButton>
+            <NavButton
               onClick={() =>
-                onClickSubmit({...newEvent, data: {image: selectedImage}})
+                onClickSubmit({ ...newEvent, data: { image: selectedImage } })
               }
-            >
-              Next ▶
-            </button>
+              buttonText="Schedule post"
+              to="/confirmation"
+            ></NavButton>
           </div>
         </div>
       </form>
