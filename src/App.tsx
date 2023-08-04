@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import "./App.css";
 import Homepage from "./components/pages/homepage/Homepage";
 import Layout from "./components/pages/Layout/Layout";
@@ -8,9 +8,7 @@ import PageNotFound from "./components/pages/pageNotFound/PageNotFound";
 import {createContext} from "react";
 import {myEventsList} from "../src/components/data/data";
 
-// 1. create context
 export const PostContext = createContext<any>({});
-// export const PostContext = createContext();
 
 function App() {
   const [allEvents, setAllEvents] = useState<any[] | null>(function () {
@@ -20,9 +18,9 @@ function App() {
 
   const [userSelected, setUserSelected] = useState<any>("");
   const [previousEvents, setpreviousEvents] = useState(myEventsList);
-  // const [newEvent, setNewEvent] = useState(null);
 
-  function handleSelected(account: any) {
+  function handleSelected(e: any, account: any) {
+    e.preventDefault();
     setUserSelected(account);
   }
 
@@ -42,12 +40,13 @@ function App() {
   );
 
   return (
-    // 2.Provide value to child components
     <PostContext.Provider
       value={{
         allEvents,
         onClickSubmit: handleAddEvent,
         previousEvents: previousEvents,
+        userSelected: userSelected,
+        onUserSelected: handleSelected,
       }}
     >
       <div>
@@ -58,25 +57,12 @@ function App() {
               element={
                 <Layout>
                   <div className="flex h-screen relative">
-                    <Homepage
-                      // allEvents={allEvents}
-                      // previousEvents={previousEvents}
-                      userSelected={userSelected}
-                      onUserSelected={handleSelected}
-                    />
+                    <Homepage />
                   </div>
                 </Layout>
               }
             />
-            <Route
-              path="post"
-              element={
-                <Post
-                  onClickSubmit={handleAddEvent}
-                  userSelected={userSelected}
-                />
-              }
-            />
+            <Route path="post" element={<Post />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

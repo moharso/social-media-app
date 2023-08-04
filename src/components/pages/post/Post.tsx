@@ -1,10 +1,9 @@
 import UploadPhoto from "../../uploadPhoto/UploadPhoto";
 import AddCaption from "../../addCaption/AddCaption";
-import React, {useState} from "react";
+import {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Post = ({onClickSubmit, userSelected}: any) => {
-
+const Post = ({onClickSubmit}: any) => {
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
   function handlePickImage(event: any) {
@@ -13,8 +12,8 @@ const Post = ({onClickSubmit, userSelected}: any) => {
 
   return (
     <div className="flex w-full h-full">
-      <UploadPhoto pickImage={handlePickImage} userSelected={userSelected} />
-      <AddCaption onClickSubmit={onClickSubmit} selectedImage={selectedImage} />
+      <UploadPhoto pickImage={handlePickImage}  />
+      <AddCaption  selectedImage={selectedImage} />
     </div>
   );
 };

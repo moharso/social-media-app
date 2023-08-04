@@ -1,28 +1,14 @@
 import React from "react";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import "./UploadPhoto.css";
 import UserData from "../data/data";
 import Account from "../account/Account";
+import {PostContext} from "../../App";
 
-const UploadPhoto = ({pickImage, userSelected}: any) => {
-  // const pickImage = (event: any) => {
-  //   props.setImage(URL.createObjectURL(event.target.files[0]));
-  // };
+const UploadPhoto = ({pickImage}: any) => {
+  const {userSelected} = useContext(PostContext);
   const [selectedImage, setSelectedImage] = useState<any>(null);
-
-  // can be passed as prop
   const [account, setAccount] = useState(UserData);
-
-  //   {
-  //   start: moment("2023-08-08T10:00:00").toDate(),
-  //   end: moment("2023-08-08T12:00:00").toDate(),
-  //   post: "Ar is relaxing for your body... ",
-  //   data: {
-  //     profile: ["facebook", "linkedin"],
-  //     image: Art,
-  //     icon: [Facebook, Linkedin],
-  //   },
-  // },
 
   return (
     <div className="w-full h-screen flex px-20 pt-10 pb-15 max-w-[500px] basis-auto bg-gray-100 dark:bg-icoDarkMode-deepBlack flex-col space-y-5">
@@ -43,11 +29,6 @@ const UploadPhoto = ({pickImage, userSelected}: any) => {
                 )
               )
             )}
-            {/* <img
-              src="https://cdn-prod.app.iconosquare.com/avatars/avatar-2156274.jpg"
-              alt="account"
-              className="object-fill h-full rounded-full"
-            ></img> */}
           </div>
         </div>
         <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
@@ -75,6 +56,12 @@ const UploadPhoto = ({pickImage, userSelected}: any) => {
                 <input
                   type="file"
                   name="myImage"
+                  className="block w-full text-sm text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:border-0
+      file:text-sm file:font-semibold
+      file:bg-violet-50 file:text-violet-700
+      hover:file:bg-violet-100"
                   onChange={(e: any) => {
                     pickImage(e);
                     setSelectedImage(e.target.files[0]);
@@ -85,9 +72,6 @@ const UploadPhoto = ({pickImage, userSelected}: any) => {
           </div>
         </div>
       </div>
-      {/* <button className="flex items-center font-GSemiBold leading-none max-w-full transition duration-100 outline-none focus:outline-none justify-center text-icoBlue border-2 border-icoBlue focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 disabled:border-transparent disabled:bg-transparent p-5 min-h-14 min-w-150 text-sm rounded-md disabled:bg-icoGray-300 dark:disabled:bg-white/5 disabled:text-icoGray-400 dark:disabled:text-icoDarkMode-wolf disabled:cursor-not-allowed mt-8">
-        Add media
-      </button> */}
     </div>
   );
 };

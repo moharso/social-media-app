@@ -1,4 +1,4 @@
-import React, {useMemo, useCallback, useEffect, useContext} from "react";
+import React, {useMemo, useContext} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import "./CalendarView.css";
 import moment from "moment";
@@ -32,11 +32,7 @@ const CalendarView = (props: any) => {
 
   let components = useMemo(() => {
     return {
-      event: EventComponent(props), // used by each view (Month, Day, Week)
-      // toolbar: MyToolbar(props),
-      // agenda: {
-      //   event: MyAgendaEvent, // with the agenda view use a different component to render events
-      // },
+      event: EventComponent(props),
     };
   }, [props]);
 
@@ -71,9 +67,17 @@ const EventComponent =
           height: "100%",
           width: "100%",
           backgroundImage: isImage
-            ? `url(${props.event.data.image})`
-            : `url(${ImageB})`,
-          backgroundSize: "100%",
+            ? `linear-gradient(
+      to right bottom,
+      rgb(43, 48, 53, 0.3),
+      rgb(43, 48, 53, 0.3)
+    ), url(${props.event.data.image})`
+            : `linear-gradient(
+      to right bottom,
+      rgb(43, 48, 53, 0.3),
+      rgb(43, 48, 53, 0.3)
+    ), url(${ImageB})`,
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           display: "flex",
@@ -97,15 +101,18 @@ const EventComponent =
 
         <button
           style={{
-            background: "transparent",
+            background: "transaprent",
             display: "block",
             width: "100%",
             height: "100%",
-            overflow: "9999",
+            fontWeight: "700",
           }}
           onClick={props.change}
+          data-modal-target="defaultModal"
+          data-modal-toggle="defaultModal"
+          className="hover:transition-all hover:scale-y-110 viewBox='0 0 24 24' "
         >
-          Open
+          Open Post
         </button>
       </div>
     );

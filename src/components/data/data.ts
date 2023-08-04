@@ -31,7 +31,7 @@ import Tiktok from "../assets/tiktok.svg";
 export const myEventsList = [
   {
     start: moment("2023-08-02T08:00:00").toDate(),
-    end: moment("2023-08-02T10:00:00").toDate(),
+    end: moment("2023-08-02T09:00:00").toDate(),
     post: "Let's run to the moon...",
     data: {
       profile: ["twitter"],
@@ -41,7 +41,7 @@ export const myEventsList = [
   },
   {
     start: moment("2023-08-08T10:00:00").toDate(),
-    end: moment("2023-08-08T12:00:00").toDate(),
+    end: moment("2023-08-08T11:00:00").toDate(),
     post: "Ar is relaxing for your body... ",
     data: {
       profile: ["facebook", "linkedin"],
@@ -61,7 +61,7 @@ export const myEventsList = [
   },
   {
     start: moment("2023-07-30T10:00:00").toDate(),
-    end: moment("2023-07-30T14:00:00").toDate(),
+    end: moment("2023-07-30T11:00:00").toDate(),
     post: "Looking for fashion oriented Sales Manager. If that's you, please contact us via email: sales@fashionstore.com ",
     data: {
       profile: ["linkedin"],
@@ -71,7 +71,7 @@ export const myEventsList = [
   },
   {
     start: moment("2023-08-05T17:00:00").toDate(),
-    end: moment("2023-07-08T19:00:00").toDate(),
+    end: moment("2023-07-05T18:00:00").toDate(),
     post: "Looking for fashion oriented Sales Manager. If that's you, please contact us via email: sales@fashionstore.com ",
     data: {
       profile: ["tiktok"],
