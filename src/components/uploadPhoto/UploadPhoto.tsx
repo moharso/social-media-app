@@ -4,11 +4,15 @@ import "./UploadPhoto.css";
 import UserData from "../data/data";
 import Account from "../account/Account";
 import {PostContext} from "../../App";
+import myUsersList from "../data/data";
+
 
 const UploadPhoto = ({pickImage}: any) => {
   const {userSelected} = useContext(PostContext);
   const [selectedImage, setSelectedImage] = useState<any>(null);
   const [account, setAccount] = useState(UserData);
+
+  const userName = myUsersList[0].userName
 
   return (
     <div className="w-full h-screen flex px-20 pt-10 pb-15 max-w-[500px] basis-auto bg-gray-100 dark:bg-icoDarkMode-deepBlack flex-col space-y-5">
@@ -32,8 +36,10 @@ const UploadPhoto = ({pickImage}: any) => {
           </div>
         </div>
         <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
+
           <span className="text-sky-500 truncate font-bold">
             {userSelected}
+
           </span>
         </div>
       </div>

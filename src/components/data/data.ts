@@ -83,13 +83,13 @@ export const myEventsList = [
 
 const myUsersList = [
   {
-    userName: "neringa",
+    userName: "Neringa",
     networks: [
-      {username: "runner", image: Runner, name: "facebook"},
-      {username: "animals", image: Animals, name: "intagram"},
-      {username: "painting", image: Painting, name: "linkedin"},
-      {username: "clothes", image: Clothes, name: "twitter"},
-      {username: "shopping", image: Shopping, name: "tiktok"},
+      {username: "Runner", image: Runner, name: "facebook"},
+      {username: "Ratty", image: Animals, name: "intagram"},
+      {username: "Newbie", image: Painting, name: "linkedin"},
+      {username: "John", image: Clothes, name: "twitter"},
+      {username: "Mary", image: Shopping, name: "tiktok"},
     ],
   },
 ];

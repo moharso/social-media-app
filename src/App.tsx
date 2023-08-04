@@ -7,6 +7,7 @@ import Post from "./components/pages/post/Post";
 import PageNotFound from "./components/pages/pageNotFound/PageNotFound";
 import {createContext} from "react";
 import {myEventsList} from "../src/components/data/data";
+import Confirmation from "./components/pages/confirmation/Confirmation";
 
 export const PostContext = createContext<any>({});
 
@@ -40,6 +41,7 @@ function App() {
   );
 
   return (
+
     <PostContext.Provider
       value={{
         allEvents,

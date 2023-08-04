@@ -1,4 +1,5 @@
 import "./AddCaption.css";
+
 import {NavLink} from "react-router-dom";
 import {useState, useEffect, useRef, useContext} from "react";
 import DatePicker from "react-datepicker";
@@ -8,6 +9,7 @@ import moment from "moment";
 
 const AddCaption = ({selectedImage}: any) => {
   const {onClickSubmit} = useContext(PostContext);
+
   const [newEvent, setNewEvent] = useState<any>({
     post: "",
     start: "",
@@ -63,7 +65,7 @@ const AddCaption = ({selectedImage}: any) => {
                     placeholder="Say something ..."
                     value={newEvent.post}
                     onChange={(e) => {
-                      setNewEvent({...newEvent, post: e.target.value});
+                      setNewEvent({ ...newEvent, post: e.target.value });
                       setTextAreaCount(e.target.value.length);
                     }}
                     ref={inputEl}
@@ -95,6 +97,7 @@ const AddCaption = ({selectedImage}: any) => {
                     // }
                   }}
                   // startDate={newEvent.start}
+
                   showTimeSelect
                   // showTimeInput
                   minDate={new Date()}
@@ -116,7 +119,7 @@ const AddCaption = ({selectedImage}: any) => {
                   selectsEnd
                   placeholderText="End Date"
                   selected={newEvent.end}
-                  onChange={(end) => setNewEvent({...newEvent, end})}
+                  onChange={(end) => setNewEvent({ ...newEvent, end })}
                   startDate={newEvent.start}
                   minDate={newEvent.start}
                   showTimeSelect
@@ -128,17 +131,15 @@ const AddCaption = ({selectedImage}: any) => {
             </div>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
-            <NavLink to="/">◀ Previous: Calendar</NavLink>
-            <button
+
+            <NavButton buttonText="<-return" to="/"></NavButton>
+            <NavButton
               onClick={() =>
-                onClickSubmit({
-                  ...newEvent,
-                  data: {image: selectedImage, icon: "", profile: []},
-                })
+                onClickSubmit({ ...newEvent, data: { image: selectedImage,icon: "", profile: [] } })
               }
-            >
-              Next ▶
-            </button>
+              buttonText="Schedule post"
+              to="/confirmation"
+            ></NavButton>
           </div>
         </div>
       </form>
