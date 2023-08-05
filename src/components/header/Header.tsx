@@ -4,9 +4,11 @@ import {Link} from "react-router-dom";
 // @ts-ignore
 import Calendar from "../assets/calendar.png";
 import {PostContext} from "../../App";
+import NavigationBar from "../navigationBar/NavigationBar";
 
 const Header = () => {
   const {userSelected} = useContext(PostContext);
+  const date = new Date();
 
   return (
     <div className="pb-5 mb-5 z-10 pt-10 ">
@@ -18,7 +20,8 @@ const Header = () => {
               src={Calendar}
               className="HeaderImg mr-3"
             ></img>
-            <span className="text-3xl font-bold">Calendar view</span>
+            <span className="text-3xl font-bold">Calendar</span>
+            {/* <span>{date}</span> */}
           </a>
         </div>
         <div className=" md:flex items-center justify-end mt-2 w-full lg:mt-0 lg:w-auto lg:flex-1">

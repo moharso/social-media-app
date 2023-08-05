@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../header/Header";
 import "./Main.css";
 import CalendarView from "../calendarView/CalendarView";
+import NavigationBar from "../navigationBar/NavigationBar";
 
 const Main = () => {
   return (
