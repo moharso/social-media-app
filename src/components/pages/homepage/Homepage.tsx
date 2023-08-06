@@ -4,21 +4,12 @@ import "./Homepage.css";
 import Main from "../../main/Main";
 import AccountsDisplay from "../../accountsDisplay/AccountsDisplay";
 
-const Homepage = ({
-  allEvents,
-  previousEvents,
-  onUserSelected,
-  userSelected,
-}: any) => {
+const Homepage = () => {
   return (
     <div className="w-full h-full scrollbar overflow-x-hidden relative">
       <Aside />
-      <Main
-        allEvents={allEvents}
-        previousEvents={previousEvents}
-        userSelected={userSelected}
-      />
-      <AccountsDisplay onUserSelected={onUserSelected} />
+      <Main />
+      <AccountsDisplay  />
     </div>
   );
 };

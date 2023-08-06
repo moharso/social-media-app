@@ -4,7 +4,6 @@ const PageNavigation = () => {
   return (
     <div>
       <nav>
-        {/* <Logo /> */}
         <ul>
           <li>
             <NavLink to="/pricing">Pricing</NavLink>

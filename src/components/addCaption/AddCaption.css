@@ -7,16 +7,3 @@
 .AddcaptionPostText {
   color: grey;
 }
-
-.AddcaptionEmojiBtn {
-  width: 5rem;
-  height: 5rem;
-  background: blue;
-}
-
-.PickerEmoji {
-  position: absolute;
-  top: 8rem;
-  right: -8rem;
-  z-index: 2;
-}

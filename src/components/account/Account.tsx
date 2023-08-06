@@ -1,15 +1,12 @@
-const Account = ({network, onSelectAccount}: any) => {
+import "./Account.css";
+
+const Account = ({network}: any) => {
   return (
-    <button
-      onClick={() => onSelectAccount(network.username)}
+    <img
+      src={network.image}
       key={network.username}
-      className=" bg-sky-500 w-12 h-12 rounded-full focus:ring-offset-1 focus:ring-2  text-transparent overflow-hidden"
-    >
-      <img src={network.image} alt="social network account" />
-      <span>
-        <img src={network.name} alt="social network"></img>
-      </span>
-    </button>
+      alt="social network account"
+    />
   );
 };
 

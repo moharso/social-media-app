@@ -1,24 +1,38 @@
 import "./AddCaption.css";
-import { useState, useEffect, useRef } from "react";
 
+import {NavLink} from "react-router-dom";
+import {useState, useEffect, useRef, useContext} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import NavButton from "../../reusableComponents/navButton/NavButton";
+import {PostContext} from "../../App";
+import moment from "moment";
 
-const AddCaption = ({ onClickSubmit, selectedImage }: any) => {
+const AddCaption = ({selectedImage}: any) => {
+  const {onClickSubmit} = useContext(PostContext);
+
   const [newEvent, setNewEvent] = useState<any>({
     post: "",
     start: "",
     end: "",
     data: {
-      profile: "",
+      profile: [""],
       image: "",
+      icon: [],
     },
   });
+
+  // start: moment("2023-08-02T08:00:00").toDate(),
 
   const [textAreaCount, setTextAreaCount] = useState<any>("");
   const inputEl = useRef<any>(null);
 
+  const handleCalendarClose = () => {
+    const endate = moment(newEvent.start).add(1, "hours").toISOString();
+
+    setNewEvent({...newEvent, end: endate});
+  };
+
+  // const handleCalendarOpen = () => console.log("Calendar opened");
   const weekend = (date: any) => new Date() <= date;
 
   useEffect(function () {
@@ -63,30 +77,45 @@ const AddCaption = ({ onClickSubmit, selectedImage }: any) => {
                   <p className="text-xs flex-1 text-icoGray-500 ">
                     <span>{150 - textAreaCount}</span> characters left
                   </p>
-                  {/* <button
-                    className="WatchedBoxBtnToggle"
-                    onClick={() => setIsOpen1((open) => !open)}
-                  >
-                    {isOpen1 ? "–" : "+"}
-                  </button> */}
                 </div>
               </div>
 
               <h2>Add new event</h2>
-              <div>
+              <div
+                style={{padding: "16px", background: "#f0f0f0", color: "black"}}
+              >
                 <DatePicker
-                  selectsStart
-                  placeholderText="Start Date"
+                  // selectsStart
+                  todayButton="Welcome Back!"
+                  showIcon
+                  placeholderText="Click to select a date"
                   selected={newEvent.start}
-                  onChange={(start) => setNewEvent({ ...newEvent, start })}
-                  startDate={newEvent.start}
+                  onChange={(start) => {
+                    setNewEvent({...newEvent, start});
+                    // if (start) {
+                    //   setIsOpen(false);
+                    // }
+                  }}
+                  // startDate={newEvent.start}
+
                   showTimeSelect
+                  // showTimeInput
+                  minDate={new Date()}
                   filterDate={weekend}
                   filterTime={weekend}
                   dateFormat="MMMM d, yyyy h:mmaa"
+                  isClearable
+                  onCalendarClose={handleCalendarClose}
+                  openToDate={new Date()}
+                  timeIntervals={15}
+
+                  // onCalendarOpen={handleCalendarOpen}
+                  // onInputClick={() => setIsOpen(true)}
+                  // onClickOutside={() => setIsOpen(false)}
+                  // open={isOpen}
                 />
 
-                <DatePicker
+                {/* <DatePicker
                   selectsEnd
                   placeholderText="End Date"
                   selected={newEvent.end}
@@ -97,15 +126,16 @@ const AddCaption = ({ onClickSubmit, selectedImage }: any) => {
                   filterDate={weekend}
                   filterTime={weekend}
                   dateFormat="MMMM d, yyyy h:mmaa"
-                />
+                /> */}
               </div>
             </div>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
+
             <NavButton buttonText="<-return" to="/"></NavButton>
             <NavButton
               onClick={() =>
-                onClickSubmit({ ...newEvent, data: { image: selectedImage } })
+                onClickSubmit({ ...newEvent, data: { image: selectedImage,icon: "", profile: [] } })
               }
               buttonText="Schedule post"
               to="/confirmation"

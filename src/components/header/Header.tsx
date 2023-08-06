@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useMemo, useContext} from "react";
 import "./Header.css";
 import {Link} from "react-router-dom";
 // @ts-ignore
 import Calendar from "../assets/calendar.png";
+import {PostContext} from "../../App";
 
-const Header = ({userSelected}: any) => {
+const Header = () => {
+  const {userSelected} = useContext(PostContext);
+
   return (
     <div className="pb-5 mb-5 z-10 pt-10 ">
       <div className="flex justify-between items-center flex-wrap">
@@ -21,7 +24,7 @@ const Header = ({userSelected}: any) => {
         <div className=" md:flex items-center justify-end mt-2 w-full lg:mt-0 lg:w-auto lg:flex-1">
           {userSelected ? (
             <Link
-              className="flex items-center font-semibold text-sm leading-none max-w-full transition duration-100 outline-none hover:bg-sky-400 focus:outline-none shadow-lg justify-center bg-sky-500 text-white focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 focus:text-white p-5 min-h-14 min-w-150 text-sm rounded-md "
+              className="flex items-center font-semibold text-sm leading-none max-w-full transition duration-100 outline-none bg-sky-500 dark:md:hover:bg-fuchsia-600 hover:bg-sky-700 focus:outline-none shadow-lg justify-center  text-white focus:ring-2 focus:ring-icoBlue-200 focus:ring-offset-2 focus:text-white p-5 min-h-14 min-w-150 text-sm rounded-md "
               to="/post"
             >
               <span className="icon-plus mr-3 align-bottom">+</span>
