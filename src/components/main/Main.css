@@ -1,7 +1,21 @@
 .Main {
-  background-color: hsla(0, 0%, 100%, 0.8);
-  /* background-color: blue;
-  width: 100%;
-} */
+  background-color: #eff6ff;
 }
-/* padding: 0 19.2rem 1.8rem 19.2rem; */
+
+.MainContainer {
+  background-image: 
+  /* linear-gradient(
+      to right bottom,
+      rgb(239, 246, 255, 0.2),
+      rgb(239, 246, 255, 0.2)
+    ), */ url(../assets/version3.jpg);
+  /* background-position: right 70% bottom 45%; */
+  background-position: center;
+  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .MainContainer {
+    background-image: none;
+  }
+}

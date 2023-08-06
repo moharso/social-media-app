@@ -6,13 +6,13 @@ const PageNavigation = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/pricing">Pricing</NavLink>
+            <NavLink to="/">Pricing</NavLink>
           </li>
           <li>
-            <NavLink to="/product">Product</NavLink>
+            <NavLink to="/">Product</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/">Login</NavLink>
           </li>
         </ul>
       </nav>

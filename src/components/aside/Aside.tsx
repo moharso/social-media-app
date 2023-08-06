@@ -1,26 +1,29 @@
-// @ts-ignore
-import Icon from "../assets/brand.png";
 import "./Aside.css";
+import MainNavigation from "../mainNavigation/MainNavigation";
+import Logo from "../reusableComponents/logo/Logo";
+import {HiMiniBars3} from "react-icons/hi2";
+import React, {useState} from "react";
 
-const Aside = () => {
+const Aside = ({showSideBar}: any) => {
   return (
-    <div className="Aside fixed z-20 rounded-lg top-6 left-6 right-m md:top-m md:right-unset md:bottom-m md:bg-none bg-white/80 dark:bg-icoDarkMode-anthracite/80 ">
-      <div className=" h-full AsideContainer">
-        <div className="flex align-middle ">
-          <a
-            href="/"
-            className="p-6 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 dark:ring-offset-icoDarkMode-deepBlack/80 focus:ring-icoBlue-200 rounded inline-block leading-none"
-          >
-            <img alt="brand icon" src={Icon} className="mr-3"></img>
-          </a>
-        </div>
+    <div
+      className={`Aside fixed z-20 rounded-lg top-6 left-6 right-m md:top-m md:right-unset md:bottom-m md:bg-none bg-white/80 h-full transition-transform .3s ease-in-out md:translate-x-0 ${
+        !showSideBar ? "-translate-x-full" : ""
+      }`}
+    >
+      <div
+        className={`hidden w-auto flex-col h-screen items-center justify-between md:flex navigation-menu AsideContainer 
+        }`}
+      >
+        <Logo />
+        <MainNavigation />
 
-        <nav className="relative flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4 ">
+        <nav className="relative flex w-full flex-wrap items-center justify-between  py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700  lg:py-4 mb-10">
           <div className="flex w-full flex-wrap items-center justify-between px-3">
             <div className="relative ml-3" data-te-dropdown-ref>
               <a
                 className="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-                href="/"
+                href="/dashboard"
                 id="navbarDropdownMenuLink"
                 role="button"
                 aria-expanded="false"
@@ -46,6 +49,17 @@ const Aside = () => {
           </div>
         </nav>
       </div>
+
+      {/* <div className="flex w-full px-m py-2.5 items-center justify-between h-13 md:hidden">
+        <div className="flex align-middle space-x-m">
+          <div className="relative flex align-middle">
+            <button>
+              <HiMiniBars3 />
+            </button>
+            
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };

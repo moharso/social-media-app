@@ -132,8 +132,10 @@ const AddCaption = ({selectedImage}: any) => {
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
 
+
             <NavButton buttonText="<-return" to="/"></NavButton>
             <NavButton
+
               onClick={() =>
                 onClickSubmit({ ...newEvent, data: { image: selectedImage,icon: "", profile: [] } })
               }
