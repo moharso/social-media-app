@@ -1,8 +1,9 @@
 import React from "react";
 
-const HiddenButton = () => {
+const HiddenButton = ({clickBtn}: any) => {
   return (
     <button
+      onClick={clickBtn}
       type="button"
       className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
     >
@@ -16,7 +17,7 @@ const HiddenButton = () => {
         aria-hidden="true"
       >
         <path
-          stroke-linecap="round"
+          strokeLinecap="round"
           strokeLinejoin="round"
           d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
         />

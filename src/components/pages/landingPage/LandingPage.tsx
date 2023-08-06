@@ -6,6 +6,7 @@ import HiddenButton from "../../reusableComponents/hiddenButton/HiddenButton";
 import HiddenDialog from "../../reusableComponents/hiddenDialog/HiddenDialog";
 import Button from "../../reusableComponents/button/Button";
 import Footer from "../../footer/Footer";
+import HiddenDialogItem from "../../reusableComponents/HiddenDialogItem/HiddenDialogItem";
 const LandingPage = () => {
   return (
     <>
@@ -15,13 +16,11 @@ const LandingPage = () => {
             className="flex items-center justify-between p-6 lg:px-8"
             aria-label="Global"
           >
-            <div className="flex lg:flex-1">
-              <a href="./" className="-m-1.5 p-1.5 flex items-center">
-                <Logo />
-                <span className="text-lg font-semibold text-center text-slate-900">
-                  postsquare
-                </span>
-              </a>
+            <div className="flex lg:flex-1 -m-1.5 p-1.5 flex items-center">
+              <Logo />
+              <span className="text-lg font-semibold text-center text-slate-900">
+                postsquare
+              </span>
             </div>
             <div className="flex lg:hidden">
               <HiddenButton />
@@ -40,7 +39,13 @@ const LandingPage = () => {
           {/* "lg:hidden" */}
           <div className="hidden" role="dialog" aria-modal="true">
             <div className="fixed inset-0 z-50"></div>
-            <HiddenDialog />
+            <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+              <HiddenDialog action="Log in">
+                <HiddenDialogItem text="How it works" />
+                <HiddenDialogItem text="Product" />
+                <HiddenDialogItem text="Price" />
+              </HiddenDialog>
+            </div>
           </div>
         </header>
         <div className="relative flex flex-column sm:flex-row gap-x-16 justify-center isolate px-6 pt-14 lg:px-8">

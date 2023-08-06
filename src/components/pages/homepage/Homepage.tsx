@@ -6,6 +6,7 @@ import AccountsDisplay from "../../accountsDisplay/AccountsDisplay";
 import NavigationBar from "../../navigationBar/NavigationBar";
 import {useState} from "react";
 import MobileNavigation from "../../mobileNavigation/MobileNavigation";
+import Modal from "../../modal/Modal";
 
 const Homepage = () => {
   const [showSideBar, setshowSideBar] = useState(false);
@@ -13,13 +14,19 @@ const Homepage = () => {
   function handleClick() {
     setshowSideBar((showSideBar: any) => (showSideBar = !showSideBar));
   }
+
+  function handleClose() {
+    setshowSideBar(false);
+  }
   return (
     <div className="w-full h-full scrollbar overflow-x-hidden relative">
-      {/* <MobileNavigation /> */}
-      <NavigationBar onClick={handleClick} />
+      {showSideBar && <MobileNavigation clickClose={handleClose} />}
+
+      <NavigationBar clickBtn={handleClick} />
       <Aside showSideBar={showSideBar} />
       <Main />
       <AccountsDisplay />
+      <Modal />
     </div>
   );
 };
