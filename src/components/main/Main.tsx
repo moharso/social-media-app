@@ -3,14 +3,20 @@ import Header from "../header/Header";
 import "./Main.css";
 import CalendarView from "../calendarView/CalendarView";
 import NavigationBar from "../navigationBar/NavigationBar";
+import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 
 const Main = () => {
   return (
-    <div className="Main flex w-full min-h-full px-m pb-m md:pl-36 md:pr-[5.688rem] xl:px-48 scheduler-wrapper-element">
-      <div className="w-full flex flex-col flex-1 mt-36 md:mt-0">
+    // xl:px-48
+    // md:pr-[5.688rem]
+    <div className="Main flex w-full min-h-full px-m pb-m md:pl-36 scheduler-wrapper-element">
+      {/* mt-36 */}
+      <div className="w-4/5 md:w-3/4 flex flex-col flex-1  md:mt-0">
+        {/* <NavigationBar /> */}
         <Header />
         <CalendarView />
       </div>
+      <HomePageImage />
     </div>
   );
 };

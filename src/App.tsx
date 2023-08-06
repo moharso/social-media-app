@@ -7,6 +7,7 @@ import Post from "./components/pages/post/Post";
 import PageNotFound from "./components/pages/pageNotFound/PageNotFound";
 import {createContext} from "react";
 import {myEventsList} from "../src/components/data/data";
+import LandingPage from "./components/pages/landingPage/LandingPage";
 
 export const PostContext = createContext<any>({});
 
@@ -52,8 +53,9 @@ function App() {
       <div>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<LandingPage />} />
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <Layout>
                   <div className="flex h-screen relative">

@@ -5,8 +5,8 @@ const Logo = () => {
     <div>
       <div className="flex align-middle p-5">
         <a
-          href="/"
-          className=" rounded focus:outline-none focus:ring-2 focus:ring-offset-2 dark:ring-offset-icoDarkMode-deepBlack/80 focus:ring-icoBlue-200 rounded inline-block leading-none"
+          href="/dashboard"
+          className=" rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-icoBlue-200 rounded inline-block leading-none"
         >
           <HiMiniSquare3Stack3D className="w-12 h-12 hover:rotate-360 text-blue-400" />
         </a>

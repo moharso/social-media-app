@@ -5,16 +5,17 @@ import Main from "../../main/Main";
 import AccountsDisplay from "../../accountsDisplay/AccountsDisplay";
 import NavigationBar from "../../navigationBar/NavigationBar";
 import {useState} from "react";
+import MobileNavigation from "../../mobileNavigation/MobileNavigation";
 
 const Homepage = () => {
   const [showSideBar, setshowSideBar] = useState(false);
 
   function handleClick() {
     setshowSideBar((showSideBar: any) => (showSideBar = !showSideBar));
-  
   }
   return (
     <div className="w-full h-full scrollbar overflow-x-hidden relative">
+      {/* <MobileNavigation /> */}
       <NavigationBar onClick={handleClick} />
       <Aside showSideBar={showSideBar} />
       <Main />

@@ -128,7 +128,7 @@ const AddCaption = ({selectedImage}: any) => {
             </div>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
-            <NavLink to="/">◀ Previous: Calendar</NavLink>
+            <NavLink to="/dashboard">◀ Previous: Calendar</NavLink>
             <button
               onClick={() =>
                 onClickSubmit({

@@ -1,0 +1,12 @@
+.MainContainer {
+  background-image: url(../assets/version3.jpg);
+
+  background-position: center;
+  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .MainContainer {
+    background-image: none;
+  }
+}
