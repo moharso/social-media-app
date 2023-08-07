@@ -1,17 +1,17 @@
-import React from 'react'
-import NavButton from '../../reusableComponents/navButton/NavButton'
+import React from "react";
+import NavButton from "../reusableComponents/NavButton";
 
 const TopBar = () => {
   return (
     <div>
-        <ul>
+      <ul>
         <li>Content</li>
         <li>Settings</li>
         <li>Confirmation</li>
-        </ul>
-        <NavButton buttonText='close' to='/' />
+      </ul>
+      <NavButton buttonText="close" to="/" />
     </div>
-  )
-}
+  );
+};
 
-export default TopBar
+export default TopBar;

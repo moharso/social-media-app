@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import "./App.css";
 import Homepage from "./components/pages/homepage/Homepage";
 import Layout from "./components/pages/Layout/Layout";
@@ -10,7 +10,6 @@ import {myEventsList} from "../src/components/data/data";
 import LandingPage from "./components/pages/landingPage/LandingPage";
 import Confirmation from "./components/pages/confirmation/Confirmation";
 
-
 export const PostContext = createContext<any>({});
 
 function App() {
@@ -19,22 +18,28 @@ function App() {
     return JSON.parse(storedValue);
   });
 
-  const [userSelected, setUserSelected] = useState<any>("");
+  const [userSelected, setUserSelected] = useState<any>([]);
   const [previousEvents, setpreviousEvents] = useState(myEventsList);
 
   function handleSelected(e: any, account: any) {
     e.preventDefault();
-    setUserSelected(account);
+    setUserSelected((acc: any) => [...acc, account]);
   }
 
-  function handleAddEvent(item: any) {
-    if (Array.isArray(allEvents)) {
-      setAllEvents([...allEvents, item]);
-    } else {
-      setAllEvents([...previousEvents, item]);
-    }
-  }
+  const handleAddEvent = useCallback(
+    function handleAddEvent(item: any) {
+      if (Array.isArray(allEvents)) {
+        setAllEvents([...allEvents, item]);
+      } else {
+        setAllEvents([...previousEvents, item]);
+      }
+    },
+    [allEvents, previousEvents]
+  );
 
+  function handleReturn() {
+    setUserSelected([]);
+  }
   useEffect(
     function () {
       localStorage.setItem("posted", JSON.stringify(allEvents));
@@ -43,7 +48,6 @@ function App() {
   );
 
   return (
-
     <PostContext.Provider
       value={{
         allEvents,
@@ -51,6 +55,7 @@ function App() {
         previousEvents: previousEvents,
         userSelected: userSelected,
         onUserSelected: handleSelected,
+        onClickReturn: handleReturn,
       }}
     >
       <div>
@@ -69,9 +74,9 @@ function App() {
             />
             <Route path="post" element={<Post />} />
             <Route
-            path="confirmation"
-            element={<Confirmation/>}
-          />
+              path="confirmation"
+              element={<Confirmation onClickReturn={handleReturn} />}
+            />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
