@@ -1,6 +1,3 @@
-import {HiMiniBars3} from "react-icons/hi2";
-import React, {useState} from "react";
-import Logo from "../reusableComponents/logo/Logo";
 import HiddenButton from "../reusableComponents/hiddenButton/HiddenButton";
 
 const NavigationBar = ({showSideBar, clickBtn}: any) => {
@@ -12,9 +9,6 @@ const NavigationBar = ({showSideBar, clickBtn}: any) => {
       <div className="md:hidden">
         <HiddenButton clickBtn={() => clickBtn()} />
       </div>
-      {/* <button className="md:hidden" onClick={() => onClick()}>
-        <HiMiniBars3 className="h-6 w-6" />
-      </button> */}
     </nav>
   );
 };

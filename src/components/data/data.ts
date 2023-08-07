@@ -1,14 +1,5 @@
 import moment from "moment";
-// @ts-ignore
-import Runner from "../assets/sport.png";
-// @ts-ignore
-import Animals from "../assets/animal.png";
-// @ts-ignore
-import Painting from "../assets/painting.png";
-// @ts-ignore
-import Clothes from "../assets/clothing.png";
-// @ts-ignore
-import Shopping from "../assets/shopping.png";
+
 // @ts-ignore
 import Running from "../assets/runner.jpg";
 // @ts-ignore
@@ -28,13 +19,13 @@ import Linkedin from "../assets/linkedin.svg";
 // @ts-ignore
 import Tiktok from "../assets/tiktok.svg";
 // @ts-ignore
-import Twitter2 from "../assets/Twitter-X-Logo-Vector-01-2.jpeg"
+import Twitter2 from "../assets/Twitter-X-Logo-Vector-01-2.jpeg";
 // @ts-ignore
-import Linkedin2 from "../assets/linkedin.png"
+import Linkedin2 from "../assets/linkedin.png";
 // @ts-ignore
-import Facebook2 from "../assets/Facebook_icon_2013.svg.png"
+import Facebook2 from "../assets/Facebook_icon_2013.svg.png";
 // @ts-ignore
-import Tiktok2 from "../assets/tiktok.png"
+import Tiktok2 from "../assets/tiktok.png";
 
 export const myEventsList = [
   {

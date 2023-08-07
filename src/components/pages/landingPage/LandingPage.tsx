@@ -1,4 +1,3 @@
-import {Link} from "react-router-dom";
 import "./LandingPage.css";
 import Logo from "../../reusableComponents/logo/Logo";
 import NavigationItem from "../../reusableComponents/navigationItem/NavigationItem";

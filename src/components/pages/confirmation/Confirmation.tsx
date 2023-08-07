@@ -1,10 +1,10 @@
-import React from 'react'
-import NavButton from '../../../reusableComponents/navButton/NavButton'
-import myUsersList from '../../data/data'
-import ConfirmationDate from '../../confirmationDate/confirmationDate'
+import React from "react";
+import NavButton from "../../reusableComponents/NavButton";
+import myUsersList from "../../data/data";
+import ConfirmationDate from "../../confirmationDate/confirmationDate";
 
-const Confirmation = () => {
-  const userName = myUsersList[0].userName
+const Confirmation = ({onClickReturn}: any) => {
+  const userName = myUsersList[0].userName;
 
   return (
     <div>
@@ -13,10 +13,18 @@ const Confirmation = () => {
         <label>{userName}</label>
         <ConfirmationDate></ConfirmationDate>
       </div>
-      <NavButton buttonText='Schedule a new post' to='/post'></NavButton>
-      <NavButton buttonText='Back to calendar' to='/dashboard'></NavButton>
+      <NavButton
+        buttonText="Schedule a new post"
+        to="/post"
+        onClick={onClickReturn}
+      ></NavButton>
+      <NavButton
+        buttonText="Back to calendar"
+        to="/dashboard"
+        onClick={onClickReturn}
+      ></NavButton>
     </div>
-  )
-}
+  );
+};
 
-export default Confirmation
+export default Confirmation;
