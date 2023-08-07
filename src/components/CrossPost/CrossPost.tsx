@@ -29,7 +29,7 @@ const CrossPost: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col">
       <h1>Crosspost</h1>
       <Switch checked={formVisible} onChange={activatedSlider} />
       {formVisible && (

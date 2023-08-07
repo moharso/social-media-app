@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import Account from "../account/Account";
-// import myUsersList from "../data/data";
 import {PostContext} from "../../App";
 
 const SelectedUsers = ({myUsersList}: any) => {

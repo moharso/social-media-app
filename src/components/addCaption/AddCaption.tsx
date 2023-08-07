@@ -101,8 +101,6 @@ const AddCaption = ({selectedImage}: any) => {
                 />
               </div>
             </div>
-          </div>
-          <div>
             <CrossPost></CrossPost>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">

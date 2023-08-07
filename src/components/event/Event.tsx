@@ -59,7 +59,6 @@ export const EventComponent =
           onClick={props.change}
           className="hover:transition-all hover:scale-y-110 viewBox='0 0 24 24' "
         >
-          Check
         </button>
       </div>
     );
