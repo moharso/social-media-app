@@ -1,10 +1,7 @@
-import React, {useMemo, useContext} from "react";
+import React, {useContext} from "react";
 import "./Header.css";
 import {Link} from "react-router-dom";
-// @ts-ignore
-import Calendar from "../assets/calendar.png";
 import {PostContext} from "../../App";
-import NavigationBar from "../navigationBar/NavigationBar";
 import Button from "../reusableComponents/button/Button";
 
 const Header = () => {
