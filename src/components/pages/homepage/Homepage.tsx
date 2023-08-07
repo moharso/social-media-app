@@ -6,7 +6,6 @@ import AccountsDisplay from "../../accountsDisplay/AccountsDisplay";
 import NavigationBar from "../../navigationBar/NavigationBar";
 import {useState} from "react";
 import MobileNavigation from "../../mobileNavigation/MobileNavigation";
-import Modal from "../../modal/Modal";
 
 const Homepage = () => {
   const [showSideBar, setshowSideBar] = useState(false);
@@ -26,7 +25,6 @@ const Homepage = () => {
       <Aside showSideBar={showSideBar} />
       <Main />
       <AccountsDisplay />
-      <Modal />
     </div>
   );
 };
