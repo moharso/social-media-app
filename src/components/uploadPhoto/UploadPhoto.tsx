@@ -5,41 +5,29 @@ import UserData from "../data/data";
 import Account from "../account/Account";
 import {PostContext} from "../../App";
 import myUsersList from "../data/data";
+import SelectedUsers from "../SelectedUsers/SelectedUsers";
 
 
 const UploadPhoto = ({pickImage}: any) => {
   const {userSelected} = useContext(PostContext);
   const [selectedImage, setSelectedImage] = useState<any>(null);
   const [account, setAccount] = useState(UserData);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
-  const userName = myUsersList[0].userName
+  const username = myUsersList[0].userName
 
   return (
     <div className="w-full h-screen flex px-20 pt-10 pb-15 max-w-[500px] basis-auto bg-gray-100 dark:bg-icoDarkMode-deepBlack flex-col space-y-5">
       <div className="flex items-center justify-between gap-x-1">
         <div className="max-w-[66%] flex items-center space-x-4">
           <div className="relative inline-flex items-center justify-center bg-white w-[46px] h-[46px] rounded-full dark:bg-icoDarkMode-deepBlack">
-            {account?.map((user) =>
-              user.networks.map((network) =>
-                network.username === userSelected ? (
-                  <Account key={network.username} network={network} />
-                ) : (
-                  <img
-                    key={network.username}
-                    src="https://cdn-prod.app.iconosquare.com/avatars/avatar-2156274.jpg"
-                    alt="account"
-                    className="object-fill h-full rounded-full"
-                  ></img>
-                )
-              )
-            )}
+          <SelectedUsers myUsersList={myUsersList} selectedUsers={selectedUsers} />
           </div>
         </div>
         <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
 
           <span className="text-sky-500 truncate font-bold">
-            {userSelected}
-
+           {username}
           </span>
         </div>
       </div>

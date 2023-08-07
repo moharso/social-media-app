@@ -27,6 +27,14 @@ import Facebook from "../assets/facebook.svg";
 import Linkedin from "../assets/linkedin.svg";
 // @ts-ignore
 import Tiktok from "../assets/tiktok.svg";
+// @ts-ignore
+import Twitter2 from "../assets/Twitter-X-Logo-Vector-01-2.jpeg"
+// @ts-ignore
+import Linkedin2 from "../assets/linkedin.png"
+// @ts-ignore
+import Facebook2 from "../assets/Facebook_icon_2013.svg.png"
+// @ts-ignore
+import Tiktok2 from "../assets/tiktok.png"
 
 export const myEventsList = [
   {
@@ -85,11 +93,11 @@ const myUsersList = [
   {
     userName: "Neringa",
     networks: [
-      {username: "Runner", image: Runner, name: "facebook"},
-      {username: "Ratty", image: Animals, name: "intagram"},
-      {username: "Newbie", image: Painting, name: "linkedin"},
-      {username: "John", image: Clothes, name: "twitter"},
-      {username: "Mary", image: Shopping, name: "tiktok"},
+      {username: "Runner", image: Facebook2, name: "facebook"},
+      {username: "Ratty", image: Instagram, name: "instagram"},
+      {username: "Newbie", image: Linkedin2, name: "linkedin"},
+      {username: "John", image: Twitter2, name: "twitter"},
+      {username: "Mary", image: Tiktok2, name: "tiktok"},
     ],
   },
 ];

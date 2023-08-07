@@ -1,11 +1,11 @@
 import "./AddCaption.css";
-
-import {NavLink} from "react-router-dom";
 import {useState, useEffect, useRef, useContext} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {PostContext} from "../../App";
 import moment from "moment";
+import NavButton from "../../reusableComponents/navButton/NavButton";
+import CrossPost from "../CrossPost/CrossPost";
 
 const AddCaption = ({selectedImage}: any) => {
   const {onClickSubmit} = useContext(PostContext);
@@ -130,10 +130,13 @@ const AddCaption = ({selectedImage}: any) => {
               </div>
             </div>
           </div>
+          <div>
+            <CrossPost></CrossPost>
+          </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
 
 
-            <NavButton buttonText="<-return" to="/"></NavButton>
+            <NavButton buttonText="<-return" to="/dashboard"></NavButton>
             <NavButton
 
               onClick={() =>

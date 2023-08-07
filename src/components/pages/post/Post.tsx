@@ -2,13 +2,7 @@ import UploadPhoto from "../../uploadPhoto/UploadPhoto";
 import AddCaption from "../../addCaption/AddCaption";
 import {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
-
 import HomePageImage from "../../reusableComponents/homepageImage/HomePageImage";
-
-import TopBar from "../../TopBar/TopBar";
-import TimeSchedule from "../../TimeSchedule/TimeSchedule";
-import CrossPost from "../../CrossPost/CrossPost";
-import NavButton from "../../../reusableComponents/navButton/NavButton";
 
 
 const Post = ({onClickSubmit}: any) => {
@@ -21,15 +15,9 @@ const Post = ({onClickSubmit}: any) => {
   return (
 
     <div className="flex w-full h-full">
-      <TopBar></TopBar>
       <UploadPhoto pickImage={handlePickImage} />
       <AddCaption selectedImage={selectedImage} />
-       <CrossPost></CrossPost>
       <HomePageImage />
-
-      
-
-
     </div>
   );
 };

@@ -20,7 +20,7 @@ const AccountsDisplay = () => {
 
   return (
     <div className="fixed z-20 bottom-72 right-0 md:right-6 w-30 md:right-m md:top-m md:bottom-m md:flex">
-      <div className=" AccountsDisplay w-full h-full flex flex-col space-y-2 items-center">
+      <div className=" AccountsDisplay w-full h-full flex flex-col space-y-4 items-center">
         {accounts.current.map((user) =>
           user.networks.map((network) => (
             <button
