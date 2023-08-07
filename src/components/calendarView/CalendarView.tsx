@@ -1,4 +1,4 @@
-import React, {useMemo, useContext} from "react";
+import React, {useMemo, useContext, memo} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import "./CalendarView.css";
 import moment from "moment";
@@ -10,7 +10,7 @@ const localizer = momentLocalizer(moment);
 
 const changeType = (a: any) => moment(a).toDate();
 
-const CalendarView = (props: any) => {
+const CalendarView = memo(function CalendarView(props: any) {
   const {allEvents, previousEvents} = useContext(PostContext);
 
   const result = useMemo(() => {
@@ -49,6 +49,6 @@ const CalendarView = (props: any) => {
       />
     </div>
   );
-};
+});
 
 export default CalendarView;

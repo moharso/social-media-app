@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import "./App.css";
 import Homepage from "./components/pages/homepage/Homepage";
 import Layout from "./components/pages/Layout/Layout";
@@ -26,13 +26,17 @@ function App() {
     setUserSelected((acc: any) => [...acc, account]);
   }
 
-  function handleAddEvent(item: any) {
-    if (Array.isArray(allEvents)) {
-      setAllEvents([...allEvents, item]);
-    } else {
-      setAllEvents([...previousEvents, item]);
-    }
-  }
+  const handleAddEvent = useCallback(
+    function handleAddEvent(item: any) {
+      if (Array.isArray(allEvents)) {
+        setAllEvents([...allEvents, item]);
+      } else {
+        setAllEvents([...previousEvents, item]);
+      }
+    },
+    [allEvents, previousEvents]
+  );
+
   function handleReturn() {
     setUserSelected([]);
   }
