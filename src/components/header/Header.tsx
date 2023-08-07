@@ -24,7 +24,7 @@ const Header = () => {
           </span>
         </div>
         <div className=" md:flex items-center justify-end mt-2 w-full lg:mt-0 lg:w-auto lg:flex-1">
-          {userSelected ? (
+          {userSelected.length ? (
             <Button text="Schedule a new post" link="/post" />
           ) : (
             <Link
