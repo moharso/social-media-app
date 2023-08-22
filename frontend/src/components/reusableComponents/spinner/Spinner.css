@@ -1,0 +1,58 @@
+.loader {
+  display: flex;
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader__ball {
+  display: inline-block;
+  margin: auto 0.25rem;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 0.375rem;
+  background: #06c;
+}
+.loader__ball--1,
+.loader__ball--2,
+.loader__ball--3 {
+  animation: bulging 2s infinite ease-in-out;
+}
+
+.loader__ball--1 {
+  animation-delay: -0.4s;
+}
+
+.loader__ball--2 {
+  animation-delay: -0.2s;
+}
+
+@keyframes bulging {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* } */
+/* .spinner {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, var(--color-light--2));
+  /* radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0); */
+/* animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+} */
