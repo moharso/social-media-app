@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../reusableComponents/logo/Logo";
 import HiddenButton from "../reusableComponents/hiddenButton/HiddenButton";
 import NavigationItem from "../reusableComponents/navigationItem/NavigationItem";

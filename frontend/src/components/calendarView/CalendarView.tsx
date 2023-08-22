@@ -1,13 +1,19 @@
-import React, {useMemo, useContext, memo} from "react";
-import {Calendar, momentLocalizer} from "react-big-calendar";
+import React, {useMemo, useContext, memo, Suspense} from "react";
+import {momentLocalizer} from "react-big-calendar";
 import "./CalendarView.css";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import {PostContext} from "../../App";
 import {EventComponent} from "../event/Event";
-// const CalendarView = React.lazy(
-//   () => import("./components/calendarView/CalendarView")
-// );
+import Spinner from "../reusableComponents/spinner/Spinner";
+
+const Calendar = React.lazy(() =>
+  new Promise((resolve) => setTimeout(resolve, 1000)).then(() =>
+    import("react-big-calendar").then((module) => {
+      return {default: module.Calendar};
+    })
+  )
+);
 
 const localizer = momentLocalizer(moment);
 
@@ -39,18 +45,20 @@ const CalendarView = memo(function CalendarView(props: any) {
   }, [props]);
 
   return (
-    <div>
+    // <div>
+    <Suspense fallback={<Spinner />}>
       <Calendar
         localizer={localizer}
         events={result}
-        startAccessor="start"
-        endAccessor="end"
+        // startAccessor="start"
+        // endAccessor="end"
         style={{height: "80vh"}}
         defaultView="week"
         views={["month", "week", "day", "agenda"]}
         components={components}
       />
-    </div>
+    </Suspense>
+    // </div>
   );
 });
 
