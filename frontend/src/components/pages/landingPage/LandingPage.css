@@ -1,0 +1,17 @@
+/* .LandingPage {
+  background-image: url(../../assets/landingpageimg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-position: fixed;
+} */
+.img-landing {
+  height: auto;
+  max-width: 100%;
+}
+
+.header {
+  font-family: Gilroy-Semibold, Arial;
+  background-color: #eff6ff;
+  z-index: 9999;
+  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+}

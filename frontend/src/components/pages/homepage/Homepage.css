@@ -1,0 +1,25 @@
+.AccountsDisplayContainer {
+  background: blue;
+}
+
+.Homepage {
+  /* background-image: url(../../assets/Human\ hand\ holding\ stopwatch.jpg); */
+  /* background-image: radial-gradient(
+      circle at 0 61%,
+      #a6d1ba,
+      #48a6a2 11%,
+      #3d93f1 22%,
+      #a786fd 33%,
+      #d7a2ef 43%,
+      #eed7eb 56%,
+      hsla(0, 0%, 100%, 0) 58%
+    ),
+    linear-gradient(177deg, #c7eed4 -1%, #7aee88 40%, #9ad7d8 72%, #f6f3e3 111%);
+
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+
+  z-index: -2; */
+  overflow: auto;
+}
