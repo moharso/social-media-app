@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../header/Header";
 import "./Main.css";
-import CalendarView from "../calendarView/CalendarView";
+// import CalendarView from "../calendarView/CalendarView";
 import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 import {Outlet} from "react-router-dom";
 const Main = () => {

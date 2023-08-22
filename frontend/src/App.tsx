@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useCallback, Suspense} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import "./App.css";
 import Homepage from "./components/pages/homepage/Homepage";
-import Layout from "./components/pages/Layout/Layout";
+// import Layout from "./components/pages/Layout/Layout";
 //
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Post from "./components/pages/post/Post";
@@ -11,6 +11,7 @@ import {myEventsList} from "../src/components/data/data";
 import LandingPage from "./components/pages/landingPage/LandingPage";
 import Confirmation from "./components/pages/confirmation/Confirmation";
 import CalendarView from "./components/calendarView/CalendarView";
+import SlideOver from "./components/slideOver/SlideOver";
 // const CalendarView = React.lazy(
 //   () => import("./components/calendarView/CalendarView")
 // );
@@ -22,6 +23,7 @@ function App() {
     const storedValue: any = localStorage.getItem("posted");
     return JSON.parse(storedValue);
   });
+  // const [posts, setPosts] = useState([]);
 
   const [userSelected, setUserSelected] = useState<any>([]);
   const [previousEvents, setpreviousEvents] = useState(myEventsList);
@@ -52,6 +54,16 @@ function App() {
     [allEvents]
   );
 
+  // for data from database
+  // useEffect(() => {
+  //   async function fetchPosts() {
+  // try{
+  //     const res = await fetch("URL");
+  //     const data = await res.json();
+  // setPosts(data)}catch(err){alert ("ERROR")};
+  //   }
+  // }, []);
+
   return (
     <PostContext.Provider
       value={{
@@ -71,6 +83,7 @@ function App() {
               <Route index element={<CalendarView />} />
               <Route path="dashboard" element={<p>DASHBOARD</p>} />
               <Route path="calendar" element={<CalendarView />} />
+              {/* <Route path="calendar/:id" element={<SlideOver />} /> */}
               <Route path="settings" element={<p>SETTINGS</p>} />
               <Route path="accounts" element={<p>ACCOUNTS</p>} />
             </Route>

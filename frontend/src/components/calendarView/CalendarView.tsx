@@ -6,7 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import {PostContext} from "../../App";
 import {EventComponent} from "../event/Event";
 import Spinner from "../reusableComponents/spinner/Spinner";
-
 const Calendar = React.lazy(() =>
   new Promise((resolve) => setTimeout(resolve, 1000)).then(() =>
     import("react-big-calendar").then((module) => {
@@ -16,10 +15,9 @@ const Calendar = React.lazy(() =>
 );
 
 const localizer = momentLocalizer(moment);
-
 const changeType = (a: any) => moment(a).toDate();
 
-const CalendarView = memo(function CalendarView(props: any) {
+const CalendarView = function CalendarView(props: any) {
   const {allEvents, previousEvents} = useContext(PostContext);
 
   const result = useMemo(() => {
@@ -60,6 +58,6 @@ const CalendarView = memo(function CalendarView(props: any) {
     </Suspense>
     // </div>
   );
-});
+};
 
-export default CalendarView;
+export default memo(CalendarView);
