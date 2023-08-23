@@ -57,9 +57,9 @@ const CalendarView = function CalendarView(props: any) {
       <Calendar
         localizer={localizer}
         events={result}
-        // startAccessor="start"
-        // endAccessor="end"
-        style={{height: "80vh"}}
+        startAccessor={result.start}
+        endAccessor={result.end}
+        // style={{height: "100vh"}}
         defaultView="month"
         views={["month", "week", "day", "agenda"]}
         components={components}

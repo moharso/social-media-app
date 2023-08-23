@@ -3,7 +3,7 @@ import "./App.css";
 import Homepage from "./components/pages/homepage/Homepage";
 // import Layout from "./components/pages/Layout/Layout";
 //
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Post from "./components/pages/post/Post";
 import PageNotFound from "./components/pages/pageNotFound/PageNotFound";
 import {createContext} from "react";
@@ -80,7 +80,7 @@ function App() {
           <Routes>
             <Route index element={<LandingPage />} />
             <Route path="app" element={<Homepage />}>
-              <Route index element={<CalendarView />} />
+              <Route index element={<Navigate replace to="calendar" />} />
               <Route path="dashboard" element={<p>DASHBOARD</p>} />
               <Route path="calendar" element={<CalendarView />} />
               <Route path="calendar/:id" element={<SlideOver />} />
