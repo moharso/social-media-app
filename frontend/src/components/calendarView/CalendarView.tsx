@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {PostContext} from "../../App";
 import {EventComponent} from "../event/Event";
 import Spinner from "../reusableComponents/spinner/Spinner";
+
 const Calendar = React.lazy(() =>
   new Promise((resolve) => setTimeout(resolve, 1000)).then(() =>
     import("react-big-calendar").then((module) => {
@@ -37,7 +38,15 @@ const CalendarView = function CalendarView(props: any) {
   }, [allEvents, previousEvents]);
 
   let components = useMemo(() => {
+    console.log(props);
     return {
+      //       Event {
+      //   title: string,
+      //   start: Date,
+      //   end: Date,
+      //   allDay?: boolean
+      //   resource?: any,
+      // }
       event: EventComponent(props),
     };
   }, [props]);
@@ -51,7 +60,7 @@ const CalendarView = function CalendarView(props: any) {
         // startAccessor="start"
         // endAccessor="end"
         style={{height: "80vh"}}
-        defaultView="week"
+        defaultView="month"
         views={["month", "week", "day", "agenda"]}
         components={components}
       />

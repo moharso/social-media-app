@@ -83,7 +83,7 @@ function App() {
               <Route index element={<CalendarView />} />
               <Route path="dashboard" element={<p>DASHBOARD</p>} />
               <Route path="calendar" element={<CalendarView />} />
-              {/* <Route path="calendar/:id" element={<SlideOver />} /> */}
+              <Route path="calendar/:id" element={<SlideOver />} />
               <Route path="settings" element={<p>SETTINGS</p>} />
               <Route path="accounts" element={<p>ACCOUNTS</p>} />
             </Route>
