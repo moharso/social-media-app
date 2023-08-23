@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import Account from "../account/Account";
-import {PostContext} from "../../App";
-
+import {PostContext} from "../../context/PostContext";
 const SelectedUsers = ({myUsersList}: any) => {
   const {userSelected} = useContext(PostContext);
 

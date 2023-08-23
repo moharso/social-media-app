@@ -3,7 +3,7 @@ import {momentLocalizer} from "react-big-calendar";
 import "./CalendarView.css";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
-import {PostContext} from "../../App";
+import {PostContext} from "../../context/PostContext";
 import {EventComponent} from "../event/Event";
 import Spinner from "../reusableComponents/spinner/Spinner";
 

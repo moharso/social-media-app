@@ -1,9 +1,65 @@
+.AddCaptionContainer {
+  flex-basis: 50%;
+  overflow: auto;
+  padding-left: 8px;
+  padding-right: 14px;
+}
+.AddCaptionContainerIcon {
+  color: #7a869a;
+  display: flex;
+  margin-right: 8px;
+  color: rgb(33, 70, 236);
+  background-color: rgb(233, 237, 253);
+}
+.AddCaptionContainerIcon span {
+  width: 20px;
+  height: 20px;
+}
 .AddCaption {
-  border: 1px solid rgb(14 165 233);
+  min-height: 150px;
+  word-wrap: break-word;
+  font-size: 14px;
+  padding: 12px;
+  max-height: 300px;
+  overflow: auto;
+  width: 100%;
+
+  font-family: Gilroy-Medium, Arial;
+
+  /* border: 1px solid rgb(14 165 233);
   border-radius: 3px;
   font-family: Gilroy-Medium, Arial;
+  position: relative; */
+}
+textarea {
+  border: 1px solid #ebecf0;
+  border-radius: 4px;
   position: relative;
+  cursor: text;
+  min-height: 150px;
+  max-height: 300px;
+  overflow: auto;
+  width: 100%;
+  /* width: 100%;
+
+  height: 100%; */
+  transition: 0.5s;
+  resize: none;
+}
+textarea:focus {
+  border: 1px solid rgb(14 165 233) !important;
 }
 .AddcaptionPostText {
   color: grey;
+}
+
+.Textarea {
+  border: 1px solid #ebecf0;
+  border-radius: 4px;
+  position: relative;
+}
+
+.label {
+  margin: 0;
+  margin: 12px 0;
 }

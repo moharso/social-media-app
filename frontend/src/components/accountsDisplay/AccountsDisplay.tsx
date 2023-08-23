@@ -2,7 +2,7 @@ import {useRef, useEffect, useContext} from "react";
 import "./AccountsDisplay.css";
 import UserData from "../data/data";
 import Account from "../account/Account";
-import {PostContext} from "../../App";
+import {PostContext} from "../../context/PostContext";
 
 const AccountsDisplay = () => {
   const {onUserSelected} = useContext(PostContext);

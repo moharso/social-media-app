@@ -12,47 +12,48 @@ import LandingPage from "./components/pages/landingPage/LandingPage";
 import Confirmation from "./components/pages/confirmation/Confirmation";
 import CalendarView from "./components/calendarView/CalendarView";
 import SlideOver from "./components/slideOver/SlideOver";
+import {PostProvider} from "./context/PostContext";
 // const CalendarView = React.lazy(
 //   () => import("./components/calendarView/CalendarView")
 // );
 
-export const PostContext = createContext<any>({});
+// export const PostContext = createContext<any>({});
 
 function App() {
-  const [allEvents, setAllEvents] = useState<any[] | null>(function () {
-    const storedValue: any = localStorage.getItem("posted");
-    return JSON.parse(storedValue);
-  });
-  // const [posts, setPosts] = useState([]);
+  // const [allEvents, setAllEvents] = useState<any[] | null>(function () {
+  //   const storedValue: any = localStorage.getItem("posted");
+  //   return JSON.parse(storedValue);
+  // });
+  // // const [posts, setPosts] = useState([]);
 
-  const [userSelected, setUserSelected] = useState<any>([]);
-  const [previousEvents, setpreviousEvents] = useState(myEventsList);
+  // const [userSelected, setUserSelected] = useState<any>([]);
+  // const [previousEvents, setpreviousEvents] = useState(myEventsList);
 
-  function handleSelected(e: any, account: any) {
-    e.preventDefault();
-    setUserSelected((acc: any) => [...acc, account]);
-  }
+  // function handleSelected(e: any, account: any) {
+  //   e.preventDefault();
+  //   setUserSelected((acc: any) => [...acc, account]);
+  // }
 
-  const handleAddEvent = useCallback(
-    function handleAddEvent(item: any) {
-      if (Array.isArray(allEvents)) {
-        setAllEvents([...allEvents, item]);
-      } else {
-        setAllEvents([...previousEvents, item]);
-      }
-    },
-    [allEvents, previousEvents]
-  );
+  // const handleAddEvent = useCallback(
+  //   function handleAddEvent(item: any) {
+  //     if (Array.isArray(allEvents)) {
+  //       setAllEvents([...allEvents, item]);
+  //     } else {
+  //       setAllEvents([...previousEvents, item]);
+  //     }
+  //   },
+  //   [allEvents, previousEvents]
+  // );
 
-  function handleReturn() {
-    setUserSelected([]);
-  }
-  useEffect(
-    function () {
-      localStorage.setItem("posted", JSON.stringify(allEvents));
-    },
-    [allEvents]
-  );
+  // function handleReturn() {
+  //   setUserSelected([]);
+  // }
+  // useEffect(
+  //   function () {
+  //     localStorage.setItem("posted", JSON.stringify(allEvents));
+  //   },
+  //   [allEvents]
+  // );
 
   // for data from database
   // useEffect(() => {
@@ -65,29 +66,20 @@ function App() {
   // }, []);
 
   return (
-    <PostContext.Provider
-      value={{
-        allEvents,
-        onClickSubmit: handleAddEvent,
-        previousEvents: previousEvents,
-        userSelected: userSelected,
-        onUserSelected: handleSelected,
-        onClickReturn: handleReturn,
-      }}
-    >
-      <div>
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<LandingPage />} />
-            <Route path="app" element={<Homepage />}>
-              <Route index element={<Navigate replace to="calendar" />} />
-              <Route path="dashboard" element={<p>DASHBOARD</p>} />
-              <Route path="calendar" element={<CalendarView />} />
-              <Route path="calendar/:id" element={<SlideOver />} />
-              <Route path="settings" element={<p>SETTINGS</p>} />
-              <Route path="accounts" element={<p>ACCOUNTS</p>} />
-            </Route>
-            {/* <Route
+    <PostProvider>
+      {/* <div> */}
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<LandingPage />} />
+          <Route path="app" element={<Homepage />}>
+            <Route index element={<Navigate replace to="calendar" />} />
+            <Route path="dashboard" element={<p>DASHBOARD</p>} />
+            <Route path="calendar" element={<CalendarView />} />
+            <Route path="calendar/:id" element={<SlideOver />} />
+            <Route path="settings" element={<p>SETTINGS</p>} />
+            <Route path="accounts" element={<p>ACCOUNTS</p>} />
+          </Route>
+          {/* <Route
               path="/app"
               element={
                 <Layout>
@@ -97,16 +89,13 @@ function App() {
                 </Layout>
               }
             /> */}
-            <Route path="post" element={<Post />} />
-            <Route
-              path="confirmation"
-              element={<Confirmation onClickReturn={handleReturn} />}
-            />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </PostContext.Provider>
+          <Route path="post" element={<Post />} />
+          <Route path="confirmation" element={<Confirmation />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
+      {/* </div> */}
+    </PostProvider>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import "./Header.css";
 import {Link} from "react-router-dom";
-import {PostContext} from "../../App";
+import {PostContext} from "../../context/PostContext";
 import Button from "../reusableComponents/button/Button";
 
 const Header = () => {

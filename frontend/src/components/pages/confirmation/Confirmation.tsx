@@ -1,10 +1,11 @@
-import React from "react";
+// import {useContext} from "react";
 import NavButton from "../../reusableComponents/NavButton";
 import myUsersList from "../../data/data";
 import ConfirmationDate from "../../confirmationDate/confirmationDate";
 import HomePageImage from "../../reusableComponents/homepageImage/HomePageImage";
 
 const Confirmation = ({onClickReturn}: any) => {
+  // const {onClickReturn} = useContext(PostContext);
   const userName = myUsersList[0].userName;
 
   return (
@@ -16,8 +17,8 @@ const Confirmation = ({onClickReturn}: any) => {
           <ConfirmationDate></ConfirmationDate>
         </div>
         <div className="flex justify-end items-end h-full">
-        <NavButton buttonText="Schedule a new post" to="/post"></NavButton>
-        <NavButton buttonText="Back to calendar" to="/dashboard"></NavButton>
+          <NavButton buttonText="Schedule a new post" to="calendar"></NavButton>
+          <NavButton buttonText="Back to calendar" to="post"></NavButton>
         </div>
       </div>
       <HomePageImage></HomePageImage>
