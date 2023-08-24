@@ -124,7 +124,7 @@ const AddCaption = ({selectedImage}: any) => {
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
             <NavButton
               buttonText="<-return"
-              to="/dashboard"
+              to="app"
               onClick={onClickReturn}
             ></NavButton>
             {newEvent.start && newEvent.post && (
