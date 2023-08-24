@@ -4,6 +4,8 @@ const postSchema = new mongoose.Schema({
   post: {
     type: String,
     trim: true,
+    // required: [true, "A post must have a post text"],
+    maxlength: [150, "A post must have less or equal then 150 characters"],
   },
   startDate: {
     type: Date,
@@ -11,23 +13,8 @@ const postSchema = new mongoose.Schema({
     required: [true, "A post must have a date"],
   },
   endDate: {type: Date},
-  label: {
-    type: String,
-  },
-  image: {type: String},
   images: [String],
 });
-
-//  {
-//     start: moment("2023-08-08T10:00:00").toDate(),
-//     end: moment("2023-08-08T11:00:00").toDate(),
-//     post: "Ar is relaxing for your body... ",
-//     data: {
-//       profile: ["facebook", "linkedin"],
-//       image: Art,
-//       icon: [Facebook, Linkedin],
-//     },
-//   },
 
 const Post = mongoose.model("Post", postSchema);
 

@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const fs = require("fs");
-const Post = require("./../models/postModel");
+const Post = require("../models/accountModel");
 // dotenv.config({path: "./config.env"});
 
 dotenv.config({path: `${__dirname}/../config.env`});

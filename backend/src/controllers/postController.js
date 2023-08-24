@@ -1,9 +1,20 @@
 const fs = require("fs");
-const Post = require("./../models/postModel");
+const Post = require("../models/accountModel");
 
 exports.getAllPosts = async (req, res) => {
   try {
+    // EXECUTE QUERY
+    // below are folter, sort functionalities
+    // const features = new APIFeatures(Tour.find(), req.query)
+    //   .filter()
+    //   .sort()
+    //   .limitFields()
+    //   .paginate();
+    // const tours = await features.query;
+
     const posts = await Post.find();
+
+    // SEND RESPONSE
     res.status(200).json({
       status: "success",
       requestedAt: req.requestTime,

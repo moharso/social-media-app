@@ -23,7 +23,7 @@ export const EventComponent =
             </div>
             <div className="EventText">{props.event.post} </div>
             <div className="EventTime">
-              <span>13:30</span>
+              <span>{props.event.start}</span>
             </div>
             <div
               className="EventVisual"
