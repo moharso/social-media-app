@@ -14,8 +14,23 @@ const postSchema = new mongoose.Schema({
   },
   endDate: {type: Date},
   images: [String],
+  account: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Account",
+      required: [true, "Post must belong to the account"],
+    },
+  ],
+  user: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: [true, "Post must belong to the user"],
+    },
+  ],
 });
 
+postSchema.virtual("");
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
