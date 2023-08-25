@@ -4,7 +4,6 @@ import {useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import HomePageImage from "../../reusableComponents/homepageImage/HomePageImage";
 
-
 const Post = ({onClickSubmit}: any) => {
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
@@ -13,7 +12,6 @@ const Post = ({onClickSubmit}: any) => {
   }
 
   return (
-
     <div className="flex w-full h-full">
       <UploadPhoto pickImage={handlePickImage} />
       <AddCaption selectedImage={selectedImage} />

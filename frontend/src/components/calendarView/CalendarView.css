@@ -40,10 +40,12 @@
   letter-spacing: -0.4px;
   border-color: rgb(0 137 255);
   border-width: 1px;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
 }
 .rbc-toolbar .rbc-btn-group button:hover {
-  background-color: #bfdbfe;
-  color: rgb(0 137 255);
+  background-color: rgb(33, 70, 236);
+  color: rgb(255, 255, 255);
 }
 .rbc-toolbar button.rbc-active,
 .rbc-toolbar button:active {
@@ -82,8 +84,7 @@
   min-height: 80px;
   height: auto !important;
 }
-.rbc-row-segment {
-}
+
 .rbc-day-bg {
   border-right: 1px solid #ebecf0;
   border-top: 1px solid #ebecf0;
@@ -139,9 +140,9 @@
   background-color: rgb(255 255 255);
 }
 
-.rbc-event-label {
+/* .rbc-event-label {
   display: none !important;
-}
+} */
 
 @media (max-width: 400px) {
   .rbc-calendar {

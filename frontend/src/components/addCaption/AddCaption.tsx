@@ -26,11 +26,11 @@ const AddCaption = ({selectedImage}: any) => {
 
   const handleCalendarClose = () => {
     const endate = moment(newEvent.start).add(1, "hours").toISOString();
-
     setNewEvent({...newEvent, end: endate});
   };
 
-  const weekend = (date: any) => new Date() <= date;
+  const filterPassedTime = (date: any) =>
+    new Date().getTime() <= date.getTime();
 
   useEffect(function () {
     inputEl.current.focus();
@@ -56,7 +56,7 @@ const AddCaption = ({selectedImage}: any) => {
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
-                      font-size="16"
+                      fontSize="16"
                     >
                       <path
                         fill="currentColor"
@@ -67,7 +67,7 @@ const AddCaption = ({selectedImage}: any) => {
                 </div>
                 <label
                   htmlFor="post"
-                  className=" label w-full block text-base font-bold mb-3 cursor-pointer w-auto"
+                  className="label w-full block text-base font-bold mb-3 cursor-pointer w-auto"
                 >
                   Post content
                 </label>
@@ -85,7 +85,6 @@ const AddCaption = ({selectedImage}: any) => {
                     }}
                     ref={inputEl}
                     className="Textarea"
-                    // w-full resize-none text-sm z-1 scrollbar placeholder:text-icoGray-400 placeholder:dark:text-icoDarkMode-wolf font-GMedium bg-transparent p-0 border-0 placeholder:text-sm focus:outline-0 focus:ring-0 peer flex-1 leading-5"
                   ></textarea>
                 </div>
                 <div className="AddcaptionPostText flex items-center z-1">
@@ -94,13 +93,17 @@ const AddCaption = ({selectedImage}: any) => {
                   </p>
                 </div>
               </div>
-
-              <h2>Add new event</h2>
+              <label
+                htmlFor="date"
+                className="label w-full block text-base font-bold mb-3 cursor-pointer w-auto"
+              >
+                Post planning
+              </label>
               <div
+                id="date"
                 style={{padding: "16px", background: "#f0f0f0", color: "black"}}
               >
                 <DatePicker
-                  todayButton="Welcome Back!"
                   showIcon
                   placeholderText="Select date..."
                   selected={newEvent.start}
@@ -109,10 +112,8 @@ const AddCaption = ({selectedImage}: any) => {
                   }}
                   showTimeSelect
                   minDate={new Date()}
-                  filterDate={weekend}
-                  filterTime={weekend}
-                  dateFormat="MMMM d, yyyy h:mmaa"
-                  isClearable
+                  filterTime={filterPassedTime}
+                  dateFormat="MMMM d, yyyy h:mm aa"
                   onCalendarClose={handleCalendarClose}
                   openToDate={new Date()}
                   timeIntervals={30}
@@ -124,7 +125,7 @@ const AddCaption = ({selectedImage}: any) => {
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
             <NavButton
               buttonText="<-return"
-              to="app"
+              to="/app"
               onClick={onClickReturn}
             ></NavButton>
             {newEvent.start && newEvent.post && (

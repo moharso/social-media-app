@@ -4,7 +4,7 @@ import "./CalendarView.css";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import {PostContext} from "../../context/PostContext";
-import {EventComponent} from "../event/Event";
+import {Event} from "../event/Event";
 import Spinner from "../reusableComponents/spinner/Spinner";
 import {Calendar} from "react-big-calendar";
 
@@ -27,17 +27,21 @@ const CalendarView = function (props: any) {
     if (Array.isArray(allEvents)) {
       return allEvents.map((obj: any) => ({
         ...obj,
-        // start: changeType(obj.start),
-        // end: changeType(obj.end),
+        start: changeType(obj.start),
+        end: changeType(obj.end),
       }));
     } else {
       return previousEvents.map((obj: any) => ({
         ...obj,
-        // start: changeType(obj.start),
-        // end: changeType(obj.end),
+        start: changeType(obj.start),
+        end: changeType(obj.end),
       }));
     }
   }, [allEvents, previousEvents]);
+
+  const handleEventSelected = function (event: any) {
+    console.log("event", event);
+  };
 
   let components = useMemo(() => {
     return {
@@ -48,7 +52,7 @@ const CalendarView = function (props: any) {
       //   allDay?: boolean
       //   resource?: any,
       // }
-      event: EventComponent(props),
+      event: Event(props),
     };
   }, [props]);
 
@@ -63,6 +67,7 @@ const CalendarView = function (props: any) {
       defaultView="month"
       views={["month", "week", "day", "agenda"]}
       components={components}
+      onSelectEvent={(event) => handleEventSelected(event)}
     />
     // {/* </Suspense> */}
   );

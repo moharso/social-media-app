@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import "./Header.css";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {PostContext} from "../../context/PostContext";
 import Button from "../reusableComponents/button/Button";
 
@@ -24,14 +24,14 @@ const Header = () => {
           {userSelected.length ? (
             <Button text="Schedule a new post" link="/post" />
           ) : (
-            <Link
+            <NavLink
               className="flex items-center font-semibold text-sm leading-none max-w-full outline-none shadow-lg justify-center bg-blue-300 text-white p-5 min-h-14 min-w-150 text-sm rounded-md"
               style={{pointerEvents: "none"}}
               to="/post"
               onClick={(event: any) => event.preventDefault()}
             >
               <span>Please choose the account!</span>
-            </Link>
+            </NavLink>
           )}
         </div>
       </div>

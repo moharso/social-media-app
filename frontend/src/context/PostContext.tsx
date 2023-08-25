@@ -1,4 +1,4 @@
-import {useState, useEffect, createContext, useCallback} from "react";
+import {useState, useEffect, createContext, useCallback, useMemo} from "react";
 import {myEventsList} from "../components/data/data";
 
 export const PostContext = createContext<any>({});
@@ -32,26 +32,23 @@ const PostProvider = ({children}: any) => {
   function handleReturn() {
     setUserSelected([]);
   }
+  const value = useMemo(() => {
+    return {
+      allEvents,
+      onClickSubmit: handleAddEvent,
+      previousEvents: previousEvents,
+      userSelected: userSelected,
+      onUserSelected: handleSelected,
+      onClickReturn: handleReturn,
+    };
+  }, [handleAddEvent, previousEvents, allEvents, userSelected]);
   useEffect(
     function () {
       localStorage.setItem("posted", JSON.stringify(allEvents));
     },
     [allEvents]
   );
-  return (
-    <PostContext.Provider
-      value={{
-        allEvents,
-        onClickSubmit: handleAddEvent,
-        previousEvents: previousEvents,
-        userSelected: userSelected,
-        onUserSelected: handleSelected,
-        onClickReturn: handleReturn,
-      }}
-    >
-      {children}
-    </PostContext.Provider>
-  );
+  return <PostContext.Provider value={value}>{children}</PostContext.Provider>;
 };
 
 export {PostProvider};
