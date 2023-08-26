@@ -20,7 +20,6 @@ export const Event =
       console.log(event);
     };
 
-    console.log(props);
     return (
       <>
         <Link to={`${props.event.data.id}`} className="EventBtn">

@@ -128,7 +128,7 @@ const AddCaption = ({selectedImage}: any) => {
               to="/app"
               onClick={onClickReturn}
             ></NavButton>
-            {newEvent.start && newEvent.post && (
+            {newEvent.start && (newEvent.post || newEvent.image) && (
               <NavButton
                 onClick={() =>
                   onClickSubmit({

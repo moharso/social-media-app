@@ -11,11 +11,14 @@ import Confirmation from "./components/pages/confirmation/Confirmation";
 import CalendarView from "./components/calendarView/CalendarView";
 import SlideOver from "./components/slideOver/SlideOver";
 import {PostProvider} from "./context/PostContext";
+import AccountView from "./components/accountView/AccountView";
+import Router from "./components/router/Router";
 
 function App() {
   return (
     <PostProvider>
-      <BrowserRouter>
+      <Router />
+      {/* <BrowserRouter>
         <Routes>
           <Route index element={<LandingPage />} />
           <Route path="app" element={<Homepage />}>
@@ -24,13 +27,13 @@ function App() {
             <Route path="calendar" element={<CalendarView />} />
             <Route path="calendar/:id" element={<SlideOver />} />
             <Route path="settings" element={<p>SETTINGS</p>} />
-            <Route path="accounts" element={<p>ACCOUNTS</p>} />
+            <Route path="accounts" element={<AccountView />} />
           </Route>
           <Route path="post" element={<Post />} />
           <Route path="confirmation" element={<Confirmation />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </PostProvider>
   );
 }

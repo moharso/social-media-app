@@ -7,9 +7,14 @@ const app = require("./index");
 
 const DB = process.env.DATABASE;
 
-mongoose.connect(DB, {useUnifiedTopology: true}).then((conn) => {
-  console.log("DB connection successful");
-});
+mongoose
+  .connect(DB, {useUnifiedTopology: true})
+  .then((conn) => {
+    console.log("DB connection successful");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const port = 4001;
 
