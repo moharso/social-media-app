@@ -15,7 +15,7 @@ const Post = ({onClickSubmit}: any) => {
     <div className="flex w-full h-full">
       <UploadPhoto pickImage={handlePickImage} />
       <AddCaption selectedImage={selectedImage} />
-      <HomePageImage />
+      {/* <HomePageImage /> */}
     </div>
   );
 };

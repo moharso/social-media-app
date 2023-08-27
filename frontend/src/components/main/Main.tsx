@@ -12,7 +12,7 @@ const Main = () => {
       {/* mt-36 */}
       <div className="w-4/5 md:w-3/4 flex flex-col flex-1  md:mt-0">
         {/* <NavigationBar /> */}
-        <Header />
+        {/* <Header /> */}
         <Outlet />
         {/* <CalendarView /> */}
       </div>

@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const opts = {runValidators: true, context: "query"};
 
 const accountSchema = new mongoose.Schema(
   {
     platform: {
       type: String,
+      unique: true,
       required: [true, "Platform must be stated"],
       enum: {
         values: ["facebook", "twitter", "linkedin", "pinterest", "instagram"],
@@ -14,6 +16,7 @@ const accountSchema = new mongoose.Schema(
     username: {
       type: String,
       trim: true,
+      unique: true,
       required: [true, "Username must be stated"],
       minlength: [1, "Username must have more or equal than 1 characters"],
     },

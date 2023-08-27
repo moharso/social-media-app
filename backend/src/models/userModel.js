@@ -65,7 +65,13 @@ const userSchema = new mongoose.Schema(
     //   },
     // ],
     // child referencing, each account should be mongoDB id (objectId)
-    accounts: [{type: mongoose.Schema.ObjectId, ref: "Account"}],
+    accounts: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Account",
+        maxItems: [5, "User can have up to 5 accounts"],
+      },
+    ],
   }
   // {toJSON: {virtuals: true}, toObject: {virtuals: true}}
 );

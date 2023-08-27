@@ -13,7 +13,7 @@ const UploadPhoto = ({pickImage}: any) => {
       <div className="flex items-center justify-between gap-x-1">
         <div className="max-w-[66%] flex items-center space-x-4">
           <div className="relative inline-flex items-center justify-center bg-white w-[46px] h-[46px] rounded-full dark:bg-icoDarkMode-deepBlack">
-            <SelectedUsers myUsersList={myUsersList} />
+            <SelectedUsers />
           </div>
         </div>
         <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
@@ -39,12 +39,7 @@ const UploadPhoto = ({pickImage}: any) => {
                 <input
                   type="file"
                   name="myImage"
-                  className="block w-full text-sm text-slate-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-violet-50 file:text-violet-700
-      hover:file:bg-violet-100"
+                  className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700hover:file:bg-violet-100"
                   onChange={(e: any) => {
                     pickImage(e);
                     setSelectedImage(e.target.files[0]);

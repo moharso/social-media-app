@@ -72,7 +72,6 @@ const PostProvider = ({children}: any) => {
         setIsLoading(true);
         const res = await axios.get(`${BASE_URL}/posts`);
         setPosts(res);
-        console.log(res);
       } catch (err) {
         setIsError(err);
       } finally {

@@ -36,10 +36,7 @@ const AccountView = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   // useEffect(() => {
   //   setIsValid(media ? true : false);

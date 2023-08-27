@@ -12,7 +12,7 @@ router
 router
   .route("/:id")
   .get(accountController.getAccount)
-  .patch(accountController.updateAccount)
+  .patch(accountController.uploadAccountPhoto, accountController.updateAccount)
   .delete(accountController.deleteAccount);
 
 module.exports = router;

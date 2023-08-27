@@ -1,7 +1,8 @@
 const fs = require("fs");
 const Account = require("../models/accountModel");
 const multer = require("multer");
-const {error} = require("console");
+const catchAsync = require("./../utils/catchAsync");
+const AppError = require("./../utils/appError");
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, callbackFunc) => {
@@ -38,39 +39,44 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-exports.getAllAccounts = async (req, res) => {
-  try {
-    // EXECUTE QUERY
-    // below are folter, sort functionalities
-    // const features = new APIFeatures(Tour.find(), req.query)
-    //   .filter()
-    //   .sort()
-    //   .limitFields()
-    //   .paginate();
-    // const tours = await features.query;
+exports.getAllAccounts = catchAsync(async (req, res, next) => {
+  // try {
+  // EXECUTE QUERY
+  // below are folter, sort functionalities
+  // const features = new APIFeatures(Tour.find(), req.query)
+  //   .filter()
+  //   .sort()
+  //   .limitFields()
+  //   .paginate();
+  // const tours = await features.query;
 
-    const accounts = await Account.find();
+  const accounts = await Account.find();
 
-    // SEND RESPONSE
-    res.status(200).json({
-      status: "success",
-      requestedAt: req.requestTime,
-      results: accounts.length,
-      data: {
-        accounts,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: {...err, errmsg: err.errmsg},
-    });
-  }
-};
+  // SEND RESPONSE
+  res.status(200).json({
+    status: "success",
+    requestedAt: req.requestTime,
+    results: accounts.length,
+    data: {
+      accounts,
+    },
+  });
+  // } catch (err) {
+  //   res.status(404).json({
+  //     status: "fail",
+  //     message: {...err, errmsg: err.errmsg},
+  //   });
+  // }
+});
 
-exports.getAccount = async (req, res) => {
-  try {
+exports.getAccount = catchAsync(async (req, res, next) => {
+  // try {
+  if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
     const account = await Account.findById(req.params.id);
+
+    if (account === null) {
+      return next(new AppError("No tour found with that ID", 404));
+    }
 
     res.status(200).json({
       status: "success",
@@ -78,64 +84,78 @@ exports.getAccount = async (req, res) => {
         account,
       },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: {...err, errmsg: err.errmsg},
-    });
   }
-};
+  // } catch (err) {
+  //   res.status(404).json({
+  //     status: "fail",
+  //     message: {...err, errmsg: err.errmsg},
+  //   });
+  // }
+});
 
-// user for post request
-exports.createAccount = async (req, res) => {
+exports.createAccount = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, "username", "platform", "mediaIcon");
+
+  if (req.file) filteredBody.photo = req.file.filename;
+
+  // try {
+  const newAccount = await Account.create(filteredBody);
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      account: newAccount,
+    },
+  });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(400).json({
+  //     status: "fail",
+  //     message: "Invalid data sent",
+  //   });
+  // }
+});
+
+exports.updateAccount = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, "username", "platform", "mediaIcon");
   if (req.file) filteredBody.photo = req.file.filename;
 
-  try {
-    const newAccount = await Account.create(filteredBody);
+  const account = await Account.findByIdAndUpdate(req.params.id, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
 
-    res.status(201).json({
-      status: "success",
-      data: {
-        account: newAccount,
-      },
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data sent",
-    });
+  if (account === null) {
+    return next(new AppError("No tour found with that ID", 404));
   }
-};
 
-exports.updateAccount = async (req, res) => {
-  try {
-    const account = await Account.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    res.status(200).json({
-      status: "success",
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: {...err, errmsg: err.errmsg},
-    });
+  res.status(200).json({
+    status: "success",
+  });
+  // } catch (err) {
+  //   res.status(404).json({
+  //     status: "fail",
+  //     message: {...err, errmsg: err.errmsg},
+  //   });
+  // }
+});
+
+exports.deleteAccount = catchAsync(async (req, res, next) => {
+  // try {
+  const account = await Account.findByIdAndDelete(req.params.id);
+
+  if (account === null) {
+    return next(new AppError("No tour found with that ID", 404));
   }
-};
-exports.deleteAccount = async (req, res) => {
-  try {
-    await Account.findByIdAndDelete(req.params.id);
-    res.status(204).json({
-      status: "success",
-      data: null,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: {...err, errmsg: err.errmsg},
-    });
-  }
-};
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+  // } catch (err) {
+  //   res.status(404).json({
+  //     status: "fail",
+  //     message: {...err, errmsg: err.errmsg},
+  //   });
+  // }
+});
