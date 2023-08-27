@@ -6,20 +6,21 @@ const {error} = require("console");
 const multerStorage = multer.diskStorage({
   destination: (req, file, callbackFunc) => {
     // the first argument is an error
-    callbackFunc(null, "public/img/accounts");
+    callbackFunc(null, `${__dirname}/../public/img/accounts`);
   },
   filename: (req, file, callbackfunc) => {
     // we will give files unique names:account-accountID-current time stamp.jpg
 
     // we will get png, jpeg or svg
     const extention = file.mimetype.split("/")[1];
-    callbackfunc(null, `user-${req.account.id}-${Date.now()}-${extention}`);
+    callbackfunc(null, `user-${Date.now()}.${extention}`);
   },
 });
 
 const multerFilter = (req, file, callbackFunc) => {
   // to check if file is an image
-  if (file.mimetype.startsWidth("image")) {
+
+  if (file.mimetype.startsWith("image")) {
     callbackFunc(null, true);
   } else {
     callbackFunc("Not an image! Please upload only images.", false);
@@ -28,6 +29,14 @@ const multerFilter = (req, file, callbackFunc) => {
 const upload = multer({storage: multerStorage, fileFilter: multerFilter});
 
 exports.uploadAccountPhoto = upload.single("photo");
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
 
 exports.getAllAccounts = async (req, res) => {
   try {
@@ -79,8 +88,11 @@ exports.getAccount = async (req, res) => {
 
 // user for post request
 exports.createAccount = async (req, res) => {
+  const filteredBody = filterObj(req.body, "username", "platform", "mediaIcon");
+  if (req.file) filteredBody.photo = req.file.filename;
+
   try {
-    const newAccount = await Account.create(req.body);
+    const newAccount = await Account.create(filteredBody);
 
     res.status(201).json({
       status: "success",
@@ -89,6 +101,7 @@ exports.createAccount = async (req, res) => {
       },
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: "fail",
       message: "Invalid data sent",

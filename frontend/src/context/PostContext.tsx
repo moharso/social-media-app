@@ -58,6 +58,7 @@ const PostProvider = ({children}: any) => {
     userSelected,
     posts,
     isLoading,
+    isError,
   ]);
   useEffect(
     function () {
@@ -69,7 +70,7 @@ const PostProvider = ({children}: any) => {
     async function fetchPosts() {
       try {
         setIsLoading(true);
-        const res = await axios.get("http://localhost:4001/api/v1/posts");
+        const res = await axios.get(`${BASE_URL}/posts`);
         setPosts(res);
         console.log(res);
       } catch (err) {

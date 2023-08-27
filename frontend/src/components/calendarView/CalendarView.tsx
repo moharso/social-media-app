@@ -21,7 +21,8 @@ const localizer = momentLocalizer(moment);
 const changeType = (a: any) => moment(a).toDate();
 
 const CalendarView = function (props: any) {
-  const {allEvents, previousEvents, posts, isLoading} = useContext(PostContext);
+  const {allEvents, previousEvents, posts, isLoading, isError} =
+    useContext(PostContext);
 
   const result = useMemo(() => {
     if (Array.isArray(allEvents)) {
@@ -60,9 +61,9 @@ const CalendarView = function (props: any) {
     return <Spinner />;
   }
 
-  // if (isError){
-  //   return {<p>}
-  // }
+  if (isError) {
+    return <p>{isError}</p>;
+  }
   return (
     // <Suspense fallback={<Spinner />}>
     <Calendar
