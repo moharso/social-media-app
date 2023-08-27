@@ -1,0 +1,16 @@
+.UploadImg {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(33 70 236);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition-duration: 0.15s;
+}
+.UploadImg:hover {
+  background-color: rgb(233 237 253);
+}
+
+.UploadPhotInput {
+  transition-duration: 0.15s;
+  background-color: rgb(33 70 236);
+}

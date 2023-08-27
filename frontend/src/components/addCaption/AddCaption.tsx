@@ -73,7 +73,10 @@ const AddCaption = ({selectedImage}: any) => {
                 </label>
               </div>
               <div className="flex flex-col relative px-8 pt-8 pb-5 space-y-4 AddCaption">
-                <div className="flex items-start w-full h-full">
+                <div
+                  className="flex items-start w-full h-full flex-col"
+                  ref={inputEl}
+                >
                   <textarea
                     id="post"
                     maxLength={150}
@@ -83,14 +86,12 @@ const AddCaption = ({selectedImage}: any) => {
                       setNewEvent({...newEvent, post: e.target.value});
                       setTextAreaCount(e.target.value.length);
                     }}
-                    ref={inputEl}
-                    className="Textarea"
                   ></textarea>
-                </div>
-                <div className="AddcaptionPostText flex items-center z-1">
-                  <p className="text-xs flex-1 text-icoGray-500 ">
-                    <span>{150 - textAreaCount}</span> characters left
-                  </p>
+                  <div className="AddcaptionPostText flex items-center z-1">
+                    <p className="text-xs flex-1 text-icoGray-500 ">
+                      <span>{150 - textAreaCount}</span> characters left
+                    </p>
+                  </div>
                 </div>
               </div>
               <label

@@ -17,12 +17,13 @@ const PostProvider = ({children}: any) => {
     return JSON.parse(storedValue);
   });
 
-  const [userSelected, setUserSelected] = useState<any>([]);
+  const [userSelected, setUserSelected] = useState<any>();
   const [previousEvents, setpreviousEvents] = useState(myEventsList);
 
   function handleSelected(e: any, account: any) {
     e.preventDefault();
-    setUserSelected((acc: any) => [...acc, account]);
+    setUserSelected(account);
+    // setUserSelected((acc: any) => [...acc, account]);
   }
 
   const handleAddEvent = useCallback(

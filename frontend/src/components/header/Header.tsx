@@ -26,10 +26,12 @@ const Header = ({view, text, scheduling}: any) => {
         </div>
         {scheduling ? (
           <div className=" md:flex items-center justify-end mt-2 w-full lg:mt-0 lg:w-auto lg:flex-1">
-            {userSelected.length ? (
-              // <Button text="Schedule a new post" link="/post"></Button>
-              <Link to={`post?social=${media}`}>Schedule a new post</Link>
+            {userSelected?.length ? (
+              <Button text="Schedule a new post" link={`post?social=${media}`}>
+                Schedule a new post
+              </Button>
             ) : (
+              // <Link to={`post?social=${media}`}>Schedule a new post</Link>
               // <Button
               //   text="Schedule a new post"
               //   link={`?compose=true&social=${media} `}

@@ -1,0 +1,25 @@
+.SlideoverBtn {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition-duration: 0.15s;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  background-color: rgb(54 179 126);
+  border-radius: 0.5rem;
+  width: 112px;
+  height: 1.75rem;
+  margin-left: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 0.15s;
+  margin-left: 0.75rem;
+}
+.SlideoverBtn:hover {
+  background-color: rgb(43 143 101);
+}
+
+.SlideoverBtnDe:hover {
+  background-color: rgb(122 134 154);
+}
