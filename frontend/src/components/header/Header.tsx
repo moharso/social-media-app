@@ -4,7 +4,6 @@ import {Link, NavLink} from "react-router-dom";
 import {PostContext} from "../../context/PostContext";
 import Button from "../reusableComponents/button/Button";
 import {useSearchParams} from "react-router-dom";
-import NavButton from "../reusableComponents/NavButton";
 
 const Header = ({view, text, scheduling}: any) => {
   const {userSelected} = useContext(PostContext);

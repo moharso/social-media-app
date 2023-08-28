@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import "./SlideOver.css";
 import {HiOutlineTrash} from "react-icons/hi2";
 // @ts-ignore
@@ -12,15 +12,42 @@ import AddCaption from "./../addCaption/AddCaption";
 import "react-datepicker/dist/react-datepicker.css";
 import SlideoverHeader from "../slideoverHeader/SlideoverHeader";
 import CloseButton from "../reusableComponents/closeButton/CloseButton";
+import {PostContext} from "../../context/PostContext";
+import axios from "axios";
 // import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 
 const SlideOver = () => {
+  const {userSelected} = useContext(PostContext);
   const [selectedImage, setSelectedImage] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(true);
   function handleOnClick() {
     setIsOpen(false);
   }
   const param = useParams();
+
+  const [account, setAccount] = useState({
+    mediaIcon: "",
+    username: "",
+  });
+
+  useEffect(
+    function () {
+      async function fetchAccount() {
+        try {
+          const res = await axios.get(
+            `http://localhost:4001/api/v1/accounts/${userSelected}`
+          );
+          setAccount(res.data.data.account);
+          console.log(res);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      fetchAccount();
+    },
+    [userSelected]
+  );
+
   // param.id === "post" ? setIsOpen(true) : setIsOpen(false);
 
   return (
@@ -40,9 +67,9 @@ const SlideOver = () => {
                     <CloseButton onClick={handleOnClick} to="/app" />
                   </div>
                   <div className="flex h-full flex-col overflow-y-scroll bg-gray-100 py-6 shadow-xl">
-                    <SlideoverHeader param={param.id} />
+                    <SlideoverHeader param={param.id} account={account} />
                     {param.id === "post" ? (
-                      <Post />
+                      <Post account={account} />
                     ) : (
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         <div className="flex flex-col justify-between">

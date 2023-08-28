@@ -17,8 +17,16 @@ const Confirmation = ({onClickReturn}: any) => {
           <ConfirmationDate></ConfirmationDate>
         </div>
         <div className="flex justify-end items-end h-full">
-          <NavButton buttonText="Schedule a new post" to="/post"></NavButton>
-          <NavButton buttonText="Back to calendar" to="/app"></NavButton>
+          <NavButton
+            buttonText="Schedule a new post"
+            to="/post"
+            variant="contained"
+          ></NavButton>
+          <NavButton
+            buttonText="Back to calendar"
+            to="/app"
+            variant="contained"
+          ></NavButton>
         </div>
       </div>
       <HomePageImage></HomePageImage>

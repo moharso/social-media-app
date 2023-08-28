@@ -3,13 +3,13 @@ import Account from "../account/Account";
 import {PostContext} from "../../context/PostContext";
 import axios from "axios";
 
-const SelectedUsers = ({myUsersList}: any) => {
+const SelectedUsers = ({account}: any) => {
   return (
     <div className="relative inline-flex items-center justify-center bg-white w-[46px] h-[46px] rounded-full dark:bg-icoDarkMode-deepBlack">
-      {myUsersList?.mediaIcon ? (
+      {account?.mediaIcon ? (
         <img
           alt=""
-          src={`http://localhost:4001/media/${myUsersList.mediaIcon}`}
+          src={`http://localhost:4001/media/${account.mediaIcon}`}
         ></img>
       ) : (
         <img

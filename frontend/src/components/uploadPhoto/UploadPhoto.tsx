@@ -1,18 +1,30 @@
 import React from "react";
-import {useState, useContext, useEffect} from "react";
+import {useState, useContext, useEffect, FC} from "react";
 import "./UploadPhoto.css";
 import myUsersList from "../data/data";
 import SelectedUsers from "../SelectedUsers/SelectedUsers";
 import {PostContext} from "../../context/PostContext";
 import axios from "axios";
+import {Tooltip} from "@mui/material";
 
-const UploadPhoto = ({pickImage}: any) => {
+interface Props {}
+
+const UploadPhoto = ({pickImage, children}: any) => {
   const {userSelected} = useContext(PostContext);
   const [selectedImage, setSelectedImage] = useState<any>(null);
+
   const [myUsersList, setMyUsersList] = useState({
     mediaIcon: "",
     username: "",
   });
+
+  // const handleFileChange = (e: any) => {
+  //   const img = {
+  //     preview: URL.createObjectURL(e.target.files[0]),
+  //     data: e.target.files[0],
+  //   };
+  //   setSelectedImage(img.data);
+  // };
 
   // useEffect(
   //   function () {
@@ -37,7 +49,7 @@ const UploadPhoto = ({pickImage}: any) => {
       <div className="UploadImg max-w-[500px] flex justify-center flex-col w-full bg-gray-200">
         <div className=" w-full text-icoGray-400 dark:text-icoDarkMode-wolf rounded-md overflow-hidden square">
           <div className="flex items-center justify-center w-full h-full">
-            <div className="flex flex-col items-center text-sm w-full h-full">
+            <div className="flex flex-col items-center text-sm w-full h-full relative">
               {selectedImage ? (
                 // <div>
                 <>
@@ -46,36 +58,44 @@ const UploadPhoto = ({pickImage}: any) => {
                     src={URL.createObjectURL(selectedImage)}
                     className="w-full h-full"
                   />
-
-                  <button
-                    onClick={() => setSelectedImage(null)}
-                    className="UploadPhotoRemove"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                  <Tooltip title="Delete" arrow>
+                    <button
+                      onClick={() => setSelectedImage("")}
+                      className="UploadPhotoRemove absolute bottom-2 right-2"
                     >
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </Tooltip>
                 </>
               ) : (
+                //           <input
+                //   id="photo"
+                //   type="file"
+                //   accept="image/*"
+                //   name="photo"
+                //   onChange={handleFileChange}
+                // ></input>
+
                 <input
                   type="file"
-                  name="myImage"
+                  name="photo"
+                  accept="image/*"
                   // className="block w-full h-auto text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600 file:cursor-pointer"
                   onChange={(e: any) => {
-                    pickImage(e);
+                    pickImage(e.target.files[0]);
                     setSelectedImage(e.target.files[0]);
                   }}
+                  // onChange={handleFileChange}
                 />
               )}
             </div>

@@ -9,39 +9,121 @@ import CrossPost from "../CrossPost/CrossPost";
 import "./AddCaption.css";
 import SlideoverHeader from "../reusableComponents/slideoverHeader/SlideoverHeader";
 import TextArea from "../textArea/TextArea";
+import {useForm, Controller} from "react-hook-form";
 
-const AddCaption = ({selectedImage}: any) => {
-  const {onClickSubmit, onClickReturn} = useContext(PostContext);
+//  post: {
+//     type: String,
+//     trim: true,
+//     // required: [true, "A post must have a post text"],
+//     maxlength: [150, "A post must have less or equal then 150 characters"],
+//   },
+//   startDate: {
+//     type: Date,
+//     default: Date.now(),
+//     required: [true, "A post must have a date"],
+//   },
+//   endDate: {type: Date},
+//   images: [String],
+//   account: [
+//     {
+//       type: mongoose.Schema.ObjectId,
+//       ref: "Account",
+//       required: [true, "Post must belong to the account"],
+//     },
+//   ],
+//   user: [
+//     {
+//       type: mongoose.Schema.ObjectId,
+//       ref: "User",
+//       required: [true, "Post must belong to the user"],
+//     },
+//   ],
+
+const AddCaption = ({selectedImage, account}: any) => {
+  // const {onClickSubmit, onClickReturn} = useContext(PostContext);
+  const [image, setImage] = useState({preview: "", data: ""});
 
   const [newEvent, setNewEvent] = useState<any>({
     post: "",
-    start: "",
-    end: "",
-    data: {
-      profile: [""],
-      image: "",
-      icon: [],
-    },
+    startDate: "",
+    endDate: "",
+    image: "",
+    user: [],
+    account: [],
   });
+
+  const BASE_URL = "http://localhost:4001/api/v1";
+
+  // const handleFileChange = (e: any) => {
+
+  //   const img = {
+  //     preview: URL.createObjectURL(e.target.files[0]),
+  //     data: e.target.files[0],
+  //   };
+  //   setImage(img);
+  // };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     // e.preventDefault();
+
+  //     // if (!media.data) return;
+
+  //     const formData = new FormData();
+  //     formData.append("username", username2);
+  //     formData.append("platform", media2);
+  //     formData.append("photo", image.data);
+
+  //     const response = await axios.post(`${BASE_URL}/accounts`, formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+  //   } catch (err) {}
+  // };
 
   // const [textAreaCount, setTextAreaCount] = useState<any>("");
   // const inputEl = useRef<any>(null);
 
   const handleCalendarClose = () => {
-    const endate = moment(newEvent.start).add(1, "hours").toISOString();
+    const endate = moment(newEvent.startDate).add(1, "hours").toISOString();
     setNewEvent({...newEvent, end: endate});
   };
   const handleTextChange = (post: any) => {
-    setNewEvent({...newEvent, post: post});
+    setNewEvent({...newEvent, post});
   };
 
   const filterPassedTime = (date: any) =>
     new Date().getTime() <= date.getTime();
 
+  const submitForm = (data: any) => {
+    try {
+      //     // e.preventDefault();
+      //     // if (!media.data) return;
+      const formData = new FormData();
+      formData.append("post", newEvent.post);
+      formData.append("startDate", newEvent.startDate);
+      formData.append("endDate", newEvent.startDate);
+      formData.append("image", selectedImage);
+
+      //need to add the correct data
+      formData.append("user", account?.username);
+      formData.append("account", image.data);
+
+      //     const response = await axios.post(`${BASE_URL}/accounts`, formData, {
+      //       headers: {
+      //         "Content-Type": "multipart/form-data",
+      //       },
+      //     });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex flex-col flex-1 basis-6/12 bg-gray-100">
       <form
-        onSubmit={(event) => event.preventDefault()}
+        onSubmit={submitForm}
         className="AddCaptionContainer flex-1 pt-10 pr-40 pl-20 pb-15 basis-auto"
       >
         <div className="flex h-full flex-col w-full justify-between">
@@ -112,12 +194,17 @@ const AddCaption = ({selectedImage}: any) => {
                 <div className="AddCaption">
                   <span>Date</span>
                   <div id="date" className="DatePicker">
+                    {/* <Controller
+                      control={control}
+                      name="date"
+                      rules={{required: true}}
+                      render={({field: {onChange, value}}) => ( */}
                     <DatePicker
                       showIcon
                       placeholderText="Select date and time..."
-                      selected={newEvent.start}
-                      onChange={(start) => {
-                        setNewEvent({...newEvent, start});
+                      selected={newEvent.startDate}
+                      onChange={(startDate) => {
+                        setNewEvent({...newEvent, startDate});
                       }}
                       showTimeSelect
                       minDate={new Date()}
@@ -127,6 +214,14 @@ const AddCaption = ({selectedImage}: any) => {
                       openToDate={new Date()}
                       timeIntervals={30}
                     />
+                    {/* )} */}
+                    {/* /> */}
+                    {/* {errors.firstName && <Text>This is required.</Text>} */}
+                    {/* <ErrorMessage
+                      errors={errors}
+                      name="date"
+                      render={({message}) => <p>{message}</p>}
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -137,20 +232,22 @@ const AddCaption = ({selectedImage}: any) => {
             <NavButton
               buttonText="Cancel"
               to="/app"
+              variant="outlined"
               // onClick={onClickReturn}
             ></NavButton>
-            {newEvent.start && (newEvent.post || newEvent.image) && (
-              <NavButton
-                onClick={() =>
-                  onClickSubmit({
-                    ...newEvent,
-                    data: {image: selectedImage, icon: "", profile: []},
-                  })
-                }
-                buttonText="Schedule post"
-                to="/confirmation"
-              ></NavButton>
-            )}
+            {/* {newEvent.start && (newEvent.post || newEvent.image) && ( */}
+            {/* <NavButton
+              onClick={() =>
+                onClickSubmit({
+                  ...newEvent,
+                  data: {image: selectedImage, icon: "", profile: []},
+                })
+              }
+              buttonText="Schedule a post"
+              to="/confirmation"
+              variant="contained"
+            ></NavButton> */}
+            {/* )} */}
           </div>
         </div>
       </form>

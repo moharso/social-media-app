@@ -1,5 +1,5 @@
 import React from "react";
-import NavButton from "../reusableComponents/NavButton";
+import NavButton from "../reusableComponents/navigationButton/NavButton";
 
 const TopBar = () => {
   return (
@@ -9,7 +9,7 @@ const TopBar = () => {
         <li>Settings</li>
         <li>Confirmation</li>
       </ul>
-      <NavButton buttonText="close" to="/" />
+      <NavButton buttonText="close" to="/" variant="contained" />
     </div>
   );
 };

@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema({
     required: [true, "A post must have a date"],
   },
   endDate: {type: Date},
-  images: [String],
+  image: [String],
   account: [
     {
       type: mongoose.Schema.ObjectId,

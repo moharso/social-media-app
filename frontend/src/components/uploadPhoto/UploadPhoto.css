@@ -5,7 +5,7 @@
   border-radius: 0.5rem;
   cursor: pointer;
   transition-duration: 0.15s;
-  min-height: 20rem;
+  min-height: 24rem;
 }
 .UploadImg:hover {
   background-color: rgb(233 237 253);

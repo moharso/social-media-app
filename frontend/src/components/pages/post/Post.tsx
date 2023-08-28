@@ -6,7 +6,7 @@ import HomePageImage from "../../reusableComponents/homepageImage/HomePageImage"
 import {PostContext} from "../../../context/PostContext";
 import axios from "axios";
 
-const Post = ({onClickSubmit}: any) => {
+const Post = ({onClickSubmit, account}: any) => {
   // const {userSelected} = useContext(PostContext);
 
   // const [selectedAccount, setSelectedAccount] = useState({
@@ -16,8 +16,9 @@ const Post = ({onClickSubmit}: any) => {
 
   const [selectedImage, setSelectedImage] = useState<any>(null);
 
-  function handlePickImage(event: any) {
-    setSelectedImage(URL.createObjectURL(event.target.files[0]));
+  function handlePickImage(image: any) {
+    // setSelectedImage(URL.createObjectURL(event.target.files[0]));
+    setSelectedImage(image);
   }
 
   // useEffect(
@@ -41,7 +42,7 @@ const Post = ({onClickSubmit}: any) => {
   return (
     <div className="flex w-full h-full">
       <UploadPhoto pickImage={handlePickImage} />
-      <AddCaption selectedImage={selectedImage} />
+      <AddCaption selectedImage={selectedImage} account={account} />
       {/* <HomePageImage /> */}
     </div>
   );
