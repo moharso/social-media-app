@@ -5,7 +5,7 @@ import {PostContext} from "../../context/PostContext";
 import axios from "axios";
 import "./SlideoverHeader.css";
 
-const SlideoverHeader = () => {
+const SlideoverHeader = ({param}: any) => {
   const {userSelected} = useContext(PostContext);
 
   const [myUsersList, setMyUsersList] = useState({
@@ -31,7 +31,7 @@ const SlideoverHeader = () => {
   );
 
   return (
-    <div className="sticky top-0 mt-4">
+    <div className="top-0 mt-4">
       <div className="flex justify-between px-4 sm:px-6 pb-8">
         <div className="flex gap-2 font-semibold text-base items-center">
           <div className="flex items-center justify-between gap-x-1">
@@ -41,18 +41,20 @@ const SlideoverHeader = () => {
               </div>
             </div>
             <div className="flex flex-col space-y-0.5 text-sm overflow-hidden">
-              <span className="text-sky-500 truncate font-bold">
+              <span className="text-slate-900 text-xl truncate font-bold">
                 {myUsersList.username}
               </span>
             </div>
           </div>
         </div>
-        <div className="flex items-center">
-          <button className="SlideoverBtnDel text-grayscale-180 bg-grayscale-10 hover:bg-grayscale-100 rounded text-white:hover tw-rounded inline-flex justify-center items-center w-7 h-7 ">
-            <HiOutlineTrash className="h-5 w-5 " />
-          </button>
-          <button className="SlideoverBtn ">Edit post</button>
-        </div>
+        {param.id === "post" ? (
+          <div className="flex items-center">
+            <button className="SlideoverBtnDel text-grayscale-180 bg-grayscale-10 rounded text-white:hover rounded inline-flex justify-center items-center w-10 h-10">
+              <HiOutlineTrash className="h-5 w-5 " />
+            </button>
+            <button className="SlideoverBtn ">Edit post</button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 // import {useContext} from "react";
-import NavButton from "../../reusableComponents/NavButton";
+import NavButton from "../../reusableComponents/navigationButton/NavButton";
 import myUsersList from "../../data/data";
 import ConfirmationDate from "../../confirmationDate/confirmationDate";
 import HomePageImage from "../../reusableComponents/homepageImage/HomePageImage";

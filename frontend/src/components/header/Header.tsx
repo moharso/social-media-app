@@ -4,6 +4,7 @@ import {Link, NavLink} from "react-router-dom";
 import {PostContext} from "../../context/PostContext";
 import Button from "../reusableComponents/button/Button";
 import {useSearchParams} from "react-router-dom";
+import NavButton from "../reusableComponents/NavButton";
 
 const Header = ({view, text, scheduling}: any) => {
   const {userSelected} = useContext(PostContext);
@@ -36,14 +37,15 @@ const Header = ({view, text, scheduling}: any) => {
               //   text="Schedule a new post"
               //   link={`?compose=true&social=${media} `}
               // ></Button>
-              <NavLink
+
+              <Link
                 className="flex items-center font-semibold text-sm leading-none max-w-full outline-none shadow-lg justify-center bg-blue-300 text-white p-5 min-h-14 min-w-150 text-sm rounded-md"
                 style={{pointerEvents: "none"}}
                 to=""
-                onClick={(event: any) => event.preventDefault()}
+                // onClick={(event: any) => event.preventDefault()}
               >
                 <span>Please choose the account!</span>
-              </NavLink>
+              </Link>
             )}
           </div>
         ) : null}
