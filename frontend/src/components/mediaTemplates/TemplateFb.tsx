@@ -9,7 +9,7 @@ const TemplateFb = () => {
           <div>
             <span className="DesktopVersionHeaderTitle">Account name</span>
             <div className="DesktopVersionHeaderDate">
-              <span>1.9.2023</span>
+              <span>DATE</span>
               <span className="DesktopVersionHeaderDateGlobe"></span>
             </div>
           </div>
