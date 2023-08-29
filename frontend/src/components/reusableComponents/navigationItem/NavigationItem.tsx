@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-scroll";
 import "./NavigationItem.css";
 
+
 const NavigationItem = ({text, children, to}: any) => {
   return (
     <Link
