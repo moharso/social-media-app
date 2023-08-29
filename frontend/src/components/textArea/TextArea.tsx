@@ -31,13 +31,13 @@ const TextArea = ({setNewEvent, title}: any) => {
       <textarea
         id="post"
         maxLength={150}
-        {...register("post", {
-          required: true,
-          maxLength: {
-            value: 150,
-            message: "The maximum post length is 150 characters",
-          },
-        })}
+        // {...register("post", {
+        //   required: true,
+        //   maxLength: {
+        //     value: 150,
+        //     message: "The maximum post length is 150 characters",
+        //   },
+        // })}
         ref={inputEl}
         placeholder="Write caption, #hashtags, @mentions, link or add emoji :) ..."
         value={textAreaContent}

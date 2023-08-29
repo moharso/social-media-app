@@ -10,6 +10,7 @@ import "./AddCaption.css";
 import SlideoverHeader from "../reusableComponents/slideoverHeader/SlideoverHeader";
 import TextArea from "../textArea/TextArea";
 import {useForm, Controller} from "react-hook-form";
+import axios from "axios";
 
 //  post: {
 //     type: String,
@@ -39,11 +40,22 @@ import {useForm, Controller} from "react-hook-form";
 //     },
 //   ],
 
-const AddCaption = ({selectedImage, account}: any) => {
-  // const {onClickSubmit, onClickReturn} = useContext(PostContext);
+const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
+  const {onClickSubmit, onClickReturn} = useContext(PostContext);
   const [image, setImage] = useState({preview: "", data: ""});
 
   const [newEvent, setNewEvent] = useState<any>({
+    post: "",
+    start: "",
+    end: "",
+    data: {
+      profile: [""],
+      image: "",
+      icon: [],
+    },
+  });
+
+  const [newEvent2, setNewEvent2] = useState<any>({
     post: "",
     startDate: "",
     endDate: "",
@@ -63,58 +75,45 @@ const AddCaption = ({selectedImage, account}: any) => {
   //   setImage(img);
   // };
 
-  // const handleSubmit = async () => {
-  //   try {
-  //     // e.preventDefault();
-
-  //     // if (!media.data) return;
-
-  //     const formData = new FormData();
-  //     formData.append("username", username2);
-  //     formData.append("platform", media2);
-  //     formData.append("photo", image.data);
-
-  //     const response = await axios.post(`${BASE_URL}/accounts`, formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-  //   } catch (err) {}
-  // };
-
   // const [textAreaCount, setTextAreaCount] = useState<any>("");
   // const inputEl = useRef<any>(null);
 
   const handleCalendarClose = () => {
     const endate = moment(newEvent.startDate).add(1, "hours").toISOString();
+    const endate2 = moment(newEvent2.startDate).add(1, "hours").toISOString();
+    // const testingDate = moment(endate2).toDate();
+
     setNewEvent({...newEvent, end: endate});
+    setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
   };
   const handleTextChange = (post: any) => {
     setNewEvent({...newEvent, post});
+    setNewEvent2({...newEvent2, post});
   };
 
   const filterPassedTime = (date: any) =>
     new Date().getTime() <= date.getTime();
 
-  const submitForm = (data: any) => {
+  const submitForm = async (e: any) => {
     try {
-      //     // e.preventDefault();
-      //     // if (!media.data) return;
+      e.preventDefault();
+
       const formData = new FormData();
-      formData.append("post", newEvent.post);
-      formData.append("startDate", newEvent.startDate);
-      formData.append("endDate", newEvent.startDate);
-      formData.append("image", selectedImage);
-
+      formData.append("post", newEvent2.post);
+      formData.append("startDate", newEvent2.startDate);
+      formData.append("endDate", newEvent2.endDate);
+      formData.append("image", selectedImage2);
+      console.log(account._id);
       //need to add the correct data
-      formData.append("user", account?.username);
-      formData.append("account", image.data);
+      formData.append("account", account._id);
+      // formData.append("account", "64ea4c65009431fd9e64d506");
 
-      //     const response = await axios.post(`${BASE_URL}/accounts`, formData, {
-      //       headers: {
-      //         "Content-Type": "multipart/form-data",
-      //       },
-      //     });
+      const response = await axios.post(`${BASE_URL}/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -202,9 +201,13 @@ const AddCaption = ({selectedImage, account}: any) => {
                     <DatePicker
                       showIcon
                       placeholderText="Select date and time..."
-                      selected={newEvent.startDate}
+                      // selected={newEvent.start}
+                      selected={newEvent2.startDate}
+                      // onChange={(start) => {
+                      //   setNewEvent({...newEvent, start});
+                      // }}
                       onChange={(startDate) => {
-                        setNewEvent({...newEvent, startDate});
+                        setNewEvent2({...newEvent2, startDate});
                       }}
                       showTimeSelect
                       minDate={new Date()}
@@ -235,7 +238,7 @@ const AddCaption = ({selectedImage, account}: any) => {
               variant="outlined"
               // onClick={onClickReturn}
             ></NavButton>
-            {/* {newEvent.start && (newEvent.post || newEvent.image) && ( */}
+
             {/* <NavButton
               onClick={() =>
                 onClickSubmit({
@@ -247,7 +250,7 @@ const AddCaption = ({selectedImage, account}: any) => {
               to="/confirmation"
               variant="contained"
             ></NavButton> */}
-            {/* )} */}
+            <button onClick={(e) => submitForm(e)}>CLICK ME</button>
           </div>
         </div>
       </form>

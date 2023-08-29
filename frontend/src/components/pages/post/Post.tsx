@@ -14,11 +14,12 @@ const Post = ({onClickSubmit, account}: any) => {
   //   username: "",
   // });
 
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<any>("");
+  const [selectedImage2, setSelectedImage2] = useState<any>("");
 
-  function handlePickImage(image: any) {
-    // setSelectedImage(URL.createObjectURL(event.target.files[0]));
-    setSelectedImage(image);
+  function handlePickImage(item: any) {
+    // setSelectedImage(URL.createObjectURL(item));
+    setSelectedImage2(item);
   }
 
   // useEffect(
@@ -42,7 +43,11 @@ const Post = ({onClickSubmit, account}: any) => {
   return (
     <div className="flex w-full h-full">
       <UploadPhoto pickImage={handlePickImage} />
-      <AddCaption selectedImage={selectedImage} account={account} />
+      <AddCaption
+        selectedImage={selectedImage}
+        account={account}
+        selectedImage2={selectedImage2}
+      />
       {/* <HomePageImage /> */}
     </div>
   );

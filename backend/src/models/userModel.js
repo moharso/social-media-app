@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please provide your email"],
       unique: true,
       lowercase: true,
-      validate: [validator.isEmail, "Please provide a valid email"],
+      // validate: [validator.isEmail, "Please provide a valid email"],
     },
-    photo: String,
+    // photo: String,
     password: {
       type: String,
       required: [true, "Please provide a password"],
@@ -23,16 +23,16 @@ const userSchema = new mongoose.Schema(
     passwordConfirm: {
       type: String,
       required: [true, "Please confirm your password"],
-      validate: {
-        validator: function (el) {
-          return el === this.password;
-        },
-        message: "Passwords are not the same!",
-      },
+      // validate: {
+      //   validator: function (el) {
+      //     return el === this.password;
+      //   },
+      //   message: "Passwords are not the same!",
+      // },
     },
-    passwordChangedAt: Date,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
+    // passwordChangedAt: Date,
+    // passwordResetToken: String,
+    // passwordResetExpires: Date,
     active: {
       type: Boolean,
       default: true,
@@ -65,20 +65,25 @@ const userSchema = new mongoose.Schema(
     //   },
     // ],
     // child referencing, each account should be mongoDB id (objectId)
-    accounts: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Account",
-        maxItems: [5, "User can have up to 5 accounts"],
-      },
-    ],
+    // accounts: [
+    //   {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: "Account",
+    //     maxItems: [5, "User can have up to 5 accounts"],
+    //   },
+    // ],
   }
   // {toJSON: {virtuals: true}, toObject: {virtuals: true}}
 );
 
-// userSchema.virtual("mediaIcon").get(function () {
-//   return `${this.platform}.svg`;
+// userSchema.virtual("postsPublished", {
+//   ref: "Post",
+//   localField: "_id",
+//   foreignField: "user",
 // });
+
+// userSchema.set("toObject", {virtuals: true});
+// userSchema.set("toJSON", {virtuals: true});
 
 const User = mongoose.model("User", userSchema);
 

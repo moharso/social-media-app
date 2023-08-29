@@ -11,7 +11,7 @@ interface Props {}
 
 const UploadPhoto = ({pickImage, children}: any) => {
   const {userSelected} = useContext(PostContext);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<any>("");
 
   const [myUsersList, setMyUsersList] = useState({
     mediaIcon: "",
@@ -60,7 +60,10 @@ const UploadPhoto = ({pickImage, children}: any) => {
                   />
                   <Tooltip title="Delete" arrow>
                     <button
-                      onClick={() => setSelectedImage("")}
+                      onClick={() => {
+                        setSelectedImage("");
+                        pickImage("");
+                      }}
                       className="UploadPhotoRemove absolute bottom-2 right-2"
                     >
                       <svg
@@ -78,25 +81,28 @@ const UploadPhoto = ({pickImage, children}: any) => {
                   </Tooltip>
                 </>
               ) : (
-                //           <input
-                //   id="photo"
-                //   type="file"
-                //   accept="image/*"
-                //   name="photo"
-                //   onChange={handleFileChange}
-                // ></input>
-
                 <input
+                  id="photo"
                   type="file"
-                  name="photo"
                   accept="image/*"
-                  // className="block w-full h-auto text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600 file:cursor-pointer"
+                  name="image"
                   onChange={(e: any) => {
                     pickImage(e.target.files[0]);
                     setSelectedImage(e.target.files[0]);
                   }}
-                  // onChange={handleFileChange}
-                />
+                ></input>
+
+                // <input
+                //   type="file"
+                //   name="image"
+                //   accept="image/*"
+
+                //   onChange={(e: any) => {
+                //     pickImage(e.target.files[0]);
+                //     setSelectedImage(e.target.files[0]);
+                //   }}
+                //   // onChange={handleFileChange}
+                // />
               )}
             </div>
           </div>

@@ -1,17 +1,39 @@
 const fs = require("fs");
-const Post = require("../models/accountModel");
+const Post = require("../models/postModel");
+const Account = require("../models/accountModel");
+const multer = require("multer");
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, callbackFunc) => {
+    callbackFunc(null, `${__dirname}/../public/img/posts`);
+  },
+  filename: (req, file, callbackfunc) => {
+    const extention = file.mimetype.split("/")[1];
+    callbackfunc(null, `post-${Date.now()}.${extention}`);
+  },
+});
+
+const multerFilter = (req, file, callbackFunc) => {
+  if (file.mimetype.startsWith("image")) {
+    callbackFunc(null, true);
+  } else {
+    callbackFunc("Not an image! Please upload only images.", false);
+  }
+};
+const upload = multer({storage: multerStorage, fileFilter: multerFilter});
+
+exports.uploadPostPhoto = upload.single("image");
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
 
 exports.getAllPosts = async (req, res) => {
   try {
-    // EXECUTE QUERY
-    // below are folter, sort functionalities
-    // const features = new APIFeatures(Tour.find(), req.query)
-    //   .filter()
-    //   .sort()
-    //   .limitFields()
-    //   .paginate();
-    // const tours = await features.query;
-
     const posts = await Post.find();
 
     // SEND RESPONSE
@@ -52,7 +74,38 @@ exports.getPost = async (req, res) => {
 // user for post request
 exports.createPost = async (req, res) => {
   try {
-    const newPost = await Post.create(req.body);
+    const filteredBody = filterObj(
+      req.body,
+      "post",
+      "startDate",
+      "endDat",
+      "account"
+    );
+
+    if (req.file) filteredBody.image = req.file.filename;
+
+    console.log(req.body);
+    // console.log(req.body);
+
+    // const filteredBody = filterObj(
+    //   req.body,
+    //   "post",
+    //   "startDate",
+    //   "endDate",
+    //   "username",
+    //   "platform",
+    //   "account",
+    //   "user"
+    // );
+
+    // if (req.file) filteredBody.image = req.file.filename;
+    const newPost = await Post.create(filteredBody);
+    console.log(newPost);
+    // await newPost.save();
+    // console.log(newPost);
+    // const account = await Account.findById({_id: newPost.account});
+    // account.publishedPosts.push(book);
+    // await account.save();
 
     res.status(201).json({
       status: "success",
@@ -63,14 +116,24 @@ exports.createPost = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "fail",
-      message: "Invalid data sent",
+      message: err,
     });
   }
 };
 
 exports.updatePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    const filteredBody = filterObj(
+      req.body,
+      "post",
+      "startDate",
+      "endDate",
+      "account"
+    );
+
+    if (req.file) filteredBody.image = req.file.filename;
+
+    const post = await Post.findByIdAndUpdate(req.params.id, filteredBody, {
       new: true,
       runValidators: true,
     });

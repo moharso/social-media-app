@@ -61,9 +61,9 @@ const CalendarView = function (props: any) {
     return <Spinner />;
   }
 
-  if (isError) {
-    return <p>{isError}</p>;
-  }
+  // if (isError) {
+  //   return <p>{isError}</p>;
+  // }
   return (
     // <Suspense fallback={<Spinner />}>
     <Calendar

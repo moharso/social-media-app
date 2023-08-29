@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const opts = {runValidators: true, context: "query"};
+const {Schema} = require("mongoose");
 
-const accountSchema = new mongoose.Schema(
+const accountSchema = new Schema(
   {
     platform: {
       type: String,
@@ -21,10 +22,6 @@ const accountSchema = new mongoose.Schema(
       minlength: [1, "Username must have more or equal than 1 characters"],
     },
     photo: {type: String, default: "default.jpg"},
-    // mediaIcon: {
-    //   type: String,
-    //   required: [true, "An account must have a media icon"],
-    // },
   },
   {toJSON: {virtuals: true}, toObject: {virtuals: true}}
 );
@@ -32,6 +29,19 @@ const accountSchema = new mongoose.Schema(
 accountSchema.virtual("mediaIcon").get(function () {
   return `${this.platform}.svg`;
 });
+
+//  type: Schema.Types.ObjectId,
+//   ref: "Account",
+//   required: [true, "Post must belong to the account"],
+
+accountSchema.virtual("postsPublished", {
+  ref: "Post",
+  localField: "username",
+  foreignField: "account",
+});
+
+// accountSchema.set("toObject", {virtuals: true});
+// accountSchema.set("toJSON", {virtuals: true});
 
 const Account = mongoose.model("Account", accountSchema);
 
