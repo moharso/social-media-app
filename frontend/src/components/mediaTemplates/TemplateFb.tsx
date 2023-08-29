@@ -1,24 +1,24 @@
 import React from "react";
 
-const TemplateFb = () => {
+const TemplateFb = ({postText, name, img}: any) => {
   return (
     <div>
       <div className="DesktopVersion">
         <header className="DesktopVersionHeader">
           <div className="DesktopVersionHeaderImg"></div>
           <div>
-            <span className="DesktopVersionHeaderTitle">Account name</span>
+            <span className="DesktopVersionHeaderTitle">{name}</span>
             <div className="DesktopVersionHeaderDate">
-              <span>DATE</span>
+              <span>9.1.2023</span>
               <span className="DesktopVersionHeaderDateGlobe"></span>
             </div>
           </div>
         </header>
         <main className="DesktopVersionMain">
-          <span className="DesktopVersionMainText">Post text</span>
+          <span className="DesktopVersionMainText">{postText}</span>
           <div className="DesktopVersionMainImg">
             <div>
-              <img src="" alt="post visual"></img>
+              <img src={img} alt="post visual"></img>
             </div>
           </div>
         </main>

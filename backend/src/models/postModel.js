@@ -32,7 +32,7 @@ const postSchema = new Schema({
 postSchema.pre(/^find/, function (next) {
   this.populate({
     path: "account",
-    select: "platform account",
+    select: "platform",
   });
   // .lean();
 

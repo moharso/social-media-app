@@ -190,6 +190,9 @@
   display: flex;
   margin: 32px 12px 0;
 }
+.Pinterest {
+  justify-content: space-between;
+}
 
 .DesktopVersionIconsPinterestImg {
   align-items: center;
@@ -351,4 +354,20 @@
 .PhoneMainHeaderImg {
   height: 24px;
   margin-left: auto;
+}
+
+.SlideOverImgV {
+  color: #fff;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+}
+.SlideOverImgV span {
+  background-color: #2c5de5;
+  padding: 6px 8px;
+  border-radius: 24px;
+}
+.SlideOverImgV svg {
+  height: 20px;
+  width: 20px;
 }

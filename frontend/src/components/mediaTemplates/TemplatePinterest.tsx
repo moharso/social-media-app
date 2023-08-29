@@ -1,11 +1,13 @@
 import React from "react";
 
-const TemplatePinterest = () => {
+const TemplatePinterest = ({postText, name, img}: any) => {
   return (
-    <div className="DesktopVersion">
+    <div className="DesktopVersion Pinterest">
       <main className="DesktopVersionMain">
         <div className="DesktopVersionMainImg">
-          <div>Image</div>
+          <div>
+            <img src={img} alt="post visual"></img>
+          </div>
         </div>
         <div className="DesktopVersionIconsPinterest">
           <div className="DesktopVersionIconsPinterestImg">
@@ -25,11 +27,11 @@ const TemplatePinterest = () => {
           </div>
           <button>Save</button>
         </div>
-        <div>Post</div>
+        <div>{postText}</div>
       </main>
       <footer className="DesktopVersionFooterPinterest">
         <div className="DesktopVersionHeaderImg"></div>
-        <span>Account name</span>
+        <span>{name}</span>
 
         <button>Follow</button>
       </footer>

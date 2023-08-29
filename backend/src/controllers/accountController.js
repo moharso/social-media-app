@@ -50,7 +50,11 @@ exports.getAllAccounts = catchAsync(async (req, res, next) => {
   //   .paginate();
   // const tours = await features.query;
 
-  const accounts = await Account.find();
+  // const accounts = await Account.find();
+  const accounts = await Account.find().populate({
+    path: "postsPublished",
+    select: "post",
+  });
 
   // SEND RESPONSE
   res.status(200).json({

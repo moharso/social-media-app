@@ -85,6 +85,8 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
 
     setNewEvent({...newEvent, end: endate});
     setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
+
+    console.log(newEvent2.startDate, endate2);
   };
   const handleTextChange = (post: any) => {
     setNewEvent({...newEvent, post});
@@ -97,6 +99,8 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
   const submitForm = async (e: any) => {
     try {
       e.preventDefault();
+      console.log(newEvent2.startDate);
+      console.log("SUBMITTED");
 
       const formData = new FormData();
       formData.append("post", newEvent2.post);
@@ -246,9 +250,12 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
               //     data: {image: selectedImage, icon: "", profile: []},
               //   })
               // }
+              // onClick={(e: any) => submitForm(e)}
               buttonText="Schedule a post"
               to="/app"
               variant="contained"
+              // onClick={(e: any) => submitForm(e)}
+              // type="submit"
             ></NavButton>
             {/* <button onClick={(e) => submitForm(e)}>CLICK ME</button> */}
           </div>

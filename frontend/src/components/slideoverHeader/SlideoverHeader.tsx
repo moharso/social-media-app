@@ -6,8 +6,6 @@ import axios from "axios";
 import "./SlideoverHeader.css";
 
 const SlideoverHeader = ({param, account}: any) => {
-  console.log(param);
-
   // const {userSelected} = useContext(PostContext);
 
   // const [myUsersList, setMyUsersList] = useState({

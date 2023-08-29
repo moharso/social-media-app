@@ -1,6 +1,6 @@
 import React from "react";
 
-const TemplateInstagram = () => {
+const TemplateInstagram = ({postText, name, img}: any) => {
   return (
     <div className="DesktopVersion">
       <header className="DesktopVersionHeaderInstagram">
@@ -14,7 +14,7 @@ const TemplateInstagram = () => {
       <main className="DesktopVersionMainInstagram">
         <div className="DesktopVersionMainImg">
           <div>
-            <img></img>
+            <img src={img} alt="post visual"></img>
           </div>
         </div>
         <div className="DesktopVersionMainIcons">
@@ -44,11 +44,8 @@ const TemplateInstagram = () => {
           </div>
         </div>
         <div className="DesktopVersionMainTextInstagram">
-          <span className="DesktopVersionMainTextInstagramAcc">
-            Account name
-          </span>
-          <span> Post text</span>
-
+          <span className="DesktopVersionMainTextInstagramAcc">{name}</span>
+          <span> {postText}</span>
           <span>tags</span>
         </div>
       </main>

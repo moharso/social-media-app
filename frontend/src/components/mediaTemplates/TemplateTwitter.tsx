@@ -1,6 +1,6 @@
 import React from "react";
 
-const TemplateTwitter = () => {
+const TemplateTwitter = ({postText, name, img}: any) => {
   return (
     <div className="DesktopVersion DesktopVersionTwitter">
       <header className="DesktopVersionHeader">
@@ -10,12 +10,12 @@ const TemplateTwitter = () => {
         <div className="DesktopVersionMainImg">
           <div>
             <span className="DesktopVersionHeaderTitle">
-              Account name @Account name date
+              {name} @{name} 9.1.2023
             </span>
           </div>
-          <div>Post</div>
+          <div>{postText}</div>
           <div>
-            <img></img>
+            <img src={img} alt="post visual"></img>
           </div>
 
           <div className="DesktopVersionFooterLinkedin">

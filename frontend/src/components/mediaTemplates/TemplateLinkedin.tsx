@@ -1,12 +1,12 @@
 import React from "react";
 
-const TemplateLinkedin = () => {
+const TemplateLinkedin = ({postText, name, img}: any) => {
   return (
     <div className="DesktopVersion">
       <header className="DesktopVersionHeader">
         <div className="DesktopVersionHeaderImg"></div>
         <div>
-          <span className="DesktopVersionHeaderTitle">Account name</span>
+          <span className="DesktopVersionHeaderTitle">{name}</span>
           <div className="DesktopVersionHeaderDate">
             <span>1.9.2023</span>
             <span className="DesktopVersionHeaderDateGlobe"></span>
@@ -14,10 +14,10 @@ const TemplateLinkedin = () => {
         </div>
       </header>
       <main className="DesktopVersionMain">
-        <span className="DesktopVersionMainText">Post text</span>
+        <span className="DesktopVersionMainText">{postText}</span>
         <div className="DesktopVersionMainImg">
           <div>
-            <img></img>
+            <img src={img} alt="post visual"></img>
           </div>
         </div>
       </main>

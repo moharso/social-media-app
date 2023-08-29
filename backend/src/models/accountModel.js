@@ -36,7 +36,7 @@ accountSchema.virtual("mediaIcon").get(function () {
 
 accountSchema.virtual("postsPublished", {
   ref: "Post",
-  localField: "username",
+  localField: "_id",
   foreignField: "account",
 });
 
