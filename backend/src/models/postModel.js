@@ -29,14 +29,15 @@ const postSchema = new Schema({
   // },
 });
 
-// postSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: "account",
-//     select: "platform",
-//   });
+postSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "account",
+    select: "platform account",
+  });
+  // .lean();
 
-//   next();
-// });
+  next();
+});
 
 const Post = mongoose.model("Post", postSchema);
 

@@ -83,6 +83,11 @@ exports.createPost = async (req, res) => {
     );
 
     if (req.file) filteredBody.image = req.file.filename;
+    const newPost = await Post.create(filteredBody);
+    // const account = await Account.findById({_id: newPost.account});
+    // account.publishedBooks.push(book);
+
+    // await account.save();
 
     console.log(req.body);
     // console.log(req.body);
@@ -99,7 +104,7 @@ exports.createPost = async (req, res) => {
     // );
 
     // if (req.file) filteredBody.image = req.file.filename;
-    const newPost = await Post.create(filteredBody);
+
     console.log(newPost);
     // await newPost.save();
     // console.log(newPost);

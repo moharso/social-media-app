@@ -6,6 +6,8 @@ import axios from "axios";
 import "./SlideoverHeader.css";
 
 const SlideoverHeader = ({param, account}: any) => {
+  console.log(param);
+
   // const {userSelected} = useContext(PostContext);
 
   // const [myUsersList, setMyUsersList] = useState({
@@ -47,7 +49,7 @@ const SlideoverHeader = ({param, account}: any) => {
             </div>
           </div>
         </div>
-        {param.id === "post" ? (
+        {param !== "post" ? (
           <div className="flex items-center">
             <button className="SlideoverBtnDel text-grayscale-180 bg-grayscale-10 rounded text-white:hover rounded inline-flex justify-center items-center w-10 h-10">
               <HiOutlineTrash className="h-5 w-5 " />

@@ -14,6 +14,11 @@ import SlideoverHeader from "../slideoverHeader/SlideoverHeader";
 import CloseButton from "../reusableComponents/closeButton/CloseButton";
 import {PostContext} from "../../context/PostContext";
 import axios from "axios";
+import TemplateFb from "../mediaTemplates/TemplateFb";
+import TemplateInstagram from "../mediaTemplates/TemplateInstagram";
+import TemplateLinkedin from "../mediaTemplates/TemplateLinkedin";
+import TemplatePinterest from "../mediaTemplates/TemplatePinterest";
+import TemplateTwitter from "../mediaTemplates/TemplateTwitter";
 // import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 
 const SlideOver = () => {
@@ -23,7 +28,7 @@ const SlideOver = () => {
   function handleOnClick() {
     setIsOpen(false);
   }
-  const param = useParams();
+  const {id} = useParams();
 
   const [account, setAccount] = useState({
     mediaIcon: "",
@@ -67,16 +72,21 @@ const SlideOver = () => {
                     <CloseButton onClick={handleOnClick} to="/app" />
                   </div>
                   <div className="flex h-full flex-col overflow-y-scroll bg-gray-100 py-6 shadow-xl">
-                    <SlideoverHeader param={param.id} account={account} />
-                    {param.id === "post" ? (
+                    <SlideoverHeader param={id} account={account} />
+                    {id === "post" ? (
                       <Post account={account} />
                     ) : (
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                        <div className="flex flex-col justify-between">
-                          <div>
+                        <div className="flex items-start justify-between">
+                          <div className="flex flex-col">
                             {/* FACEBOOK */}
-                            <h1>fACEBOOK</h1>
-                            <div className="DesktopVersion">
+                            <h1>Desktop</h1>
+                            <TemplateFb />
+                            <TemplateInstagram />
+                            <TemplateLinkedin />
+                            <TemplatePinterest />
+                            <TemplateTwitter />
+                            {/* <div className="DesktopVersion">
                               <header className="DesktopVersionHeader">
                                 <div className="DesktopVersionHeaderImg"></div>
                                 <div>
@@ -117,7 +127,7 @@ const SlideOver = () => {
                                   <span>Send</span>
                                 </div>
                               </footer>
-                            </div>
+                            </div> */}
                             {/* INSTAGRAM */}
                             <h2>instagram</h2>
                             <div className="DesktopVersion">
@@ -475,9 +485,6 @@ const SlideOver = () => {
                               </div>
                             </div>
                           </div>
-                          {/* flex-basis: 50%; overflow: auto; padding-left: 14px;
-                    padding-right: 8px; position: -webkit-sticky; position:
-                    sticky; top: 0; */}
                         </div>
                       </div>
                     )}

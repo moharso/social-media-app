@@ -239,18 +239,18 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
               // onClick={onClickReturn}
             ></NavButton>
 
-            {/* <NavButton
-              onClick={() =>
-                onClickSubmit({
-                  ...newEvent,
-                  data: {image: selectedImage, icon: "", profile: []},
-                })
-              }
+            <NavButton
+              // onClick={() =>
+              //   onClickSubmit({
+              //     ...newEvent,
+              //     data: {image: selectedImage, icon: "", profile: []},
+              //   })
+              // }
               buttonText="Schedule a post"
-              to="/confirmation"
+              to="/app"
               variant="contained"
-            ></NavButton> */}
-            <button onClick={(e) => submitForm(e)}>CLICK ME</button>
+            ></NavButton>
+            {/* <button onClick={(e) => submitForm(e)}>CLICK ME</button> */}
           </div>
         </div>
       </form>
