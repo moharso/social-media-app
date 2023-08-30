@@ -1,4 +1,4 @@
-import {useRef, useEffect, useContext, useState} from "react";
+import {useRef, useEffect, useContext, useState, useMemo} from "react";
 import {useSearchParams, useParams} from "react-router-dom";
 import "./AccountsDisplay.css";
 import UserData from "../data/data";
@@ -12,13 +12,14 @@ const AccountsDisplay = () => {
   const [accounts, setAccounts] = useState<any>([]);
   const [searchParams, setSearchParams] = useSearchParams("");
   const [isLoading, setIsLoading] = useState(false);
-  const buttonEl = useRef<any>();
+  const buttonEl = useRef<any>(null);
   const param = useParams();
+  const [active, setIsActive] = useState(false);
 
-  function handleButton(e: any) {
-    e.preventDefault();
+  function handleButton(e: any, acc: any) {
+    setIsActive(acc);
+    // e.preventDefault();
     buttonEl.current = e.currentTarget;
-    // setSearchParams("");
   }
 
   useEffect(function () {
@@ -35,6 +36,11 @@ const AccountsDisplay = () => {
     }
     fetchAccounts();
   }, []);
+  // console.log("active2", active2);
+  console.log("active", active);
+  useEffect(() => {
+    if (buttonEl.current) buttonEl.current.focus();
+  }, []);
 
   if (isLoading) {
     return <Spinner />;
@@ -49,14 +55,15 @@ const AccountsDisplay = () => {
             <button
               onClick={(e) => {
                 onUserSelected(e, acc._id);
-                handleButton(e);
+                handleButton(e, acc);
                 setSearchParams({
                   social: `${acc.platform}`,
                 });
-
-                // &&profile=${acc._id
               }}
-              className="bg-blue-500 w-12 h-12 rounded-full focus:ring-offset-1 focus:ring-2 text-transparent overflow-hidden"
+              className={`bg-blue-500 w-12 h-12 rounded-full  text-transparent overflow-hidden focus:ring-offset-1 focus:ring-2 ${
+                active === acc ? "Active" : ""
+              }`}
+              ref={buttonEl}
               key={acc._id}
             >
               <Account
@@ -64,27 +71,10 @@ const AccountsDisplay = () => {
                 account={`http://localhost:4001/static/${acc.photo}`}
                 network={`http://localhost:4001/media/${acc.mediaIcon}`}
               />
-              {/* <img src={acc.photo} alt=""></img> */}
             </button>
           );
         })}
-        {/* {accounts.map((user: any) =>
-          user.networks.map((network: any) => (
-            <button
-              onClick={(e) => {
-                onUserSelected(e, network.username);
-                handleButton(e);
-              }}
-              ref={buttonEl}
-              key={network.username}
-              className="bg-blue-500 w-12 h-12 rounded-full focus:ring-offset-1 focus:ring-2 text-transparent overflow-hidden"
-            >
-              <Account key={network.username} network={network} />
-            </button>
-          ))
-        )} */}
       </div>
-      {/* ) : null} */}
     </div>
   );
 };

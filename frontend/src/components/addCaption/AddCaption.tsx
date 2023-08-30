@@ -13,63 +13,49 @@ import {useForm, Controller} from "react-hook-form";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
 
-//  post: {
-//     type: String,
-//     trim: true,
-//     // required: [true, "A post must have a post text"],
-//     maxlength: [150, "A post must have less or equal then 150 characters"],
-//   },
-//   startDate: {
-//     type: Date,
-//     default: Date.now(),
-//     required: [true, "A post must have a date"],
-//   },
-//   endDate: {type: Date},
-//   images: [String],
-//   account: [
-//     {
-//       type: mongoose.Schema.ObjectId,
-//       ref: "Account",
-//       required: [true, "Post must belong to the account"],
-//     },
-//   ],
-//   user: [
-//     {
-//       type: mongoose.Schema.ObjectId,
-//       ref: "User",
-//       required: [true, "Post must belong to the user"],
-//     },
-//   ],
-
 const AddCaption = ({
   selectedImage,
   account,
   selectedImage2,
   openDialog,
+  post,
+  isPostCreationDone,
 }: any) => {
   const {onClickSubmit, onClickReturn} = useContext(PostContext);
   const [image, setImage] = useState({preview: "", data: ""});
 
-  const [newEvent, setNewEvent] = useState<any>({
-    post: "",
-    start: "",
-    end: "",
-    data: {
-      profile: [""],
-      image: "",
-      icon: [],
-    },
-  });
+  // const [newEvent, setNewEvent] = useState<any>({
+  //   post: "",
+  //   start: "",
+  //   end: "",
+  //   data: {
+  //     profile: [""],
+  //     image: "",
+  //     icon: [],
+  //   },
+  // });
+  // isPostCreationDone CAN BE ACCESSED DIRECTLY FROM THIS COMPONENT
 
-  const [newEvent2, setNewEvent2] = useState<any>({
-    post: "",
-    startDate: "",
-    endDate: "",
-    image: "",
-    user: [],
-    account: [],
-  });
-
+  const [newEvent2, setNewEvent2] = useState<any>(
+    isPostCreationDone
+      ? {
+          post: post?.post,
+          startDate: moment(post.startDate).toDate(),
+          endDate: post?.endDate,
+          image: post?.image,
+          // user: [],
+          account: post?.account?._id,
+        }
+      : {
+          post: "",
+          startDate: "",
+          endDate: "",
+          image: "",
+          // user: [],
+          account: [],
+        }
+  );
+  console.log(newEvent2);
   const BASE_URL = "http://localhost:4001/api/v1";
 
   // const handleFileChange = (e: any) => {
@@ -85,17 +71,14 @@ const AddCaption = ({
   // const inputEl = useRef<any>(null);
 
   const handleCalendarClose = () => {
-    const endate = moment(newEvent.startDate).add(1, "hours").toISOString();
     const endate2 = moment(newEvent2.startDate).add(1, "hours").toISOString();
-    // const testingDate = moment(endate2).toDate();
 
-    setNewEvent({...newEvent, end: endate});
     setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
 
     console.log(newEvent2.startDate, moment(endate2).toDate());
   };
+
   const handleTextChange = (post: any) => {
-    setNewEvent({...newEvent, post});
     setNewEvent2({...newEvent2, post});
   };
 
@@ -111,10 +94,8 @@ const AddCaption = ({
       formData.append("startDate", newEvent2.startDate);
       formData.append("endDate", newEvent2.endDate);
       formData.append("image", selectedImage2);
-      console.log(newEvent2.endDate);
-      //need to add the correct data
+
       formData.append("account", account._id);
-      // formData.append("account", "64ea4c65009431fd9e64d506");
 
       const response = await axios.post(`${BASE_URL}/posts`, formData, {
         headers: {
@@ -160,25 +141,11 @@ const AddCaption = ({
 
                 <div className="flex flex-col relative px-8 pt-8 pb-5 space-y-4 AddCaption">
                   <span>Post text</span>
-                  <TextArea setNewEvent={handleTextChange} />
-                  {/* <div className="flex items-start w-full h-full flex-col">
-                  <textarea
-                    id="post"
-                    ref={inputEl}
-                    maxLength={150}
-                    placeholder="Write caption, #hashtags, @mentions, link or add emoji :) ..."
-                    value={newEvent.post}
-                    onChange={(e) => {
-                      setNewEvent({...newEvent, post: e.target.value});
-                      setTextAreaCount(e.target.value.length);
-                    }}
-                  ></textarea>
-                  <div className="AddcaptionPostText flex items-center z-1">
-                    <p className="text-xs flex-1 text-icoGray-500 ">
-                      <span>{150 - textAreaCount}</span> characters left
-                    </p>
-                  </div>
-                </div> */}
+                  <TextArea
+                    setNewEvent={handleTextChange}
+                    post={post}
+                    isPostCreationDone={isPostCreationDone}
+                  />
                 </div>
               </div>
               <div className="AddCaptionItem">
@@ -201,19 +168,10 @@ const AddCaption = ({
                 <div className="AddCaption">
                   <span>Date</span>
                   <div id="date" className="DatePicker">
-                    {/* <Controller
-                      control={control}
-                      name="date"
-                      rules={{required: true}}
-                      render={({field: {onChange, value}}) => ( */}
                     <DatePicker
                       showIcon
                       placeholderText="Select date and time..."
-                      // selected={newEvent.start}
                       selected={newEvent2.startDate}
-                      // onChange={(start) => {
-                      //   setNewEvent({...newEvent, start});
-                      // }}
                       onChange={(startDate) => {
                         setNewEvent2({...newEvent2, startDate});
                       }}
@@ -225,14 +183,6 @@ const AddCaption = ({
                       openToDate={new Date()}
                       timeIntervals={30}
                     />
-                    {/* )} */}
-                    {/* /> */}
-                    {/* {errors.firstName && <Text>This is required.</Text>} */}
-                    {/* <ErrorMessage
-                      errors={errors}
-                      name="date"
-                      render={({message}) => <p>{message}</p>}
-                    /> */}
                   </div>
                 </div>
               </div>
@@ -249,21 +199,7 @@ const AddCaption = ({
                 // onClick={onClickReturn}
               ></NavButton>
             </NavLink>
-            {/* // onClick={() =>
- //   onClickSubmit({
-              //     ...newEvent,
-              //     data: {image: selectedImage, icon: "", profile: []},
-              //   })
-              // }
-              // onClick={(e: any) => submitForm(e)}
-              // buttonText="Schedule a post"
-              // to="/app"
-              // variant="contained"
-              // onClick={(e: any) => submitForm(e)}
-              // type="submit" */}
-            {/* <NavButton
-             
-            ></NavButton> */}
+
             <NavButton
               variant="contained"
               type="submit"

@@ -21,7 +21,7 @@ import TemplatePinterest from "../mediaTemplates/TemplatePinterest";
 import TemplateTwitter from "../mediaTemplates/TemplateTwitter";
 import MobileContainer from "../reusableComponents/MobileContainer.tsx/MobileContainer";
 import Confirmation from "../pages/confirmation/Confirmation";
-
+import {useSearchParams} from "react-router-dom";
 // import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 
 const SlideOver = () => {
@@ -36,6 +36,9 @@ const SlideOver = () => {
   const [isDelete, setIsDelete] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isPostCreationDone = searchParams.get("isPostCreationDone");
+
   function handleOpenDialog() {
     // setSelectedImage(URL.createObjectURL(item));
     setOpenDialog(!openDialog);
@@ -49,6 +52,10 @@ const SlideOver = () => {
     setIsDelete(true);
     handleOpenDialog();
   }
+  function handlePost() {
+    // setIsDelete(true);
+    // handleOpenDialog();
+  }
 
   useEffect(
     function () {
@@ -58,14 +65,13 @@ const SlideOver = () => {
             `http://localhost:4001/api/v1/accounts/${userSelected}`
           );
           setAccount(res.data.data.account);
-          // console.log("FIRST FETCH RUN", res.data.data.account);
         } catch (err) {
           console.log(err);
         }
       }
-      fetchAccount();
+      if (id === "post") fetchAccount();
     },
-    [userSelected]
+    [userSelected, id]
   );
 
   useEffect(
@@ -82,7 +88,7 @@ const SlideOver = () => {
         }
       }
 
-      fetchPostDetails();
+      if (id !== "post") fetchPostDetails();
     },
     [id]
   );
@@ -114,8 +120,8 @@ const SlideOver = () => {
                     clickDelete={handleDelete}
                   />
 
-                  {id === "post" ? (
-                    <Post account={account} />
+                  {id === "post" || isPostCreationDone ? (
+                    <Post account={account} post={post} />
                   ) : (
                     <>
                       {isDelete && (
@@ -126,7 +132,7 @@ const SlideOver = () => {
                         />
                       )}
                       <div className=" flex items-start relative mt-6 flex-1 px-4 sm:px-6">
-                        <div className=" flex max-w-\[500px\]">
+                        <div className=" flex h-auto w-full justify-center">
                           <div className="flex flex-col items-center">
                             <div className="SlideOverImgV">
                               <span>

@@ -9,14 +9,27 @@ import {Tooltip} from "@mui/material";
 
 interface Props {}
 
-const UploadPhoto = ({pickImage, children}: any) => {
+const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
   const {userSelected} = useContext(PostContext);
-  const [selectedImage, setSelectedImage] = useState<any>("");
+  const [selectedImage, setSelectedImage] = useState<any>(
+    ""
+    // isPostCreationDone ? `http://localhost:4001/post/${post.image})` : ""
+  );
 
-  const [myUsersList, setMyUsersList] = useState({
-    mediaIcon: "",
-    username: "",
-  });
+  //   function DynamicImage({ imageName }) {
+  //   const imagePath = ./images/${imageName};
+
+  //   // Dynamically import the image using import()
+  //   const ImageComponent = React.lazy(() => import(${imagePath}));
+
+  //   return <ImageComponent />;
+  // }
+
+  // console.log(URL.createObjectURL(selectedImage));
+  // const [myUsersList, setMyUsersList] = useState({
+  //   mediaIcon: "",
+  //   username: "",
+  // });
 
   // const handleFileChange = (e: any) => {
   //   const img = {

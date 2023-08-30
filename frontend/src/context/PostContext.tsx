@@ -12,13 +12,13 @@ const PostProvider = ({children}: any) => {
 
   const BASE_URL = "http://localhost:4001/api/v1";
   // ******************************************
-  const [allEvents, setAllEvents] = useState<any[] | null>(function () {
-    const storedValue: any = localStorage.getItem("posted");
-    return JSON.parse(storedValue);
-  });
+  // const [allEvents, setAllEvents] = useState<any[] | null>(function () {
+  //   const storedValue: any = localStorage.getItem("posted");
+  //   return JSON.parse(storedValue);
+  // });
 
   const [userSelected, setUserSelected] = useState<any>();
-  const [previousEvents, setpreviousEvents] = useState(myEventsList);
+  // const [previousEvents, setpreviousEvents] = useState(myEventsList);
 
   function handleSelected(e: any, account: any) {
     e.preventDefault();
@@ -26,25 +26,14 @@ const PostProvider = ({children}: any) => {
     // setUserSelected((acc: any) => [...acc, account]);
   }
 
-  const handleAddEvent = useCallback(
-    function handleAddEvent(item: any) {
-      if (Array.isArray(allEvents)) {
-        setAllEvents([...allEvents, item]);
-      } else {
-        setAllEvents([...previousEvents, item]);
-      }
-    },
-    [allEvents, previousEvents]
-  );
-
   function handleReturn() {
     setUserSelected([]);
   }
   const value = useMemo(() => {
     return {
-      allEvents,
-      onClickSubmit: handleAddEvent,
-      previousEvents: previousEvents,
+      // allEvents,
+      // onClickSubmit: handleAddEvent,
+      // previousEvents: previousEvents,
       userSelected: userSelected,
       onUserSelected: handleSelected,
       onClickReturn: handleReturn,
@@ -53,26 +42,43 @@ const PostProvider = ({children}: any) => {
       isError,
     };
   }, [
-    handleAddEvent,
-    previousEvents,
-    allEvents,
+    // handleAddEvent,
+    // previousEvents,
+    // allEvents,
     userSelected,
     posts,
     isLoading,
     isError,
   ]);
-  useEffect(
-    function () {
-      localStorage.setItem("posted", JSON.stringify(allEvents));
-    },
-    [allEvents]
-  );
+  // useEffect(
+  //   function () {
+  //     localStorage.setItem("posted", JSON.stringify(allEvents));
+  //   },
+  //   [allEvents]
+  // );
+  // useEffect(function () {
+  //   async function fetchPosts() {
+  //     try {
+  //       setIsLoading(true);
+  //       const res = await axios.get(`${BASE_URL}/posts`);
+  //       const posts = res.data.data.posts;
+  //       setResult2(posts);
+  //     } catch (err) {
+  //       console.log(err);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   fetchPosts();
+  // }, []);
+
   useEffect(function () {
     async function fetchPosts() {
       try {
         setIsLoading(true);
         const res = await axios.get(`${BASE_URL}/posts`);
-        setPosts(res);
+        console.log(res);
+        setPosts(res.data.data.posts);
       } catch (err) {
         setIsError(err);
       } finally {
@@ -81,6 +87,7 @@ const PostProvider = ({children}: any) => {
     }
     fetchPosts();
   }, []);
+
   return <PostContext.Provider value={value}>{children}</PostContext.Provider>;
 };
 

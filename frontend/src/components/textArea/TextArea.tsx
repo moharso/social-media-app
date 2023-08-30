@@ -1,26 +1,17 @@
 import React from "react";
-import {useState, useEffect, useRef, useContext} from "react";
-import {Path, useForm, UseFormRegister, SubmitHandler} from "react-hook-form";
+import {useState, useEffect, useRef} from "react";
+import {useForm} from "react-hook-form";
 
 interface IFormValues {
   post: string;
 }
 
-const TextArea = ({setNewEvent, title}: any) => {
-  const {register} = useForm<IFormValues>();
+const TextArea = ({setNewEvent, title, isPostCreationDone, post}: any) => {
   const inputEl = useRef<any>(null);
   const [textAreaCount, setTextAreaCount] = useState<any>("");
-  const [textAreaContent, setTextAreaContent] = useState<any>("");
-  // const [newEvent, setNewEvent] = useState<any>({
-  //   post: "",
-  //   start: "",
-  //   end: "",
-  //   data: {
-  //     profile: [""],
-  //     image: "",
-  //     icon: [],
-  //   },
-  // });
+  const [textAreaContent, setTextAreaContent] = useState<any>(
+    isPostCreationDone ? post.post : ""
+  );
 
   useEffect(function () {
     inputEl.current.focus();
@@ -31,13 +22,6 @@ const TextArea = ({setNewEvent, title}: any) => {
       <textarea
         id="post"
         maxLength={150}
-        // {...register("post", {
-        //   required: true,
-        //   maxLength: {
-        //     value: 150,
-        //     message: "The maximum post length is 150 characters",
-        //   },
-        // })}
         ref={inputEl}
         placeholder="Write caption, #hashtags, @mentions, link or add emoji :) ..."
         value={textAreaContent}

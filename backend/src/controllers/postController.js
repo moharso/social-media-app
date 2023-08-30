@@ -36,7 +36,6 @@ exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
 
-    // SEND RESPONSE
     res.status(200).json({
       status: "success",
       requestedAt: req.requestTime,

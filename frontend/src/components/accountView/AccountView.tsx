@@ -80,13 +80,9 @@ const AccountView = () => {
         </select>
         {!isValid && <p>You must choose a value</p>}
 
-        {/* <div>
-          <label htmlFor="platform">Platform</label>
-          <input type="radio" value="html" id="platform" name="topic" />
-        </div> */}
         <div>
           <label htmlFor="photo">Account image</label>
-          {/* "imgae/* menas we accept all forms of images" */}
+
           <input
             id="photo"
             type="file"
@@ -102,10 +98,6 @@ const AccountView = () => {
           </button>
         </div>
       </form>
-      {/* <h3>DELETE ACCOUNT</h3>
-      <button>BUTTON</button>
-      <h3>UPDATE ACCOUNT</h3>
-      <button>BUTTON</button> */}
     </div>
   );
 };

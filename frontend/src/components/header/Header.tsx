@@ -9,7 +9,7 @@ const Header = ({view, text, scheduling}: any) => {
   const {userSelected} = useContext(PostContext);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const media = searchParams.get("social");
+  // const media = searchParams.get("social");
 
   return (
     <div className="pb-5 mb-5 z-10 pt-10 ">

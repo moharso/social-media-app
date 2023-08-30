@@ -1,11 +1,8 @@
-import React, {useState, useContext, useEffect} from "react";
 import {HiOutlineTrash} from "react-icons/hi2";
 import SelectedUsers from "../SelectedUsers/SelectedUsers";
-import {PostContext} from "../../context/PostContext";
-import axios from "axios";
 import "./SlideoverHeader.css";
-
-const SlideoverHeader = ({param, account, clickDelete}: any) => {
+import Button from "../reusableComponents/button/Button";
+const SlideoverHeader = ({param, account, clickDelete, clickPost}: any) => {
   // const {userSelected} = useContext(PostContext);
 
   // const [myUsersList, setMyUsersList] = useState({
@@ -55,7 +52,16 @@ const SlideoverHeader = ({param, account, clickDelete}: any) => {
             >
               <HiOutlineTrash className="h-5 w-5 " />
             </button>
-            <button className="SlideoverBtn ">Edit post</button>
+
+            {/* <button className="SlideoverBtn" onClick={clickPost}> */}
+            {/* <NavLink to={"/post}"}> */}
+            <Button text=" Edit post" link={`?isPostCreationDone=true`}>
+              {/* {`?isPostCreationDone=true`} */}
+            </Button>
+            {/* </NavLink> */}
+            {/* <button className="SlideoverBtn" onClick={clickPost}>
+              Edit post
+            </button> */}
           </div>
         ) : null}
       </div>
