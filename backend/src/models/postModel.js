@@ -11,7 +11,7 @@ const postSchema = new Schema({
   startDate: {
     type: Date,
     default: Date.now(),
-    // required: [true, "A post must have a date"],
+    required: [true, "A post must have a date"],
   },
   endDate: {type: Date},
   image: {type: String, default: "default.jpg"},

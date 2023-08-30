@@ -11,6 +11,7 @@ import SlideoverHeader from "../reusableComponents/slideoverHeader/SlideoverHead
 import TextArea from "../textArea/TextArea";
 import {useForm, Controller} from "react-hook-form";
 import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 //  post: {
 //     type: String,
@@ -40,7 +41,12 @@ import axios from "axios";
 //     },
 //   ],
 
-const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
+const AddCaption = ({
+  selectedImage,
+  account,
+  selectedImage2,
+  openDialog,
+}: any) => {
   const {onClickSubmit, onClickReturn} = useContext(PostContext);
   const [image, setImage] = useState({preview: "", data: ""});
 
@@ -86,7 +92,7 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
     setNewEvent({...newEvent, end: endate});
     setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
 
-    console.log(newEvent2.startDate, endate2);
+    console.log(newEvent2.startDate, moment(endate2).toDate());
   };
   const handleTextChange = (post: any) => {
     setNewEvent({...newEvent, post});
@@ -99,15 +105,13 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
   const submitForm = async (e: any) => {
     try {
       e.preventDefault();
-      console.log(newEvent2.startDate);
-      console.log("SUBMITTED");
 
       const formData = new FormData();
       formData.append("post", newEvent2.post);
       formData.append("startDate", newEvent2.startDate);
       formData.append("endDate", newEvent2.endDate);
       formData.append("image", selectedImage2);
-      console.log(account._id);
+      console.log(newEvent2.endDate);
       //need to add the correct data
       formData.append("account", account._id);
       // formData.append("account", "64ea4c65009431fd9e64d506");
@@ -236,28 +240,40 @@ const AddCaption = ({selectedImage, account, selectedImage2}: any) => {
             <CrossPost></CrossPost>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
-            <NavButton
-              buttonText="Cancel"
-              to="/app"
-              variant="outlined"
-              // onClick={onClickReturn}
-            ></NavButton>
-
-            <NavButton
-              // onClick={() =>
-              //   onClickSubmit({
+            <NavLink to="/app">
+              <NavButton
+                buttonText="Cancel"
+                // to="/app"
+                variant="outlined"
+                type="button"
+                // onClick={onClickReturn}
+              ></NavButton>
+            </NavLink>
+            {/* // onClick={() =>
+ //   onClickSubmit({
               //     ...newEvent,
               //     data: {image: selectedImage, icon: "", profile: []},
               //   })
               // }
               // onClick={(e: any) => submitForm(e)}
-              buttonText="Schedule a post"
-              to="/app"
-              variant="contained"
+              // buttonText="Schedule a post"
+              // to="/app"
+              // variant="contained"
               // onClick={(e: any) => submitForm(e)}
-              // type="submit"
+              // type="submit" */}
+            {/* <NavButton
+             
+            ></NavButton> */}
+            <NavButton
+              variant="contained"
+              type="submit"
+              buttonText="Schedule a post"
+              onClick={openDialog}
             ></NavButton>
-            {/* <button onClick={(e) => submitForm(e)}>CLICK ME</button> */}
+            {/* <button type="submit"> */}
+            {/* onClick={(e) => submitForm(e)} */}
+
+            {/* </button> */}
           </div>
         </div>
       </form>

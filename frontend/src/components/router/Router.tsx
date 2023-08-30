@@ -71,7 +71,7 @@ const Router = () => {
           />
         </Route>
         {/* <Route path="/post" element={<Post />} /> */}
-        <Route path="confirmation" element={<Confirmation />} />
+        {/* <Route path="confirmation" element={<Confirmation />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

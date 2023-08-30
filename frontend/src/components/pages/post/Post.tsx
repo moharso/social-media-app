@@ -5,10 +5,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import HomePageImage from "../../reusableComponents/homepageImage/HomePageImage";
 import {PostContext} from "../../../context/PostContext";
 import axios from "axios";
+import Confirmation from "../confirmation/Confirmation";
 
 const Post = ({onClickSubmit, account}: any) => {
   // const {userSelected} = useContext(PostContext);
-
+  const [openDialog, setOpenDialog] = useState(false);
   // const [selectedAccount, setSelectedAccount] = useState({
   //   mediaIcon: "",
   //   username: "",
@@ -20,6 +21,10 @@ const Post = ({onClickSubmit, account}: any) => {
   function handlePickImage(item: any) {
     // setSelectedImage(URL.createObjectURL(item));
     setSelectedImage2(item);
+  }
+  function handleOpenDialog() {
+    // setSelectedImage(URL.createObjectURL(item));
+    setOpenDialog(!openDialog);
   }
 
   // useEffect(
@@ -39,15 +44,28 @@ const Post = ({onClickSubmit, account}: any) => {
   //   },
   //   [userSelected]
   // );
-
+  console.log(openDialog);
   return (
     <div className="flex w-full h-full">
-      <UploadPhoto pickImage={handlePickImage} />
-      <AddCaption
-        selectedImage={selectedImage}
-        account={account}
-        selectedImage2={selectedImage2}
-      />
+      {openDialog && (
+        <Confirmation
+          openDialog={openDialog}
+          openDialogFunc={handleOpenDialog}
+          isDelete={"hellow"}
+        />
+      )}
+      {/* // ) : ( */}
+      <>
+        <UploadPhoto pickImage={handlePickImage} />
+        <AddCaption
+          selectedImage={selectedImage}
+          account={account}
+          selectedImage2={selectedImage2}
+          openDialog={handleOpenDialog}
+        />
+      </>
+      {/* // )} */}
+
       {/* <HomePageImage /> */}
     </div>
   );

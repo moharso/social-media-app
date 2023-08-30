@@ -4,21 +4,22 @@ import Button from "@mui/material/Button";
 import {NavLink} from "react-router-dom";
 
 interface NavButtonProps {
-  buttonText: string;
-  to: string;
+  buttonText?: string;
+  // to: string;
   onClick?: () => any;
   variant: "text" | "outlined" | "contained" | undefined;
+  type?: "submit" | "button";
 }
 
-const NavButton = ({buttonText, to, onClick, variant}: NavButtonProps) => {
+const NavButton = ({buttonText, onClick, variant, type}: NavButtonProps) => {
   return (
     <div>
       <Stack spacing={2} direction="row" padding={5}>
-        <NavLink to={to}>
-          <Button variant={variant} onClick={onClick}>
-            {buttonText}
-          </Button>
-        </NavLink>
+        {/* <NavLink to={to}> */}
+        <Button variant={variant} onClick={onClick} type={type}>
+          {buttonText}
+        </Button>
+        {/* </NavLink> */}
       </Stack>
     </div>
   );

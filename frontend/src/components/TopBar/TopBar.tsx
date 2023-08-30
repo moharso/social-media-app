@@ -9,7 +9,8 @@ const TopBar = () => {
         <li>Settings</li>
         <li>Confirmation</li>
       </ul>
-      <NavButton buttonText="close" to="/" variant="contained" />
+      <NavButton buttonText="close" variant="contained" />
+      {/* to="/" */}
     </div>
   );
 };

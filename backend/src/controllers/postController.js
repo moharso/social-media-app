@@ -78,32 +78,12 @@ exports.createPost = async (req, res) => {
       req.body,
       "post",
       "startDate",
-      "endDat",
+      "endDate",
       "account"
     );
 
     if (req.file) filteredBody.image = req.file.filename;
     const newPost = await Post.create(filteredBody);
-    // const account = await Account.findById({_id: newPost.account});
-    // account.publishedBooks.push(book);
-
-    // await account.save();
-
-    console.log(req.body);
-    // console.log(req.body);
-
-    // const filteredBody = filterObj(
-    //   req.body,
-    //   "post",
-    //   "startDate",
-    //   "endDate",
-    //   "username",
-    //   "platform",
-    //   "account",
-    //   "user"
-    // );
-
-    // if (req.file) filteredBody.image = req.file.filename;
 
     console.log(newPost);
     // await newPost.save();
