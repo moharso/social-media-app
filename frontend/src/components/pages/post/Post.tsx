@@ -11,6 +11,7 @@ import {useSearchParams} from "react-router-dom";
 const Post = ({onClickSubmit, account, post}: any) => {
   // const {userSelected} = useContext(PostContext);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
   // const [selectedAccount, setSelectedAccount] = useState({
   //   mediaIcon: "",
   //   username: "",
@@ -29,7 +30,9 @@ const Post = ({onClickSubmit, account, post}: any) => {
     // setSelectedImage(URL.createObjectURL(item));
     setOpenDialog(!openDialog);
   }
-
+  function handleOpenAlert() {
+    setOpenDialog(openAlert);
+  }
   // useEffect(
   //   function () {
   //     async function fetchAccount() {
@@ -57,7 +60,9 @@ const Post = ({onClickSubmit, account, post}: any) => {
           openDialogFunc={handleOpenDialog}
         />
       )}
+      {/* {openAlert&&(
 
+      )} */}
       <>
         <UploadPhoto
           pickImage={handlePickImage}
@@ -71,6 +76,7 @@ const Post = ({onClickSubmit, account, post}: any) => {
           openDialog={handleOpenDialog}
           isPostCreationDone={isPostCreationDone}
           post={post}
+          openAlert={handleOpenAlert}
         />
       </>
     </div>

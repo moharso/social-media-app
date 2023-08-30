@@ -12,10 +12,9 @@ interface Props {}
 const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
   const {userSelected} = useContext(PostContext);
   const [selectedImage, setSelectedImage] = useState<any>(
-    ""
-    // isPostCreationDone ? `http://localhost:4001/post/${post.image})` : ""
+    isPostCreationDone ? post.image : ""
   );
-
+  console.log(typeof selectedImage);
   //   function DynamicImage({ imageName }) {
   //   const imagePath = ./images/${imageName};
 
@@ -64,11 +63,14 @@ const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
           <div className="flex items-center justify-center w-full h-full">
             <div className="flex flex-col items-center text-sm w-full h-full relative">
               {selectedImage ? (
-                // <div>
                 <>
                   <img
                     alt="not found"
-                    src={URL.createObjectURL(selectedImage)}
+                    src={
+                      typeof selectedImage !== "string"
+                        ? URL.createObjectURL(selectedImage)
+                        : `http://localhost:4001/post/${selectedImage}`
+                    }
                     className="w-full h-full"
                   />
                   <Tooltip title="Delete" arrow>
@@ -104,18 +106,6 @@ const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
                     setSelectedImage(e.target.files[0]);
                   }}
                 ></input>
-
-                // <input
-                //   type="file"
-                //   name="image"
-                //   accept="image/*"
-
-                //   onChange={(e: any) => {
-                //     pickImage(e.target.files[0]);
-                //     setSelectedImage(e.target.files[0]);
-                //   }}
-                //   // onChange={handleFileChange}
-                // />
               )}
             </div>
           </div>

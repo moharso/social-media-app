@@ -8,7 +8,9 @@ interface IFormValues {
 
 const TextArea = ({setNewEvent, title, isPostCreationDone, post}: any) => {
   const inputEl = useRef<any>(null);
-  const [textAreaCount, setTextAreaCount] = useState<any>("");
+  const [textAreaCount, setTextAreaCount] = useState<any>(
+    isPostCreationDone ? post.post?.length : ""
+  );
   const [textAreaContent, setTextAreaContent] = useState<any>(
     isPostCreationDone ? post.post : ""
   );

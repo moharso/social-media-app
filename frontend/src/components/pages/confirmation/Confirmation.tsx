@@ -15,16 +15,15 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
 const Confirmation = ({openDialog, openDialogFunc, isDelete}: any) => {
-
   const [open, setOpen] = useState(openDialog);
-  
+
   const handleClose = () => {
     setOpen(false);
     openDialogFunc();
   };
   const {id} = useParams();
 
-  async function handleDelete() {
+  function handleDelete() {
     async function fetchPostDetails() {
       try {
         const res = await axios.delete(
