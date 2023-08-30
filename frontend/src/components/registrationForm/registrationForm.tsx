@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import "./registrationForm.css"
 import axios from "axios"
 import LoginForm from '../loginForm/loginForm';
-import { createBrowserHistory } from 'history';
 
 interface RegistrationFormProps {
   onClose: () => void;
@@ -19,11 +18,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [formMode, setFormMode] = useState(FormMode.Registration);
-  const history = createBrowserHistory();
 
   const handleLogin = (email: string, password: string) => {
     onClose();
-    history.push('/app');
+    window.location.href = "/app"
   };
 
   const toggleFormType = () => {

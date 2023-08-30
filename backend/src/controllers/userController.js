@@ -65,4 +65,33 @@ exports.createUser = async (req, res) => {
       res.status(400).send(error);
     }
   };
+
+  exports.deleteUser = async (req, res) => {
+    try {
+      const deletedUser = await User.findOneAndDelete({
+        email: req.params.email,
+      });
   
+      res.status(200).json(deletedUser);
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+    }
+  };
+  
+  exports.updateUser = async (req, res) => {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { email: req.params.email },
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+  
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+    }
+  };
