@@ -5,6 +5,7 @@ const router = express.Router();
 router
   .route("/")
   .get(postController.getAllPosts)
+
   .post(postController.uploadPostPhoto, postController.createPost);
 // postController.uploadPostPhoto
 router
@@ -14,3 +15,4 @@ router
   .delete(postController.deletePost);
 
 module.exports = router;
+

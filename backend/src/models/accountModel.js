@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const opts = {runValidators: true, context: "query"};
 const {Schema} = require("mongoose");
 
@@ -46,3 +47,4 @@ accountSchema.virtual("postsPublished", {
 const Account = mongoose.model("Account", accountSchema);
 
 module.exports = Account;
+

@@ -1,4 +1,5 @@
 const fs = require("fs");
+
 const Post = require("../models/postModel");
 const Account = require("../models/accountModel");
 const multer = require("multer");
@@ -35,6 +36,7 @@ const filterObj = (obj, ...allowedFields) => {
 exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
+
 
     res.status(200).json({
       status: "success",
@@ -73,6 +75,7 @@ exports.getPost = async (req, res) => {
 // user for post request
 exports.createPost = async (req, res) => {
   try {
+
     const filteredBody = filterObj(
       req.body,
       "post",
@@ -91,6 +94,7 @@ exports.createPost = async (req, res) => {
     // account.publishedPosts.push(book);
     // await account.save();
 
+
     res.status(201).json({
       status: "success",
       data: {
@@ -100,13 +104,16 @@ exports.createPost = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "fail",
+
       message: err,
+
     });
   }
 };
 
 exports.updatePost = async (req, res) => {
   try {
+
     const filteredBody = filterObj(
       req.body,
       "post",
@@ -121,6 +128,7 @@ exports.updatePost = async (req, res) => {
       new: true,
       runValidators: true,
     });
+
 
     res.status(200).json({
       status: "success",
@@ -145,4 +153,6 @@ exports.deletePost = async (req, res) => {
       message: {...err, errmsg: err.errmsg},
     });
   }
+
 };
+

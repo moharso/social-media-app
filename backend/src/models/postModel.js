@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
+
 const {Schema} = require("mongoose");
 
 const postSchema = new Schema({
+
+
   post: {
     type: String,
     trim: true,
@@ -14,6 +17,7 @@ const postSchema = new Schema({
     required: [true, "A post must have a date"],
   },
   endDate: {type: Date},
+
   image: {type: String, default: "default.jpg"},
 
   account: {
@@ -42,3 +46,4 @@ postSchema.pre(/^find/, function (next) {
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
+
