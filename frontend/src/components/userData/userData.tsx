@@ -20,11 +20,15 @@ const UserDataComponent: React.FC = () => {
 
   return (
     <div>
+      {userData ? (
         <div>
           <h1>User Data</h1>
           <p>Name: {userData.name}</p>
           <p>Email: {userData.email}</p>
         </div>
+      ) : (
+        <p>Loading user data...</p>
+      )}
     </div>
   );
 };
