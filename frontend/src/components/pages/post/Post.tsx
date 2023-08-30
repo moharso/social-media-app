@@ -51,7 +51,6 @@ const Post = ({onClickSubmit, account}: any) => {
         <Confirmation
           openDialog={openDialog}
           openDialogFunc={handleOpenDialog}
-          isDelete={"hellow"}
         />
       )}
       {/* // ) : ( */}

@@ -13,16 +13,33 @@ import Button from "@mui/material/Button";
 import {useState, useEffect, useRef, useContext} from "react";
 import {NavLink} from "react-router-dom";
 import {Link, useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
 
 const Confirmation = ({openDialog, openDialogFunc, isDelete}: any) => {
-  // const {onClickReturn} = useContext(PostContext);
   const userName = myUsersList[0].userName;
   const [open, setOpen] = useState(openDialog);
   const navigate = useNavigate();
+
   const handleClose = () => {
     setOpen(false);
     openDialogFunc();
   };
+  const {id} = useParams();
+
+  async function handleDelete() {
+    async function fetchPostDetails() {
+      try {
+        const res = await axios.delete(
+          `http://localhost:4001/api/v1/posts/${id}`
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchPostDetails();
+  }
+
   return (
     <Dialog
       open={open}
@@ -69,8 +86,23 @@ const Confirmation = ({openDialog, openDialogFunc, isDelete}: any) => {
           </>
         ) : (
           <>
-            <Button onClick={handleClose}>DISAGREE</Button>
-            <Button onClick={handleClose}>AGREE</Button>
+            <Button
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              DISAGREE
+            </Button>
+            <NavLink to="/app">
+              <Button
+                onClick={() => {
+                  handleClose();
+                  handleDelete();
+                }}
+              >
+                AGREE
+              </Button>
+            </NavLink>
           </>
         )}
         {/* <div onClick={() => navigate(-1)}> */}

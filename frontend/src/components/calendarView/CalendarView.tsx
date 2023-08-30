@@ -30,7 +30,7 @@ const changeType = (a: any) => moment(a).toDate();
 const CalendarView = function (props: any) {
   const BASE_URL = "http://localhost:4001/api/v1";
 
-  const {allEvents, previousEvents, posts, isError} = useContext(PostContext);
+  // const {allEvents, previousEvents, posts, isError} = useContext(PostContext);
   const [isLoading, setIsLoading] = useState(false);
   const [result2, setResult2] = useState<any[]>([]);
 
@@ -50,7 +50,6 @@ const CalendarView = function (props: any) {
         setIsLoading(true);
         const res = await axios.get(`${BASE_URL}/posts`);
         const posts = res.data.data.posts;
-
         setResult2(posts);
       } catch (err) {
         console.log(err);
@@ -80,9 +79,6 @@ const CalendarView = function (props: any) {
       endAccessor={(event) => {
         return new Date(event.endDate);
       }}
-      // startAccessor="startDate"
-      // endAccessor="endDate"
-      // style={{height: "100vh"}}
       defaultView="month"
       views={["month", "week", "day", "agenda"]}
       components={components}
