@@ -1,9 +1,78 @@
-.AddCaption {
-  border: 1px solid rgb(14 165 233);
-  border-radius: 3px;
-  font-family: Gilroy-Medium, Arial;
-  position: relative;
+.AddCaptionContainer {
+  overflow: auto;
+  padding: 16px;
+  padding-right: 14px;
+  /* background-color: ; */
 }
-.AddcaptionPostText {
-  color: grey;
+.AddCaptionItem {
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.AddCaptionContainerIcon {
+  color: #7a869a;
+  display: flex;
+  margin-right: 8px;
+  color: rgb(33, 70, 236);
+  background-color: rgb(233, 237, 253);
+}
+.AddCaptionContainerIcon span {
+  width: 20px;
+  height: 20px;
+}
+.AddCaption {
+  min-height: 150px;
+  word-wrap: break-word;
+  font-size: 14px;
+  padding: 12px;
+  max-height: 300px;
+  overflow: auto;
+  width: 100%;
+  font-family: Gilroy-Medium, Arial;
+}
+textarea {
+  border: 1px solid #ebecf0;
+  border-radius: 4px;
+  position: relative;
+  cursor: text;
+  min-height: 150px;
+  max-height: 300px;
+  overflow: auto;
+  width: 100%;
+  transition: 0.5s;
+  resize: none;
+  padding: 12px;
+  font-family: Gilroy-Medium, Arial;
+}
+textarea:focus,
+textarea:hover {
+  outline: none;
+  border: 1px solid rgb(14 165 233) !important;
+}
+
+.DatePicker {
+  padding: 16px;
+  background: #f0f0f0;
+  color: black;
+}
+.react-datepicker-wrapper {
+  width: 210px;
+}
+
+.react-datepicker-wrapper input {
+  outline: none;
+  width: 100%;
+  border: 1px solid #b3bac5;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  height: 42px;
+  padding: 0 10px;
+  transition: background-color 0.19s ease-out, border-color 0.19s ease-out;
+}
+.react-datepicker-wrapper input:focus,
+.react-datepicker-wrapper input:hover {
+  border: 1px solid rgb(14 165 233) !important;
 }

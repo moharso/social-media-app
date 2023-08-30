@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../header/Header";
 import "./Main.css";
-import CalendarView from "../calendarView/CalendarView";
+// import CalendarView from "../calendarView/CalendarView";
 import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 import {Outlet} from "react-router-dom";
 const Main = () => {
@@ -12,7 +12,7 @@ const Main = () => {
       {/* mt-36 */}
       <div className="w-4/5 md:w-3/4 flex flex-col flex-1  md:mt-0">
         {/* <NavigationBar /> */}
-        <Header />
+        {/* <Header /> */}
         <Outlet />
         {/* <CalendarView /> */}
       </div>

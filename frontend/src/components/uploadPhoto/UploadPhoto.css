@@ -1,0 +1,34 @@
+.UploadImg {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgb(33 70 236);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition-duration: 0.15s;
+  min-height: 24rem;
+}
+.UploadImg:hover {
+  background-color: rgb(233 237 253);
+}
+
+.UploadPhotInput {
+  transition-duration: 0.15s;
+  background-color: rgb(33 70 236);
+}
+
+.UploadPhotoRemove {
+  width: 30px;
+  height: 30px;
+  background-color: #de1c22;
+  color: #fff;
+  font-size: 11px;
+  background-color: 0.16s ease-out, box-shadow 0.16s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UploadPhotoRemove:hover {
+  background-color: #c7191f;
+}

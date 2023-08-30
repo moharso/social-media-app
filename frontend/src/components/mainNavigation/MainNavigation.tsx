@@ -16,10 +16,10 @@ const MainNavigation = () => {
         <MainNavigationItem to="calendar">
           <HiOutlineCalendarDays className="text-xs align-middle text-icoGray-500 w-12 h-12 ease-in duration-300 " />
         </MainNavigationItem>
-        <MainNavigationItem to="settings">
+        <MainNavigationItem to="accounts">
           <HiOutlineUsers className="icon-dashboard text-xs align-middle text-icoGray-500 w-12 h-12 ease-in duration-300 " />
         </MainNavigationItem>
-        <MainNavigationItem to="accounts">
+        <MainNavigationItem to="settings">
           <HiOutlineCog6Tooth className="icon-dashboard text-xs align-middle text-icoGray-500 w-12 h-12 ease-in duration-300 " />
         </MainNavigationItem>
       </div>

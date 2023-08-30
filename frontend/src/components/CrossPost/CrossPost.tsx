@@ -2,7 +2,7 @@ import React, {useState, useContext} from "react";
 import Switch from "@mui/material/Switch";
 import Checkbox from "@mui/material/Checkbox";
 // import myUsersList from "../data/data";
-import {PostContext} from "../../App";
+import {PostContext} from "../../context/PostContext";
 import UserData from "../data/data";
 
 const CrossPost: React.FC = () => {

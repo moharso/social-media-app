@@ -1,12 +1,20 @@
 import "./Account.css";
 
-const Account = ({network}: any) => {
+const Account = ({network, account}: any) => {
   return (
-    <img
-      src={network.image}
-      key={network.username}
-      alt="social network account"
-    />
+    <div className="relative w-full h-full">
+      <img
+        src={account}
+        key={account.username}
+        alt="client account"
+        className="z-10 relative"
+      />
+      <img
+        src={network}
+        alt="social network account"
+        className="absolute bottom-1 right-2 w-5 h-5 z-40 border-1 border-white"
+      ></img>
+    </div>
   );
 };
 

@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const postSchema = new mongoose.Schema({
+const {Schema} = require("mongoose");
+
+const postSchema = new Schema({
+
+
   post: {
     type: String,
     trim: true,
@@ -13,24 +17,33 @@ const postSchema = new mongoose.Schema({
     required: [true, "A post must have a date"],
   },
   endDate: {type: Date},
-  images: [String],
-  account: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Account",
-      required: [true, "Post must belong to the account"],
-    },
-  ],
-  user: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: [true, "Post must belong to the user"],
-    },
-  ],
+
+  image: {type: String, default: "default.jpg"},
+
+  account: {
+    type: Schema.Types.ObjectId,
+    ref: "Account",
+    required: [true, "Post must belong to the account"],
+  },
+
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  //   required: [true, "Post must belong to the user"],
+  // },
 });
 
-postSchema.virtual("");
+postSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "account",
+    select: "platform username",
+  });
+  // .lean();
+
+  next();
+});
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
+

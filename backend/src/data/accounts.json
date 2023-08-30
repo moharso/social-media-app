@@ -1,37 +1,39 @@
 [
-    {
-      "_id": "5c8a1d5b0190b214360dc057",
-      "username": "Ruff&Au",
-      "platform": "instagram",
-      "clientIcon": "user-1.jpg",
-      "mediaIcon": "user-1.jpg"
-    },
-    {
-      "_id": "5c8a1d5b0190b214360dc057",
-      "username": "Ruff&Au",
-      "platform": "facebook",
-      "clientIcon": "user-1.jpg",
-      "mediaIcon": "user-1.jpg"
-    },
-    {
-      "_id": "5c8a1d5b0190b214360dc057",
-      "username": "Ruff&Au",
-      "platform": "twitter",
-      "clientIcon": "user-1.jpg",
-      "mediaIcon": "user-1.jpg"
-    },
-    {
-      "_id": "5c8a1d5b0190b214360dc057",
-      "username": "Ruff&Au",
-      "platform": "pinterest",
-      "clientIcon": "user-1.jpg",
-      "mediaIcon": "user-1.jpg"
-    },
-    {
-      "_id": "5c8a1d5b0190b214360dc057",
-      "username": "Ruff&Au",
-      "platform": "linkedin",
-      "clientIcon": "user-1.jpg",
-      "mediaIcon": "user-1.jpg"
-    }
-  ]
+
+  {
+    "_id": "5c8a1d5b0190b214360dc057",
+    "username": "Ruff&Au",
+    "platform": "instagram",
+    "clientIcon": "account-1.png",
+    "mediaIcon": "media-1.svg"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc057",
+    "username": "Ruff&Au",
+    "platform": "facebook",
+    "clientIcon": "account-1.png",
+    "mediaIcon": "media-2.jpg"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc057",
+    "username": "Ruff&Au",
+    "platform": "twitter",
+    "clientIcon": "account-1.png",
+    "mediaIcon": "media-3.jpg"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc057",
+    "username": "Ruff&Au",
+    "platform": "pinterest",
+    "clientIcon": "account-1.png",
+    "mediaIcon": "media-4.jpg"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc057",
+    "username": "Ruff&Au",
+    "platform": "linkedin",
+    "clientIcon": "account-1.png",
+    "mediaIcon": "media-5.jpg"
+  }
+]
+

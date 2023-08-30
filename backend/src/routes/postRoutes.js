@@ -5,12 +5,14 @@ const router = express.Router();
 router
   .route("/")
   .get(postController.getAllPosts)
-  .post(postController.createPost);
 
+  .post(postController.uploadPostPhoto, postController.createPost);
+// postController.uploadPostPhoto
 router
   .route("/:id")
   .get(postController.getPost)
-  .patch(postController.updatePost)
+  .patch(postController.uploadPostPhoto, postController.updatePost)
   .delete(postController.deletePost);
 
 module.exports = router;
+

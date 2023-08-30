@@ -2,125 +2,214 @@ import "./AddCaption.css";
 import {useState, useEffect, useRef, useContext} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {PostContext} from "../../App";
+import {PostContext} from "../../context/PostContext";
 import moment from "moment";
-import NavButton from "../reusableComponents/NavButton";
+import NavButton from "../reusableComponents/navigationButton/NavButton";
 import CrossPost from "../CrossPost/CrossPost";
+import "./AddCaption.css";
+import SlideoverHeader from "../reusableComponents/slideoverHeader/SlideoverHeader";
+import TextArea from "../textArea/TextArea";
+import {useForm, Controller} from "react-hook-form";
+import axios from "axios";
+import {NavLink} from "react-router-dom";
 
-const AddCaption = ({selectedImage}: any) => {
+const AddCaption = ({
+  selectedImage,
+  account,
+  selectedImage2,
+  openDialog,
+  post,
+  isPostCreationDone,
+}: any) => {
   const {onClickSubmit, onClickReturn} = useContext(PostContext);
+  const [image, setImage] = useState({preview: "", data: ""});
 
-  const [newEvent, setNewEvent] = useState<any>({
-    post: "",
-    start: "",
-    end: "",
-    data: {
-      profile: [""],
-      image: "",
-      icon: [],
-    },
-  });
+  // const [newEvent, setNewEvent] = useState<any>({
+  //   post: "",
+  //   start: "",
+  //   end: "",
+  //   data: {
+  //     profile: [""],
+  //     image: "",
+  //     icon: [],
+  //   },
+  // });
+  // isPostCreationDone CAN BE ACCESSED DIRECTLY FROM THIS COMPONENT
 
-  const [textAreaCount, setTextAreaCount] = useState<any>("");
-  const inputEl = useRef<any>(null);
+  const [newEvent2, setNewEvent2] = useState<any>(
+    isPostCreationDone
+      ? {
+          post: post?.post,
+          startDate: moment(post.startDate).toDate(),
+          endDate: post?.endDate,
+          image: post?.image,
+          // user: [],
+          account: post?.account?._id,
+        }
+      : {
+          post: "",
+          startDate: "",
+          endDate: "",
+          image: "",
+          // user: [],
+          account: [],
+        }
+  );
+  console.log(newEvent2);
+  const BASE_URL = "http://localhost:4001/api/v1";
+
+  // const handleFileChange = (e: any) => {
+
+  //   const img = {
+  //     preview: URL.createObjectURL(e.target.files[0]),
+  //     data: e.target.files[0],
+  //   };
+  //   setImage(img);
+  // };
+
+  // const [textAreaCount, setTextAreaCount] = useState<any>("");
+  // const inputEl = useRef<any>(null);
 
   const handleCalendarClose = () => {
-    const endate = moment(newEvent.start).add(1, "hours").toISOString();
+    const endate2 = moment(newEvent2.startDate).add(1, "hours").toISOString();
 
-    setNewEvent({...newEvent, end: endate});
+    setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
+
+    console.log(newEvent2.startDate, moment(endate2).toDate());
   };
 
-  const weekend = (date: any) => new Date() <= date;
+  const handleTextChange = (post: any) => {
+    setNewEvent2({...newEvent2, post});
+  };
 
-  useEffect(function () {
-    inputEl.current.focus();
-  }, []);
+  const filterPassedTime = (date: any) =>
+    new Date().getTime() <= date.getTime();
+
+  const submitForm = async (e: any) => {
+    try {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append("post", newEvent2.post);
+      formData.append("startDate", newEvent2.startDate);
+      formData.append("endDate", newEvent2.endDate);
+      formData.append("image", selectedImage2);
+
+      formData.append("account", account._id);
+
+      const response = await axios.post(`${BASE_URL}/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 basis-6/12 bg-gray-100">
       <form
-        onSubmit={(event) => event.preventDefault()}
-        className="flex-1 pt-10 pr-40 pl-20 pb-15 basis-auto bg-white dark:bg-icoDarkMode-anthracite"
+        onSubmit={submitForm}
+        className="AddCaptionContainer flex-1 pt-10 pr-40 pl-20 pb-15 basis-auto"
       >
         <div className="flex h-full flex-col w-full justify-between">
           <div className="flex flex-col space-y-8 ">
             <div className="flex flex-col">
-              <label
-                htmlFor="post"
-                className="w-full block text-base font-bold mb-3 cursor-pointer w-auto"
-              >
-                Add a caption
-              </label>
-              <div className="flex flex-col relative px-8 pt-8 pb-5 space-y-4  AddCaption">
-                <div className="flex items-start">
-                  <span className="relative inline-flex items-center justify-center bg-white mr-5 w-[46px] h-[46px] rounded-full dark:bg-icoDarkMode-deepBlack">
-                    📝
-                  </span>
-                  <textarea
-                    id="post"
-                    maxLength={150}
-                    placeholder="Say something ..."
-                    value={newEvent.post}
-                    onChange={(e) => {
-                      setNewEvent({...newEvent, post: e.target.value});
-                      setTextAreaCount(e.target.value.length);
-                    }}
-                    ref={inputEl}
-                    className="w-full resize-none text-sm z-1 scrollbar placeholder:text-icoGray-400 placeholder:dark:text-icoDarkMode-wolf font-GMedium bg-transparent p-0 border-0 placeholder:text-sm focus:outline-0 focus:ring-0 peer flex-1 leading-5"
-                  ></textarea>
-                </div>
+              <div className="AddCaptionItem">
+                <SlideoverHeader
+                  text="Post content"
+                  icon={
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="far"
+                      data-icon="icons"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      fontSize="16"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M59.6 54.4c11.1-9.4 30.8-8.7 43.5 3.7l8 8.1 17.5 17.8 17.1-18.3 7.3-7.8c12.5-12 31.7-13.1 43.8-3.4c14.2 12.1 14.8 33.3 2 46.2l0 0-70.7 70.8-71-70.8 0 0C44.3 87.9 44.9 66.6 59.5 54.5l0 0 .1-.1zM28.8 17.6C-7.7 47.9-9.4 102 23.1 134.6l0 0L101.7 213c14.7 15.1 38.3 14.1 52.5 .4l0 0 .3-.3 78.3-78.5 0 0C265.4 102 263.6 48 227.6 17.7l0 0-.3-.3c-29.9-24.3-71-21.9-99.3-1C99.7-4.4 58.2-7 28.8 17.6zM512 24c0-7.2-3.2-14-8.8-18.6s-12.9-6.4-19.9-5l-160 32C312.1 34.7 304 44.6 304 56V161.5c-5.1-1-10.5-1.5-16-1.5c-35.3 0-64 21.5-64 48s28.7 48 64 48s64-21.5 64-48V75.7L464 53.3v76.2c-5.1-1-10.5-1.5-16-1.5c-35.3 0-64 21.5-64 48s28.7 48 64 48s64-21.5 64-48V24zM106.9 309.5l2.7-5.5h68.7l2.7 5.5c8.1 16.3 24.8 26.5 42.9 26.5c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V352c0-8.8 7.2-16 16-16c18.2 0 34.8-10.3 42.9-26.5zM224 288l-7.2-14.3c-5.4-10.8-16.5-17.7-28.6-17.7H99.8c-12.1 0-23.2 6.8-28.6 17.7L64 288c-35.3 0-64 28.7-64 64v96c0 35.3 28.7 64 64 64H224c35.3 0 64-28.7 64-64V352c0-35.3-28.7-64-64-64zM192 392a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM473.4 259.1c-6-4.4-14.3-4-19.9 .9l-128 112c-5 4.4-6.8 11.4-4.4 17.7s8.3 10.4 15 10.4h55.7l-38.4 89.7c-2.9 6.9-.7 14.9 5.3 19.2s14.3 4 19.9-.9l128-112c5-4.4 6.8-11.4 4.4-17.7s-8.3-10.4-15-10.4H440.3l38.4-89.7c2.9-6.9 .7-14.9-5.3-19.2z"
+                      ></path>
+                    </svg>
+                  }
+                />
 
-                <div className="AddcaptionPostText flex items-center z-1">
-                  <p className="text-xs flex-1 text-icoGray-500 ">
-                    <span>{150 - textAreaCount}</span> characters left
-                  </p>
+                <div className="flex flex-col relative px-8 pt-8 pb-5 space-y-4 AddCaption">
+                  <span>Post text</span>
+                  <TextArea
+                    setNewEvent={handleTextChange}
+                    post={post}
+                    isPostCreationDone={isPostCreationDone}
+                  />
                 </div>
               </div>
-
-              <h2>Add new event</h2>
-              <div
-                style={{padding: "16px", background: "#f0f0f0", color: "black"}}
-              >
-                <DatePicker
-                  todayButton="Welcome Back!"
-                  showIcon
-                  placeholderText="Click to select a date"
-                  selected={newEvent.start}
-                  onChange={(start) => {
-                    setNewEvent({...newEvent, start});
-                  }}
-                  showTimeSelect
-                  minDate={new Date()}
-                  filterDate={weekend}
-                  filterTime={weekend}
-                  dateFormat="MMMM d, yyyy h:mmaa"
-                  isClearable
-                  onCalendarClose={handleCalendarClose}
-                  openToDate={new Date()}
-                  timeIntervals={15}
+              <div className="AddCaptionItem">
+                <SlideoverHeader
+                  text="Post planning"
+                  icon={
+                    <svg
+                      focusable="false"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M128 0c13.3 0 24 10.7 24 24V64H296V24c0-13.3 10.7-24 24-24s24 10.7 24 24V64h40c35.3 0 64 28.7 64 64v16 48V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V192 144 128C0 92.7 28.7 64 64 64h40V24c0-13.3 10.7-24 24-24zM400 192H48V448c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V192zM112 256h96c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16H112c-8.8 0-16-7.2-16-16V272c0-8.8 7.2-16 16-16z"
+                      ></path>
+                    </svg>
+                  }
                 />
+                <div className="AddCaption">
+                  <span>Date</span>
+                  <div id="date" className="DatePicker">
+                    <DatePicker
+                      showIcon
+                      placeholderText="Select date and time..."
+                      selected={newEvent2.startDate}
+                      onChange={(startDate) => {
+                        setNewEvent2({...newEvent2, startDate});
+                      }}
+                      showTimeSelect
+                      minDate={new Date()}
+                      filterTime={filterPassedTime}
+                      dateFormat="MMMM d, yyyy h:mm aa"
+                      onCalendarClose={handleCalendarClose}
+                      openToDate={new Date()}
+                      timeIntervals={30}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <CrossPost></CrossPost>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
-            <NavButton
-              buttonText="<-return"
-              to="/dashboard"
-              onClick={onClickReturn}
-            ></NavButton>
-            {newEvent.start && newEvent.post && (
+            <NavLink to="/app">
               <NavButton
-                onClick={() =>
-                  onClickSubmit({
-                    ...newEvent,
-                    data: {image: selectedImage, icon: "", profile: []},
-                  })
-                }
-                buttonText="Schedule post"
-                to="/confirmation"
+                buttonText="Cancel"
+                // to="/app"
+                variant="outlined"
+                type="button"
+                // onClick={onClickReturn}
               ></NavButton>
-            )}
+            </NavLink>
+
+            <NavButton
+              variant="contained"
+              type="submit"
+              buttonText="Schedule a post"
+              onClick={openDialog}
+            ></NavButton>
+            {/* <button type="submit"> */}
+            {/* onClick={(e) => submitForm(e)} */}
+
+            {/* </button> */}
           </div>
         </div>
       </form>

@@ -1,65 +1,48 @@
-// @ts-ignore
-import ImageB from "../assets/blank.jpg";
+import {Link} from "react-router-dom";
+import "./Event.css";
+import moment from "moment";
 
-export const EventComponent =
+export const Event =
   ({events, change}: any) =>
   (props: any) => {
-    const isImage = props?.event?.data?.image;
-    const isIcon = props?.event?.data?.icon.length !== 0;
+    const handleHoursAndMinutes = function () {
+      const currentHour = moment(props.event.startDate).toDate().getHours();
+      const currentMinute = moment(props.event.startDate).toDate().getMinutes();
+      const formattedMinutes =
+        currentMinute < 10 ? "0" + currentMinute : currentMinute;
+      return `${currentHour}:${formattedMinutes}`;
+    };
+
+    // const handleClick = function (event: any) {
+    //   console.log(event);
+    // };
 
     return (
-      <div
-        style={{
-          color: "white",
-          height: "100%",
-          width: "100%",
-          backgroundImage: isImage
-            ? `linear-gradient(
-      to right bottom,
-      rgb(43, 48, 53, 0.3),
-      rgb(43, 48, 53, 0.3)
-    ), url(${props.event.data.image})`
-            : `linear-gradient(
-      to right bottom,
-      rgb(43, 48, 53, 0.3),
-      rgb(43, 48, 53, 0.3)
-    ), url(${ImageB})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          display: "flex",
-          alignItems: "flex-end",
-        }}
-      >
-        <div
-          style={{
-            minWidth: "1.5rem",
-            minHeight: "1.5rem",
-            borderRadius: "9999px",
-            boxShadow: "0 0 0 2px",
-            backgroundPosition: "center",
-            backgroundImage: isIcon
-              ? props?.event?.data?.icon.map((item: any) => {
-                  return `url(${item})`;
-                })
-              : null,
-          }}
-        ></div>
-
-        <button
-          style={{
-            background: "transaprent",
-            display: "block",
-            width: "100%",
-            height: "100%",
-            fontWeight: "700",
-          }}
-          data-modal-target="defaultModal"
-          data-modal-toggle="defaultModal"
-          onClick={props.change}
-          className="hover:transition-all hover:scale-y-110 viewBox='0 0 24 24' "
-        >
-        </button>
-      </div>
+      <>
+        <Link to={`${props.event._id}`} className="EventBtn">
+          <div>
+            <div className="EventHeader">
+              <span className="EventSocialMedia">
+                <img
+                  src={`http://localhost:4001/media/${props.event.account.mediaIcon}`}
+                  alt="social media icon"
+                />
+              </span>
+              <span className="EventAccount">Account name</span>
+            </div>
+            <div className="EventText">{props.event.post} </div>
+            <div className="EventTime">
+              <span>{handleHoursAndMinutes()}</span>
+            </div>
+            <div
+              className="EventVisual"
+              style={{
+                backgroundImage: `url(http://localhost:4001/post/${props.event.image})`,
+              }}
+            ></div>
+          </div>
+        </Link>
+        <div className="NewEvent"></div>
+      </>
     );
   };
