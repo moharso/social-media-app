@@ -1,8 +1,23 @@
+import React, { useState } from "react";
 import Logo from "../reusableComponents/logo/Logo";
 import HiddenButton from "../reusableComponents/hiddenButton/HiddenButton";
 import NavigationItem from "../reusableComponents/navigationItem/NavigationItem";
+import NavButton from "../reusableComponents/NavButton";
+import RegistrationForm from "../registrationForm/registrationForm";
+
+enum FormMode {
+  Registration,
+  Login,
+}
 
 const PageNavigation = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [formMode, setFormMode] = useState(FormMode.Registration);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  }
+
   return (
     <nav
       className="flex items-center justify-between p-2 lg:px-8 shadow-sm"
@@ -23,12 +38,12 @@ const PageNavigation = () => {
         <NavigationItem to="pricing">Pricing</NavigationItem>
       </div>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <NavigationItem text="Log in">
-          <span aria-hidden="true">&rarr;</span>
-        </NavigationItem>
+        <NavButton buttonText="Log In/Sign up" to="/" onClick={toggleForm}></NavButton>
+        {showForm && formMode === FormMode.Registration && <RegistrationForm onClose={toggleForm} />}
       </div>
     </nav>
   );
 };
+
 
 export default PageNavigation;

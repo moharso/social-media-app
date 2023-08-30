@@ -11,6 +11,8 @@ import {myEventsList} from "../src/components/data/data";
 import LandingPage from "./components/pages/landingPage/LandingPage";
 import Confirmation from "./components/pages/confirmation/Confirmation";
 import CalendarView from "./components/calendarView/CalendarView";
+import AccountPage from "./components/pages/accountPage/AccountPage";
+
 // const CalendarView = React.lazy(
 //   () => import("./components/calendarView/CalendarView")
 // );
@@ -72,7 +74,7 @@ function App() {
               <Route path="dashboard" element={<p>DASHBOARD</p>} />
               <Route path="calendar" element={<CalendarView />} />
               <Route path="settings" element={<p>SETTINGS</p>} />
-              <Route path="accounts" element={<p>ACCOUNTS</p>} />
+              <Route path="accounts" element={<AccountPage />} />
             </Route>
             {/* <Route
               path="/app"
