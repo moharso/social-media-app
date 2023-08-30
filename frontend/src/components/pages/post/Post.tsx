@@ -7,11 +7,12 @@ import {PostContext} from "../../../context/PostContext";
 import axios from "axios";
 import Confirmation from "../confirmation/Confirmation";
 import {useSearchParams} from "react-router-dom";
+import Alerting from "../../alert/Alert";
 
-const Post = ({onClickSubmit, account, post}: any) => {
+const Post = ({onClickSubmit, account, post, openAlert}: any) => {
   // const {userSelected} = useContext(PostContext);
   const [openDialog, setOpenDialog] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
+
   // const [selectedAccount, setSelectedAccount] = useState({
   //   mediaIcon: "",
   //   username: "",
@@ -30,9 +31,7 @@ const Post = ({onClickSubmit, account, post}: any) => {
     // setSelectedImage(URL.createObjectURL(item));
     setOpenDialog(!openDialog);
   }
-  function handleOpenAlert() {
-    setOpenDialog(openAlert);
-  }
+
   // useEffect(
   //   function () {
   //     async function fetchAccount() {
@@ -50,7 +49,6 @@ const Post = ({onClickSubmit, account, post}: any) => {
   //   },
   //   [userSelected]
   // );
-  console.log(openDialog);
 
   return (
     <div className="flex w-full h-full">
@@ -60,9 +58,7 @@ const Post = ({onClickSubmit, account, post}: any) => {
           openDialogFunc={handleOpenDialog}
         />
       )}
-      {/* {openAlert&&(
 
-      )} */}
       <>
         <UploadPhoto
           pickImage={handlePickImage}
@@ -76,7 +72,7 @@ const Post = ({onClickSubmit, account, post}: any) => {
           openDialog={handleOpenDialog}
           isPostCreationDone={isPostCreationDone}
           post={post}
-          openAlert={handleOpenAlert}
+          openAlert={openAlert}
         />
       </>
     </div>

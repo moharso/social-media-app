@@ -185,23 +185,23 @@ const AddCaption = ({
                 !isPostCreationDone ? navigate("/app") : navigate(-1);
               }}
             ></NavButton>
-
             {/* <NavButton
               buttonText="Cancel"
               variant="outlined"
               onClick={() => navigate(-1)}
             ></NavButton> */}
 
+            {/* <NavLink to="/app"> */}
             <NavButton
               variant="contained"
               type="submit"
               buttonText="Schedule a post"
               // onClick={openDialog}
               onClick={() => {
-                !isPostCreationDone ? openDialog() : handleUpdate();
+                !isPostCreationDone ? openDialog() : openAlert();
               }}
             ></NavButton>
-
+            {/* </NavLink> */}
             {/* <Button onClick={handleClose}>Schedule a new post</Button>
             <NavLink to="/app">
               <Button onClick={handleClose} autoFocus>
@@ -210,7 +210,6 @@ const AddCaption = ({
             </NavLink> */}
             {/* <button type="submit"> */}
             {/* onClick={(e) => submitForm(e)} */}
-
             {/* </button> */}
           </div>
         </div>
