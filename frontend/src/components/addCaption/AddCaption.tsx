@@ -81,9 +81,6 @@ const AddCaption = ({
       formData.append("image", selectedImage);
       formData.append("account", account._id);
 
-      localStorage.setItem("postDate", newEvent.startDate);
-      localStorage.setItem("post", newEvent.post);
-
       if (isPostCreationDone) {
         await axios.patch(`${BASE_URL}/posts/${id}`, formData, {
           headers: {
@@ -99,6 +96,9 @@ const AddCaption = ({
       }
     } catch (err) {}
   };
+
+  localStorage.setItem("postDate", newEvent.startDate);
+  localStorage.setItem("post", newEvent.post);
 
   return (
     <div className="flex flex-col flex-1 basis-6/12 bg-gray-100">

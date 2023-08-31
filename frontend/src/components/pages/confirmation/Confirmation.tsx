@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {NavLink} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import axios from "axios";
@@ -25,7 +25,6 @@ const Confirmation = ({
 
   const getEmail = localStorage.getItem("email")
   const getPost = localStorage.getItem("post")
-  const getImage = localStorage.getItem("image")
 
   const handleClose = () => {
     setOpen(false);

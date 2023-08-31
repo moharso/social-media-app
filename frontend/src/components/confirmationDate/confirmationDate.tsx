@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 const ConfirmationDate: React.FC = () => {
   const [postDate, setPostDate] = useState<string | null>(null);
 
   useEffect(() => {
-    // Retrieve the value from localStorage
     const storedPostDate = localStorage.getItem('postDate');
     if (storedPostDate) {
       setPostDate(storedPostDate);
     }
-  
   }, []);
 
   const formattedValue = postDate
@@ -23,7 +21,6 @@ const ConfirmationDate: React.FC = () => {
       })
     : "";
 
-  // return <div>{/* <p>{formattedValue}</p> */}</div>;
   return <span>{formattedValue}</span>;
 };
 
