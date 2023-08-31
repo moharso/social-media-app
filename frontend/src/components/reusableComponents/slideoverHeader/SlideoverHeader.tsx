@@ -1,6 +1,9 @@
-import React from "react";
+type HiddenDialogProps = {
+  text: string;
+  icon: any;
+};
 
-const SlideoverHeader = ({text, icon}: any) => {
+const SlideoverHeader = ({text, icon}: HiddenDialogProps) => {
   return (
     <div className="flex items-center justify-center">
       <div className="AddCaptionContainerIcon">

@@ -1,7 +1,12 @@
 import React from "react";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 
-const CloseButton = ({to}: any) => {
+type CloseButtonProps = {
+  to: string;
+  onClick?: () => void;
+};
+
+const CloseButton = ({to, onClick}: CloseButtonProps) => {
   return (
     <Link
       type="button"

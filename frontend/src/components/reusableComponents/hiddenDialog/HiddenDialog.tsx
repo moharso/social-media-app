@@ -1,6 +1,12 @@
 import React from "react";
 
-const HiddenDialog = ({children, action, clickClose}: any) => {
+type HiddenDialogProps = {
+  children: any;
+  action?: string;
+  clickClose?: () => void;
+};
+
+const HiddenDialog = ({children, clickClose}: HiddenDialogProps) => {
   return (
     <>
       <div className="flex items-center justify-between">
@@ -33,11 +39,7 @@ const HiddenDialog = ({children, action, clickClose}: any) => {
         <div className="-my-6 divide-y divide-gray-500/10">
           <div className="space-y-2 py-6">{children}</div>
           <div className="py-6">
-            <button
-              className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-            >
-              
-            </button>
+            <button className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"></button>
           </div>
         </div>
       </div>

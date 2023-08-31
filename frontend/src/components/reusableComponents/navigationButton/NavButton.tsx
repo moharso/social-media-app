@@ -1,10 +1,8 @@
-import React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 interface NavButtonProps {
   buttonText?: string;
-  // to: string;
   onClick?: () => any;
   variant: "text" | "outlined" | "contained" | undefined;
   type?: "submit" | "button";

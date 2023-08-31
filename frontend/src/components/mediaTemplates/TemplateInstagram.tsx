@@ -1,6 +1,10 @@
-import React from "react";
+type TemplateInstagramProps = {
+  postText: string;
+  name: string;
+  img: string;
+};
 
-const TemplateInstagram = ({postText, name, img}: any) => {
+const TemplateInstagram = ({postText, name, img}: TemplateInstagramProps) => {
   return (
     <div className="DesktopVersion">
       <header className="DesktopVersionHeaderInstagram">

@@ -2,11 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* height: 100%; */
   padding-bottom: 3rem;
   padding-right: 1rem;
 }
 
 .Active {
-  background-color: blue;
+  box-shadow: 0 0 0 3px white;
 }

@@ -1,61 +1,22 @@
 import React from "react";
-import {useState, useContext, useEffect, FC} from "react";
+import {useState} from "react";
 import "./UploadPhoto.css";
-import myUsersList from "../data/data";
-import SelectedUsers from "../SelectedUsers/SelectedUsers";
-import {PostContext} from "../../context/PostContext";
-import axios from "axios";
 import {Tooltip} from "@mui/material";
 
-interface Props {}
+interface UploadPhotoProps {
+  pickImage: (item: any) => void;
+  isPostCreationDone: string | null;
+  post: any;
+}
 
-const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
-  const {userSelected} = useContext(PostContext);
+const UploadPhoto = ({
+  pickImage,
+  isPostCreationDone,
+  post,
+}: UploadPhotoProps) => {
   const [selectedImage, setSelectedImage] = useState<any>(
-    ""
-    // isPostCreationDone ? `http://localhost:4001/post/${post.image})` : ""
+    isPostCreationDone ? post.image : ""
   );
-
-  //   function DynamicImage({ imageName }) {
-  //   const imagePath = ./images/${imageName};
-
-  //   // Dynamically import the image using import()
-  //   const ImageComponent = React.lazy(() => import(${imagePath}));
-
-  //   return <ImageComponent />;
-  // }
-
-  // console.log(URL.createObjectURL(selectedImage));
-  // const [myUsersList, setMyUsersList] = useState({
-  //   mediaIcon: "",
-  //   username: "",
-  // });
-
-  // const handleFileChange = (e: any) => {
-  //   const img = {
-  //     preview: URL.createObjectURL(e.target.files[0]),
-  //     data: e.target.files[0],
-  //   };
-  //   setSelectedImage(img.data);
-  // };
-
-  // useEffect(
-  //   function () {
-  //     async function fetchAccount() {
-  //       try {
-  //         const res = await axios.get(
-  //           `http://localhost:4001/api/v1/accounts/${userSelected}`
-  //         );
-  //         setMyUsersList(res.data.data.account);
-  //         console.log(res);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //     fetchAccount();
-  //   },
-  //   [userSelected]
-  // );
 
   return (
     <div className="w-full h-full flex items-center px-20 pt-10 pb-15 bg-gray-100  flex-col space-y-5 basis-6/12">
@@ -64,11 +25,14 @@ const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
           <div className="flex items-center justify-center w-full h-full">
             <div className="flex flex-col items-center text-sm w-full h-full relative">
               {selectedImage ? (
-                // <div>
                 <>
                   <img
                     alt="not found"
-                    src={URL.createObjectURL(selectedImage)}
+                    src={
+                      typeof selectedImage !== "string"
+                        ? URL.createObjectURL(selectedImage)
+                        : `http://localhost:4001/post/${selectedImage}`
+                    }
                     className="w-full h-full"
                   />
                   <Tooltip title="Delete" arrow>
@@ -104,18 +68,6 @@ const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
                     setSelectedImage(e.target.files[0]);
                   }}
                 ></input>
-
-                // <input
-                //   type="file"
-                //   name="image"
-                //   accept="image/*"
-
-                //   onChange={(e: any) => {
-                //     pickImage(e.target.files[0]);
-                //     setSelectedImage(e.target.files[0]);
-                //   }}
-                //   // onChange={handleFileChange}
-                // />
               )}
             </div>
           </div>

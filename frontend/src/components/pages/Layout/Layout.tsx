@@ -2,16 +2,7 @@ import React from "react";
 import "./Layout.css";
 
 const Layout = (props: any) => {
-  return (
-    <div className="Layout">
-      {/* <div className="flex h-screen relative">
-        <Homepage />
-      </div> */}
-
-      {/* {props.children} */}
-      {/* <Outlet /> */}
-    </div>
-  );
+  return <div className="Layout"></div>;
 };
 
 export default Layout;

@@ -1,6 +1,10 @@
 import React from "react";
 
-const HiddenButton = ({clickBtn}: any) => {
+type CloseButtonProps = {
+  clickBtn?: () => void;
+};
+
+const HiddenButton = ({clickBtn}: CloseButtonProps) => {
   return (
     <button
       onClick={clickBtn}

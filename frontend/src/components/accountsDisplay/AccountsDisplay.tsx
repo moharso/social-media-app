@@ -1,24 +1,31 @@
-import {useRef, useEffect, useContext, useState, useMemo} from "react";
-import {useSearchParams, useParams} from "react-router-dom";
+import {useRef, useEffect, useContext, useState} from "react";
+// import {useSearchParams} from "react-router-dom";
 import "./AccountsDisplay.css";
-import UserData from "../data/data";
 import Account from "../account/Account";
 import {PostContext} from "../../context/PostContext";
 import axios from "axios";
 import Spinner from "../reusableComponents/spinner/Spinner";
 
+type AccountsDisplayProps = {
+  id: string;
+  _id: string;
+  mediaIcon: string;
+  photo: string;
+  platform: string;
+  username: string;
+  postsPublished?: any[];
+};
+
 const AccountsDisplay = () => {
   const {onUserSelected} = useContext(PostContext);
-  const [accounts, setAccounts] = useState<any>([]);
-  const [searchParams, setSearchParams] = useSearchParams("");
+  const [accounts, setAccounts] = useState([]);
+  // const [searchParams, setSearchParams] = useSearchParams("");
   const [isLoading, setIsLoading] = useState(false);
-  const buttonEl = useRef<any>(null);
-  const param = useParams();
-  const [active, setIsActive] = useState(false);
+  const buttonEl = useRef<HTMLButtonElement | null>(null);
+  const [active, setIsActive] = useState<string | "">("");
 
-  function handleButton(e: any, acc: any) {
-    setIsActive(acc);
-    // e.preventDefault();
+  function handleButton(e: any, acc: AccountsDisplayProps) {
+    setIsActive(acc._id);
     buttonEl.current = e.currentTarget;
   }
 
@@ -36,8 +43,7 @@ const AccountsDisplay = () => {
     }
     fetchAccounts();
   }, []);
-  // console.log("active2", active2);
-  console.log("active", active);
+
   useEffect(() => {
     if (buttonEl.current) buttonEl.current.focus();
   }, []);
@@ -48,20 +54,20 @@ const AccountsDisplay = () => {
 
   return (
     <div className="fixed z-20 bottom-72 right-0 md:right-6 w-30 md:right-m md:top-m md:bottom-m md:flex">
-      {/* {!param.id ? ( */}
-      <div className=" AccountsDisplay w-full h-full flex flex-col space-y-4 items-center">
-        {accounts.map((acc: any) => {
+      <div className="AccountsDisplay w-full h-full flex flex-col space-y-4 items-center">
+        {accounts.map((acc: AccountsDisplayProps) => {
           return (
             <button
               onClick={(e) => {
                 onUserSelected(e, acc._id);
+                // setIsActive(acc._id);
                 handleButton(e, acc);
-                setSearchParams({
-                  social: `${acc.platform}`,
-                });
+                // setSearchParams({
+                //   social: `${acc.platform}`,
+                // });
               }}
               className={`bg-blue-500 w-12 h-12 rounded-full  text-transparent overflow-hidden focus:ring-offset-1 focus:ring-2 ${
-                active === acc ? "Active" : ""
+                active === acc._id ? " Active" : ""
               }`}
               ref={buttonEl}
               key={acc._id}

@@ -1,4 +1,3 @@
-import React from "react";
 import NavButton from "../reusableComponents/navigationButton/NavButton";
 
 const TopBar = () => {
@@ -10,7 +9,6 @@ const TopBar = () => {
         <li>Confirmation</li>
       </ul>
       <NavButton buttonText="close" variant="contained" />
-      {/* to="/" */}
     </div>
   );
 };

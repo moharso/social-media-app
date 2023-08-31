@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 const ConfirmationDate: React.FC = () => {
   const [postDate, setPostDate] = useState<string | null>(null);

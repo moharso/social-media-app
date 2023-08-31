@@ -3,13 +3,8 @@
 }
 
 .MainContainer {
-  background-image: 
-  /* linear-gradient(
-      to right bottom,
-      rgb(239, 246, 255, 0.2),
-      rgb(239, 246, 255, 0.2)
-    ), */ url(../assets/version3.jpg);
-  /* background-position: right 70% bottom 45%; */
+  background-image: url(../assets/version3.jpg);
+
   background-position: center;
   background-size: cover;
 }

@@ -1,14 +1,7 @@
 import React, {useState, useEffect, useContext} from "react";
 import "./SlideOver.css";
-import {HiOutlineTrash} from "react-icons/hi2";
-// @ts-ignore
-import Facebook from "../assets/facebook.svg";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Post from "../pages/post/Post";
-import UploadPhoto from "./../uploadPhoto/UploadPhoto";
-
-import AddCaption from "./../addCaption/AddCaption";
-
 import "react-datepicker/dist/react-datepicker.css";
 import SlideoverHeader from "../slideoverHeader/SlideoverHeader";
 import CloseButton from "../reusableComponents/closeButton/CloseButton";
@@ -22,11 +15,10 @@ import TemplateTwitter from "../mediaTemplates/TemplateTwitter";
 import MobileContainer from "../reusableComponents/MobileContainer.tsx/MobileContainer";
 import Confirmation from "../pages/confirmation/Confirmation";
 import {useSearchParams} from "react-router-dom";
-// import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
+import Alerting from "../alert/Alert";
 
 const SlideOver = () => {
   const {userSelected} = useContext(PostContext);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(true);
   const [post, setPost] = useState<any>({});
   const navigate = useNavigate();
@@ -35,12 +27,11 @@ const SlideOver = () => {
   }
   const [isDelete, setIsDelete] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-
+  const [openAlert, setOpenAlert] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const isPostCreationDone = searchParams.get("isPostCreationDone");
-
+  const [isError, setIsError] = useState("");
   function handleOpenDialog() {
-    // setSelectedImage(URL.createObjectURL(item));
     setOpenDialog(!openDialog);
     setIsDelete(!isDelete);
   }
@@ -52,21 +43,35 @@ const SlideOver = () => {
     setIsDelete(true);
     handleOpenDialog();
   }
-  function handlePost() {
-    // setIsDelete(true);
-    // handleOpenDialog();
+
+  function handleOpenAlert() {
+    setOpenAlert(true);
+
+    setTimeout(() => {
+      setOpenAlert(false);
+      return navigate("/app");
+    }, 1000);
   }
 
   useEffect(
     function () {
       async function fetchAccount() {
         try {
+          setIsError("");
+
+          if (!userSelected) throw new Error("Please choose the account");
           const res = await axios.get(
             `http://localhost:4001/api/v1/accounts/${userSelected}`
           );
+
+          if (!res.data.data.account)
+            throw new Error(
+              "That doesn't seem to be an account. Click on one of the accounts on the right side"
+            );
+
           setAccount(res.data.data.account);
-        } catch (err) {
-          console.log(err);
+        } catch (err: any) {
+          setIsError(err.message);
         }
       }
       if (id === "post") fetchAccount();
@@ -95,7 +100,6 @@ const SlideOver = () => {
 
   return (
     <>
-      {/* {isOpen ? ( */}
       <div className="relative z-10 ">
         <div
           onClick={() => navigate(-1)}
@@ -113,6 +117,12 @@ const SlideOver = () => {
                 <div className="absolute right-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
                   <CloseButton onClick={handleOnClick} to="/app" />
                 </div>
+                {openAlert && (
+                  <Alerting
+                    text="The post has been successfully updated"
+                    severity="success"
+                  />
+                )}
                 <div className="flex h-full flex-col overflow-y-scroll bg-gray-100 py-6 shadow-xl ">
                   <SlideoverHeader
                     param={id}
@@ -121,7 +131,11 @@ const SlideOver = () => {
                   />
 
                   {id === "post" || isPostCreationDone ? (
-                    <Post account={account} post={post} />
+                    <Post
+                      account={account}
+                      post={post}
+                      openAlert={handleOpenAlert}
+                    />
                   ) : (
                     <>
                       {isDelete && (
@@ -232,7 +246,7 @@ const SlideOver = () => {
                             switch (post.account?.platform) {
                               case "facebook":
                                 return (
-                                  <MobileContainer>
+                                  <MobileContainer platform="facebook">
                                     <TemplateFb
                                       postText={post.post}
                                       name={post.account.username}
@@ -242,7 +256,7 @@ const SlideOver = () => {
                                 );
                               case "instagram":
                                 return (
-                                  <MobileContainer>
+                                  <MobileContainer platform="instagram">
                                     <TemplateInstagram
                                       postText={post.post}
                                       name={post.account.username}
@@ -294,7 +308,6 @@ const SlideOver = () => {
           </div>
         </div>
       </div>
-      {/* ) : null} */}
     </>
   );
 };

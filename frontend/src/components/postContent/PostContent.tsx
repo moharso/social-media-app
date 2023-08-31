@@ -55,7 +55,6 @@ const PostContent = () => {
             }}
             ref={inputEl}
             className="Textarea"
-            // w-full resize-none text-sm z-1 scrollbar placeholder:text-icoGray-400 placeholder:dark:text-icoDarkMode-wolf font-GMedium bg-transparent p-0 border-0 placeholder:text-sm focus:outline-0 focus:ring-0 peer flex-1 leading-5"
           ></textarea>
         </div>
         <div className="AddcaptionPostText flex items-center z-1">
