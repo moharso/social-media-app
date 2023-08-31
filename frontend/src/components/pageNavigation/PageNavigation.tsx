@@ -40,7 +40,7 @@ const PageNavigation = () => {
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
         <NavButton
           buttonText="Log In/Sign up"
-          variant="contained"
+          variant="text"
           onClick={toggleForm}
         ></NavButton>
         {showForm && formMode === FormMode.Registration && (

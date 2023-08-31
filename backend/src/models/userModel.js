@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   
-  // child referencing, each account should be mongoDB id (objectId)
   accounts: [{type: mongoose.Schema.ObjectId, ref: "Account"}],
 });
 

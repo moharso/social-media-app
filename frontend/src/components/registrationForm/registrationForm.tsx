@@ -50,7 +50,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
     
     if (password !== passwordConfirm) {
       console.error('Password and password confirmation do not match');
-      return; // Early return if passwords don't match
+      return;
     }
 
     try {
