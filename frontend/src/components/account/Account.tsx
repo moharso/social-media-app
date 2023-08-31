@@ -1,14 +1,11 @@
-import "./Account.css";
-
-const Account = ({network, account}: any) => {
+type AccountProps = {
+  network: string;
+  account: string;
+};
+const Account = ({network, account}: AccountProps) => {
   return (
     <div className="relative w-full h-full">
-      <img
-        src={account}
-        key={account.username}
-        alt="client account"
-        className="z-10 relative"
-      />
+      <img src={account} alt="client account" className="z-10 relative" />
       <img
         src={network}
         alt="social network account"

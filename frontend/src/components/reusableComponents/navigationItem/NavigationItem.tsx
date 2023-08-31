@@ -1,9 +1,13 @@
-import React from "react";
 import {Link} from "react-scroll";
 import "./NavigationItem.css";
 
+type HiddenDialogProps = {
+  text?: string;
+  children?: any;
+  to: string;
+};
 
-const NavigationItem = ({text, children, to}: any) => {
+const NavigationItem = ({text, children, to}: HiddenDialogProps) => {
   return (
     <Link
       activeClass="active"

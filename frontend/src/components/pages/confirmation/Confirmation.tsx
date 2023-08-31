@@ -1,8 +1,4 @@
-// import {useContext} from "react";
-import NavButton from "../../reusableComponents/navigationButton/NavButton";
-import myUsersList from "../../data/data";
 import ConfirmationDate from "../../confirmationDate/confirmationDate";
-
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -11,25 +7,32 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import {NavLink} from "react-router-dom";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import axios from "axios";
 
-const Confirmation = ({openDialog, openDialogFunc, isDelete}: any) => {
+type ConfirmationProps = {
+  openDialog: boolean;
+  openDialogFunc: () => void;
+  isDelete?: boolean;
+};
 
+const Confirmation = ({
+  openDialog,
+  openDialogFunc,
+  isDelete,
+}: ConfirmationProps) => {
   const [open, setOpen] = useState(openDialog);
-  
+
   const handleClose = () => {
     setOpen(false);
     openDialogFunc();
   };
   const {id} = useParams();
 
-  async function handleDelete() {
+  function handleDelete() {
     async function fetchPostDetails() {
       try {
-        const res = await axios.delete(
-          `http://localhost:4001/api/v1/posts/${id}`
-        );
+        await axios.delete(`http://localhost:4001/api/v1/posts/${id}`);
       } catch (err) {
         console.log(err);
       }

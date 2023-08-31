@@ -1,6 +1,10 @@
-import React from "react";
+type TemplateTwitterProps = {
+  postText: string;
+  name: string;
+  img: string;
+};
 
-const TemplateTwitter = ({postText, name, img}: any) => {
+const TemplateTwitter = ({postText, name, img}: TemplateTwitterProps) => {
   return (
     <div className="DesktopVersion DesktopVersionTwitter">
       <header className="DesktopVersionHeader">

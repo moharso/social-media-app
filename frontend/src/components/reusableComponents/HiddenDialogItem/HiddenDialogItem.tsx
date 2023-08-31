@@ -1,6 +1,9 @@
 import React from "react";
+type HiddenDialogItemProps = {
+  text: string;
+};
 
-const HiddenDialogItem = ({text}: any) => {
+const HiddenDialogItem = ({text}: HiddenDialogItemProps) => {
   return (
     <a
       href="/"

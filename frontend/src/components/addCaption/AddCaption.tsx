@@ -1,42 +1,42 @@
 import "./AddCaption.css";
-import {useState, useEffect, useRef, useContext} from "react";
+import {useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {PostContext} from "../../context/PostContext";
 import moment from "moment";
 import NavButton from "../reusableComponents/navigationButton/NavButton";
 import CrossPost from "../CrossPost/CrossPost";
 import "./AddCaption.css";
 import SlideoverHeader from "../reusableComponents/slideoverHeader/SlideoverHeader";
 import TextArea from "../textArea/TextArea";
-import {useForm, Controller} from "react-hook-form";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+
+const BASE_URL = "http://localhost:4001/api/v1";
+
+type AddCaptionProps = {
+  selectedImage: string;
+  account: any;
+  openDialog: () => void;
+  post: any;
+  isPostCreationDone: string | null;
+  openAlert: () => void;
+};
 
 const AddCaption = ({
   selectedImage,
   account,
-  selectedImage2,
   openDialog,
   post,
   isPostCreationDone,
-}: any) => {
-  const {onClickSubmit, onClickReturn} = useContext(PostContext);
-  const [image, setImage] = useState({preview: "", data: ""});
-
-  // const [newEvent, setNewEvent] = useState<any>({
-  //   post: "",
-  //   start: "",
-  //   end: "",
-  //   data: {
-  //     profile: [""],
-  //     image: "",
-  //     icon: [],
-  //   },
-  // });
-  // isPostCreationDone CAN BE ACCESSED DIRECTLY FROM THIS COMPONENT
-
-  const [newEvent2, setNewEvent2] = useState<any>(
+  openAlert,
+}: AddCaptionProps) => {
+  const [newEvent, setNewEvent] = useState<{
+    post: string | "";
+    startDate: any;
+    endDate: any;
+    image: string | "";
+    account: any[];
+  }>(
     isPostCreationDone
       ? {
           post: post?.post,
@@ -55,57 +55,50 @@ const AddCaption = ({
           account: [],
         }
   );
-  console.log(newEvent2);
-  const BASE_URL = "http://localhost:4001/api/v1";
-
-  // const handleFileChange = (e: any) => {
-
-  //   const img = {
-  //     preview: URL.createObjectURL(e.target.files[0]),
-  //     data: e.target.files[0],
-  //   };
-  //   setImage(img);
-  // };
-
-  // const [textAreaCount, setTextAreaCount] = useState<any>("");
-  // const inputEl = useRef<any>(null);
+  console.log(isPostCreationDone, typeof isPostCreationDone);
+  const navigate = useNavigate();
+  const {id} = useParams();
 
   const handleCalendarClose = () => {
-    const endate2 = moment(newEvent2.startDate).add(1, "hours").toISOString();
-
-    setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
-
-    console.log(newEvent2.startDate, moment(endate2).toDate());
+    const endate = moment(newEvent.startDate).add(1, "hours").toISOString();
+    setNewEvent({...newEvent, endDate: moment(endate).toDate()});
   };
 
-  const handleTextChange = (post: any) => {
-    setNewEvent2({...newEvent2, post});
+  const handleTextChange = (post: string | "") => {
+    setNewEvent({...newEvent, post});
   };
 
-  const filterPassedTime = (date: any) =>
+  // const handleUpdate = () => {
+  //   openAlert();
+  // };
+
+  const filterPassedTime = (date: Date) =>
     new Date().getTime() <= date.getTime();
 
   const submitForm = async (e: any) => {
     try {
       e.preventDefault();
-
       const formData = new FormData();
-      formData.append("post", newEvent2.post);
-      formData.append("startDate", newEvent2.startDate);
-      formData.append("endDate", newEvent2.endDate);
-      formData.append("image", selectedImage2);
-
+      formData.append("post", newEvent.post);
+      formData.append("startDate", newEvent.startDate);
+      formData.append("endDate", newEvent.endDate);
+      formData.append("image", selectedImage);
       formData.append("account", account._id);
 
-      const response = await axios.post(`${BASE_URL}/posts`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+      if (isPostCreationDone) {
+        await axios.patch(`${BASE_URL}/posts/${id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      } else {
+        await axios.post(`${BASE_URL}/posts`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+    } catch (err) {}
   };
 
   return (
@@ -171,9 +164,9 @@ const AddCaption = ({
                     <DatePicker
                       showIcon
                       placeholderText="Select date and time..."
-                      selected={newEvent2.startDate}
+                      selected={newEvent.startDate}
                       onChange={(startDate) => {
-                        setNewEvent2({...newEvent2, startDate});
+                        setNewEvent({...newEvent, startDate});
                       }}
                       showTimeSelect
                       minDate={new Date()}
@@ -190,26 +183,23 @@ const AddCaption = ({
             <CrossPost></CrossPost>
           </div>
           <div className="flex justify-between mt-8 space-x-3 !justify-end">
-            <NavLink to="/app">
-              <NavButton
-                buttonText="Cancel"
-                // to="/app"
-                variant="outlined"
-                type="button"
-                // onClick={onClickReturn}
-              ></NavButton>
-            </NavLink>
+            <NavButton
+              buttonText="Cancel"
+              variant="outlined"
+              type="button"
+              onClick={() => {
+                !isPostCreationDone ? navigate("/app") : navigate(-1);
+              }}
+            ></NavButton>
 
             <NavButton
               variant="contained"
               type="submit"
               buttonText="Schedule a post"
-              onClick={openDialog}
+              onClick={() => {
+                !isPostCreationDone ? openDialog() : openAlert();
+              }}
             ></NavButton>
-            {/* <button type="submit"> */}
-            {/* onClick={(e) => submitForm(e)} */}
-
-            {/* </button> */}
           </div>
         </div>
       </form>

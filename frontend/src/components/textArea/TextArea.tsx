@@ -1,14 +1,17 @@
 import React from "react";
 import {useState, useEffect, useRef} from "react";
-import {useForm} from "react-hook-form";
 
-interface IFormValues {
-  post: string;
+interface TextAreaProps {
+  setNewEvent: (post: string | "") => void;
+  isPostCreationDone: string | null;
+  post: any;
 }
 
-const TextArea = ({setNewEvent, title, isPostCreationDone, post}: any) => {
+const TextArea = ({setNewEvent, isPostCreationDone, post}: TextAreaProps) => {
   const inputEl = useRef<any>(null);
-  const [textAreaCount, setTextAreaCount] = useState<any>("");
+  const [textAreaCount, setTextAreaCount] = useState<any>(
+    isPostCreationDone ? post.post?.length : ""
+  );
   const [textAreaContent, setTextAreaContent] = useState<any>(
     isPostCreationDone ? post.post : ""
   );

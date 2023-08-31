@@ -3,7 +3,11 @@ import MainNavigation from "../mainNavigation/MainNavigation";
 import Logo from "../reusableComponents/logo/Logo";
 import UserAvatar from "../userAvatar/UserAvatar";
 
-const Aside = ({showSideBar}: any) => {
+type AsideProps = {
+  showSideBar: Boolean;
+};
+
+const Aside = ({showSideBar}: AsideProps) => {
   return (
     <div
       className={`Aside fixed z-20 rounded-lg top-6 left-6 right-m md:top-m md:right-unset md:bottom-m md:bg-none bg-white/80 h-full transition-transform .3s ease-in-out md:translate-x-0 ${

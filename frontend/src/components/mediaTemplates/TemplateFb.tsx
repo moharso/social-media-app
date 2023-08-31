@@ -1,6 +1,10 @@
-import React from "react";
+type TemplateFbProps = {
+  postText: string;
+  name: string;
+  img: string;
+};
 
-const TemplateFb = ({postText, name, img}: any) => {
+const TemplateFb = ({postText, name, img}: TemplateFbProps) => {
   return (
     <div>
       <div className="DesktopVersion">

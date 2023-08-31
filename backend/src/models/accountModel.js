@@ -31,20 +31,12 @@ accountSchema.virtual("mediaIcon").get(function () {
   return `${this.platform}.svg`;
 });
 
-//  type: Schema.Types.ObjectId,
-//   ref: "Account",
-//   required: [true, "Post must belong to the account"],
-
 accountSchema.virtual("postsPublished", {
   ref: "Post",
   localField: "_id",
   foreignField: "account",
 });
 
-// accountSchema.set("toObject", {virtuals: true});
-// accountSchema.set("toJSON", {virtuals: true});
-
 const Account = mongoose.model("Account", accountSchema);
 
 module.exports = Account;
-
