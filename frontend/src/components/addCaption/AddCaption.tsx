@@ -68,10 +68,6 @@ const AddCaption = ({
     setNewEvent({...newEvent, post});
   };
 
-  // const handleUpdate = () => {
-  //   openAlert();
-  // };
-
   const filterPassedTime = (date: Date) =>
     new Date().getTime() <= date.getTime();
 
@@ -84,6 +80,9 @@ const AddCaption = ({
       formData.append("endDate", newEvent.endDate);
       formData.append("image", selectedImage);
       formData.append("account", account._id);
+
+      localStorage.setItem("postDate", newEvent.startDate);
+      localStorage.setItem("post", newEvent.post);
 
       if (isPostCreationDone) {
         await axios.patch(`${BASE_URL}/posts/${id}`, formData, {

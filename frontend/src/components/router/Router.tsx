@@ -6,6 +6,7 @@ import CalendarView from "./../calendarView/CalendarView";
 import SlideOver from "./../slideOver/SlideOver";
 import AccountView from "./../accountView/AccountView";
 import Header from "../header/Header";
+import AccountPage from "../pages/accountPage/AccountPage";
 
 const Router = () => {
   return (
@@ -49,6 +50,7 @@ const Router = () => {
                   text="passwords resetting"
                   scheduling={false}
                 />
+              <AccountPage/>
               </>
             }
           />

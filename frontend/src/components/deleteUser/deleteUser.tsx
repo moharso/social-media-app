@@ -26,7 +26,7 @@ const DeleteButton = () => {
 
   return (
     <div>
-      <button onClick={handleDelete} disabled={loading}>
+      <button className="bg-blue-500 text-white px-2 py-1 rounded p-4" onClick={handleDelete} disabled={loading}>
         Delete User Data
       </button>
     </div>

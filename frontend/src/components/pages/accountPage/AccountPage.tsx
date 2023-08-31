@@ -7,7 +7,6 @@ const AccountPage = () => {
 return (
     <div>
         <UserDataComponent></UserDataComponent>
-        <DeleteButton></DeleteButton>
     </div>
 );
 }
