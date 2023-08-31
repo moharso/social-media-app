@@ -37,7 +37,6 @@ exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
 
-
     res.status(200).json({
       status: "success",
       requestedAt: req.requestTime,
@@ -72,10 +71,8 @@ exports.getPost = async (req, res) => {
   }
 };
 
-// user for post request
 exports.createPost = async (req, res) => {
   try {
-
     const filteredBody = filterObj(
       req.body,
       "post",
@@ -94,7 +91,6 @@ exports.createPost = async (req, res) => {
     // account.publishedPosts.push(book);
     // await account.save();
 
-
     res.status(201).json({
       status: "success",
       data: {
@@ -106,14 +102,12 @@ exports.createPost = async (req, res) => {
       status: "fail",
 
       message: err,
-
     });
   }
 };
 
 exports.updatePost = async (req, res) => {
   try {
-
     const filteredBody = filterObj(
       req.body,
       "post",
@@ -128,7 +122,6 @@ exports.updatePost = async (req, res) => {
       new: true,
       runValidators: true,
     });
-
 
     res.status(200).json({
       status: "success",
@@ -153,6 +146,4 @@ exports.deletePost = async (req, res) => {
       message: {...err, errmsg: err.errmsg},
     });
   }
-
 };
-

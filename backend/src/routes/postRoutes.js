@@ -7,7 +7,7 @@ router
   .get(postController.getAllPosts)
 
   .post(postController.uploadPostPhoto, postController.createPost);
-// postController.uploadPostPhoto
+
 router
   .route("/:id")
   .get(postController.getPost)
@@ -15,4 +15,3 @@ router
   .delete(postController.deletePost);
 
 module.exports = router;
-

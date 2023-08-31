@@ -246,7 +246,7 @@ const SlideOver = () => {
                             switch (post.account?.platform) {
                               case "facebook":
                                 return (
-                                  <MobileContainer>
+                                  <MobileContainer platform="facebook">
                                     <TemplateFb
                                       postText={post.post}
                                       name={post.account.username}
@@ -256,7 +256,7 @@ const SlideOver = () => {
                                 );
                               case "instagram":
                                 return (
-                                  <MobileContainer>
+                                  <MobileContainer platform="instagram">
                                     <TemplateInstagram
                                       postText={post.post}
                                       name={post.account.username}

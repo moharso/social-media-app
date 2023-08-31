@@ -315,6 +315,9 @@
   display: flex;
   padding: 12px 16px;
 }
+.PhoneMainHeaderInstagram {
+  justify-content: space-between;
+}
 .PhoneMainBody {
   flex: 1 1 auto;
   overflow: auto;
@@ -360,7 +363,9 @@
   height: 24px;
   margin-left: auto;
 }
-
+.PhoneMainHeaderImgInstagram {
+  margin-left: 0;
+}
 .SlideOverImgV {
   color: #fff;
   display: flex;

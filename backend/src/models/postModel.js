@@ -3,12 +3,9 @@ const mongoose = require("mongoose");
 const {Schema} = require("mongoose");
 
 const postSchema = new Schema({
-
-
   post: {
     type: String,
     trim: true,
-    // required: [true, "A post must have a post text"],
     maxlength: [150, "A post must have less or equal then 150 characters"],
   },
   startDate: {
@@ -25,12 +22,6 @@ const postSchema = new Schema({
     ref: "Account",
     required: [true, "Post must belong to the account"],
   },
-
-  // user: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: [true, "Post must belong to the user"],
-  // },
 });
 
 postSchema.pre(/^find/, function (next) {
@@ -38,7 +29,6 @@ postSchema.pre(/^find/, function (next) {
     path: "account",
     select: "platform username",
   });
-  // .lean();
 
   next();
 });
@@ -46,4 +36,3 @@ postSchema.pre(/^find/, function (next) {
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
-

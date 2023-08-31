@@ -6,21 +6,15 @@ const AppError = require("./../utils/appError");
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, callbackFunc) => {
-    // the first argument is an error
     callbackFunc(null, `${__dirname}/../public/img/accounts`);
   },
   filename: (req, file, callbackfunc) => {
-    // we will give files unique names:account-accountID-current time stamp.jpg
-
-    // we will get png, jpeg or svg
     const extention = file.mimetype.split("/")[1];
     callbackfunc(null, `user-${Date.now()}.${extention}`);
   },
 });
 
 const multerFilter = (req, file, callbackFunc) => {
-  // to check if file is an image
-
   if (file.mimetype.startsWith("image")) {
     callbackFunc(null, true);
   } else {
