@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import DeleteButton from "../deleteUser/deleteUser";
 
 const UserDataComponent: React.FC = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -28,7 +29,7 @@ const UserDataComponent: React.FC = () => {
   const handleSaveClick = async () => {
     try {
       const response = await axios.put(`http://localhost:4001/api/update/${userData.email}`, {
-        name: newName,
+        name: newName
       });
 
       setUserData(response.data);
@@ -39,20 +40,23 @@ const UserDataComponent: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-md mx-auto rounded flex justify-center">
       {userData ? (
         <div>
-          <h1>User Data</h1>
+          <h2 className="text-4xl font-semibold mb-4 p-4">User information</h2>
           {editing ? (
-            <div>
-              <p>Name: <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} /></p>
-              <button onClick={handleSaveClick}>Save</button>
+            <div className="p-4">
+              <p className="mb-2">Name: <input className="border rounded p-1" type="text" value={newName} onChange={(e) => setNewName(e.target.value)} /></p>
+              <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={handleSaveClick}>Save</button>
             </div>
           ) : (
             <div>
-              <p>Name: {userData.name}</p>
-              <p>Email: {userData.email}</p>
-              <button onClick={handleEditClick}>Edit Name</button>
+              <p className="mb-2 p-3">Name: {userData.name}</p>
+              <p className="mb-2 p-3">Email: {userData.email}</p>
+              <div className="flex gap-8 p-3">
+              <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={handleEditClick}>Edit Name</button>
+              <DeleteButton></DeleteButton>
+              </div>
             </div>
           )}
         </div>

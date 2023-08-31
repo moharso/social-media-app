@@ -97,6 +97,10 @@ const AddCaption = ({
 
       formData.append("account", account._id);
 
+      localStorage.setItem("postDate", newEvent2.startDate);
+      localStorage.setItem("post", newEvent2.post);
+      localStorage.setItem("image", newEvent2.selectedImage2);
+
       const response = await axios.post(`${BASE_URL}/posts`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

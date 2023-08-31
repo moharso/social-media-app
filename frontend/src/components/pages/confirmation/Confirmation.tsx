@@ -9,7 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {NavLink} from "react-router-dom";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
@@ -17,6 +17,11 @@ import axios from "axios";
 const Confirmation = ({openDialog, openDialogFunc, isDelete}: any) => {
 
   const [open, setOpen] = useState(openDialog);
+
+
+  const getEmail = localStorage.getItem("email")
+  const getPost = localStorage.getItem("post")
+  const getImage = localStorage.getItem("image")
   
   const handleClose = () => {
     setOpen(false);
@@ -61,8 +66,8 @@ const Confirmation = ({openDialog, openDialogFunc, isDelete}: any) => {
                 <span className="font-bold text-3xl">
                   Your post is scheduled
                 </span>
-                <span className="text-sky-600 font-bold">username</span>
-                <img src="" alt="post visual"></img>
+                <span className="text-sky-600 font-bold">{getEmail}</span>
+                <span>"{getPost}"</span>
                 <ConfirmationDate></ConfirmationDate>
               </span>
             </span>

@@ -8,8 +8,7 @@ const app = require("./index");
 
 const DB = process.env.MONGODB_URL
 
-mongoose
-  .connect(DB, {useUnifiedTopology: true})
+mongoose.connect(DB, {useUnifiedTopology: true})
   .then((conn) => {
     console.log("DB connection successful");
   })
