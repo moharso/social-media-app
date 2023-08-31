@@ -41,7 +41,6 @@ const PageNavigation = () => {
         <NavButton
           buttonText="Log In/Sign up"
           variant="contained"
-          // to="/"
           onClick={toggleForm}
         ></NavButton>
         {showForm && formMode === FormMode.Registration && (

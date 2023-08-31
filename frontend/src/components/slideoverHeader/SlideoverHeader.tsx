@@ -2,31 +2,17 @@ import {HiOutlineTrash} from "react-icons/hi2";
 import SelectedUsers from "../SelectedUsers/SelectedUsers";
 import "./SlideoverHeader.css";
 import Button from "../reusableComponents/button/Button";
-const SlideoverHeader = ({param, account, clickDelete, clickPost}: any) => {
-  // const {userSelected} = useContext(PostContext);
 
-  // const [myUsersList, setMyUsersList] = useState({
-  //   mediaIcon: "",
-  //   username: "",
-  // });
-  // useEffect(
-  //   function () {
-  //     async function fetchAccount() {
-  //       try {
-  //         const res = await axios.get(
-  //           `http://localhost:4001/api/v1/accounts/${userSelected}`
-  //         );
-  //         setMyUsersList(res.data.data.account);
-  //         console.log(res);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //     fetchAccount();
-  //   },
-  //   [userSelected]
-  // );
-
+type SlideoverHeaderProps = {
+  param: string | undefined;
+  account: any;
+  clickDelete: () => void;
+};
+const SlideoverHeader = ({
+  param,
+  account,
+  clickDelete,
+}: SlideoverHeaderProps) => {
   return (
     <>
       <div className="top-0 mt-4">
@@ -53,16 +39,10 @@ const SlideoverHeader = ({param, account, clickDelete, clickPost}: any) => {
               >
                 <HiOutlineTrash className="h-5 w-5 " />
               </button>
-
-              {/* <button className="SlideoverBtn" onClick={clickPost}> */}
-              {/* <NavLink to={"/post}"}> */}
-              <Button text=" Edit post" link={`?isPostCreationDone=true`}>
-                {/* {`?isPostCreationDone=true`} */}
-              </Button>
-              {/* </NavLink> */}
-              {/* <button className="SlideoverBtn" onClick={clickPost}>
-              Edit post
-            </button> */}
+              <Button
+                text=" Edit post"
+                link={`?isPostCreationDone=true`}
+              ></Button>
             </div>
           ) : null}
         </div>

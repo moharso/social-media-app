@@ -1,6 +1,10 @@
-import React from "react";
+type TemplatePinterestProps = {
+  postText: string;
+  name: string;
+  img: string;
+};
 
-const TemplatePinterest = ({postText, name, img}: any) => {
+const TemplatePinterest = ({postText, name, img}: TemplatePinterestProps) => {
   return (
     <div className="DesktopVersion Pinterest">
       <main className="DesktopVersionMain">

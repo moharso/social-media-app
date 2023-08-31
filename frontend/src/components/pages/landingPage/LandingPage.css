@@ -1,9 +1,3 @@
-/* .LandingPage {
-  background-image: url(../../assets/landingpageimg.jpg);
-  background-position: center;
-  background-size: cover;
-  background-position: fixed;
-} */
 .img-landing {
   height: auto;
   max-width: 100%;
@@ -14,4 +8,35 @@
   background-color: #eff6ff;
   z-index: 9999;
   box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+}
+
+.TrustedSection {
+  background-color: #fff;
+  padding-bottom: 30px;
+  padding-top: 40px;
+  text-align: center;
+}
+
+.TrustedSectionContainer {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.TrustedSectionContainer h2 {
+  color: #343c4e;
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.TrustedSectionContainerWrapper {
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 970px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }

@@ -1,9 +1,7 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Homepage from "./../pages/homepage/Homepage";
-import Post from "./../pages/post/Post";
 import PageNotFound from "./../pages/pageNotFound/PageNotFound";
 import LandingPage from "./../pages/landingPage/LandingPage";
-import Confirmation from "./../pages/confirmation/Confirmation";
 import CalendarView from "./../calendarView/CalendarView";
 import SlideOver from "./../slideOver/SlideOver";
 import AccountView from "./../accountView/AccountView";
@@ -42,8 +40,6 @@ const Router = () => {
             }
           />
           <Route path="calendar/:id" element={<SlideOver />} />
-          {/* <Route path="calendar/post" element={<SlideOver />} /> */}
-
           <Route
             path="settings"
             element={
@@ -70,8 +66,6 @@ const Router = () => {
             }
           />
         </Route>
-        {/* <Route path="/post" element={<Post />} /> */}
-        {/* <Route path="confirmation" element={<Confirmation />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

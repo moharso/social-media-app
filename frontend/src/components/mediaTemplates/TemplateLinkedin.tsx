@@ -1,6 +1,10 @@
-import React from "react";
+type TemplateLinkedinProps = {
+  postText: string;
+  name: string;
+  img: string;
+};
 
-const TemplateLinkedin = ({postText, name, img}: any) => {
+const TemplateLinkedin = ({postText, name, img}: TemplateLinkedinProps) => {
   return (
     <div className="DesktopVersion">
       <header className="DesktopVersionHeader">

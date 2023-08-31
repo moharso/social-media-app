@@ -1,60 +1,22 @@
 import React from "react";
-import {useState, useContext, useEffect, FC} from "react";
+import {useState} from "react";
 import "./UploadPhoto.css";
-import myUsersList from "../data/data";
-import SelectedUsers from "../SelectedUsers/SelectedUsers";
-import {PostContext} from "../../context/PostContext";
-import axios from "axios";
 import {Tooltip} from "@mui/material";
 
-interface Props {}
+interface UploadPhotoProps {
+  pickImage: (item: any) => void;
+  isPostCreationDone: string | null;
+  post: any;
+}
 
-const UploadPhoto = ({pickImage, children, isPostCreationDone, post}: any) => {
-  const {userSelected} = useContext(PostContext);
+const UploadPhoto = ({
+  pickImage,
+  isPostCreationDone,
+  post,
+}: UploadPhotoProps) => {
   const [selectedImage, setSelectedImage] = useState<any>(
     isPostCreationDone ? post.image : ""
   );
-  console.log(typeof selectedImage);
-  //   function DynamicImage({ imageName }) {
-  //   const imagePath = ./images/${imageName};
-
-  //   // Dynamically import the image using import()
-  //   const ImageComponent = React.lazy(() => import(${imagePath}));
-
-  //   return <ImageComponent />;
-  // }
-
-  // console.log(URL.createObjectURL(selectedImage));
-  // const [myUsersList, setMyUsersList] = useState({
-  //   mediaIcon: "",
-  //   username: "",
-  // });
-
-  // const handleFileChange = (e: any) => {
-  //   const img = {
-  //     preview: URL.createObjectURL(e.target.files[0]),
-  //     data: e.target.files[0],
-  //   };
-  //   setSelectedImage(img.data);
-  // };
-
-  // useEffect(
-  //   function () {
-  //     async function fetchAccount() {
-  //       try {
-  //         const res = await axios.get(
-  //           `http://localhost:4001/api/v1/accounts/${userSelected}`
-  //         );
-  //         setMyUsersList(res.data.data.account);
-  //         console.log(res);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //     fetchAccount();
-  //   },
-  //   [userSelected]
-  // );
 
   return (
     <div className="w-full h-full flex items-center px-20 pt-10 pb-15 bg-gray-100  flex-col space-y-5 basis-6/12">

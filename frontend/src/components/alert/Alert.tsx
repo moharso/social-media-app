@@ -1,7 +1,11 @@
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 
-const Alerting = ({text, severity, reason}: any) => {
+type AlertingProps = {
+  text: string;
+  severity: any;
+};
+
+const Alerting = ({text, severity}: AlertingProps) => {
   return (
     <Alert variant="filled" severity={severity}>
       {text}— Check it out!

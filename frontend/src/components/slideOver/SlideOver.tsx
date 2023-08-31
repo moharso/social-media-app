@@ -1,14 +1,7 @@
 import React, {useState, useEffect, useContext} from "react";
 import "./SlideOver.css";
-import {HiOutlineTrash} from "react-icons/hi2";
-// @ts-ignore
-import Facebook from "../assets/facebook.svg";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Post from "../pages/post/Post";
-import UploadPhoto from "./../uploadPhoto/UploadPhoto";
-
-import AddCaption from "./../addCaption/AddCaption";
-
 import "react-datepicker/dist/react-datepicker.css";
 import SlideoverHeader from "../slideoverHeader/SlideoverHeader";
 import CloseButton from "../reusableComponents/closeButton/CloseButton";
@@ -23,11 +16,9 @@ import MobileContainer from "../reusableComponents/MobileContainer.tsx/MobileCon
 import Confirmation from "../pages/confirmation/Confirmation";
 import {useSearchParams} from "react-router-dom";
 import Alerting from "../alert/Alert";
-// import HomePageImage from "../reusableComponents/homepageImage/HomePageImage";
 
 const SlideOver = () => {
   const {userSelected} = useContext(PostContext);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(true);
   const [post, setPost] = useState<any>({});
   const navigate = useNavigate();
@@ -41,7 +32,6 @@ const SlideOver = () => {
   const isPostCreationDone = searchParams.get("isPostCreationDone");
   const [isError, setIsError] = useState("");
   function handleOpenDialog() {
-    // setSelectedImage(URL.createObjectURL(item));
     setOpenDialog(!openDialog);
     setIsDelete(!isDelete);
   }
@@ -82,7 +72,6 @@ const SlideOver = () => {
           setAccount(res.data.data.account);
         } catch (err: any) {
           setIsError(err.message);
-          // console.log(err);
         }
       }
       if (id === "post") fetchAccount();
@@ -108,8 +97,6 @@ const SlideOver = () => {
     },
     [id]
   );
-
-  if (isError) return <Alerting severity="error" text={isError} />;
 
   return (
     <>
@@ -321,7 +308,6 @@ const SlideOver = () => {
           </div>
         </div>
       </div>
-      {/* ) : null} */}
     </>
   );
 };

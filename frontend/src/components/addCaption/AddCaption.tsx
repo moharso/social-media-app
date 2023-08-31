@@ -1,28 +1,42 @@
 import "./AddCaption.css";
-import {useState, useEffect, useRef, useContext} from "react";
+import {useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {PostContext} from "../../context/PostContext";
 import moment from "moment";
 import NavButton from "../reusableComponents/navigationButton/NavButton";
 import CrossPost from "../CrossPost/CrossPost";
 import "./AddCaption.css";
 import SlideoverHeader from "../reusableComponents/slideoverHeader/SlideoverHeader";
 import TextArea from "../textArea/TextArea";
-import {useForm, Controller} from "react-hook-form";
 import axios from "axios";
-import {NavLink, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+
+const BASE_URL = "http://localhost:4001/api/v1";
+
+type AddCaptionProps = {
+  selectedImage: string;
+  account: any;
+  openDialog: () => void;
+  post: any;
+  isPostCreationDone: string | null;
+  openAlert: () => void;
+};
 
 const AddCaption = ({
   selectedImage,
   account,
-  selectedImage2,
   openDialog,
   post,
   isPostCreationDone,
   openAlert,
-}: any) => {
-  const [newEvent2, setNewEvent2] = useState<any>(
+}: AddCaptionProps) => {
+  const [newEvent, setNewEvent] = useState<{
+    post: string | "";
+    startDate: any;
+    endDate: any;
+    image: string | "";
+    account: any[];
+  }>(
     isPostCreationDone
       ? {
           post: post?.post,
@@ -41,58 +55,50 @@ const AddCaption = ({
           account: [],
         }
   );
-
-  const BASE_URL = "http://localhost:4001/api/v1";
+  console.log(isPostCreationDone, typeof isPostCreationDone);
   const navigate = useNavigate();
   const {id} = useParams();
 
   const handleCalendarClose = () => {
-    const endate2 = moment(newEvent2.startDate).add(1, "hours").toISOString();
-    setNewEvent2({...newEvent2, endDate: moment(endate2).toDate()});
+    const endate = moment(newEvent.startDate).add(1, "hours").toISOString();
+    setNewEvent({...newEvent, endDate: moment(endate).toDate()});
   };
 
-  const handleTextChange = (post: any) => {
-    setNewEvent2({...newEvent2, post});
+  const handleTextChange = (post: string | "") => {
+    setNewEvent({...newEvent, post});
   };
 
-  const handleUpdate = () => {
-    openAlert();
-  };
+  // const handleUpdate = () => {
+  //   openAlert();
+  // };
 
-  const filterPassedTime = (date: any) =>
+  const filterPassedTime = (date: Date) =>
     new Date().getTime() <= date.getTime();
 
   const submitForm = async (e: any) => {
     try {
       e.preventDefault();
       const formData = new FormData();
-      formData.append("post", newEvent2.post);
-      formData.append("startDate", newEvent2.startDate);
-      formData.append("endDate", newEvent2.endDate);
-      formData.append("image", selectedImage2);
+      formData.append("post", newEvent.post);
+      formData.append("startDate", newEvent.startDate);
+      formData.append("endDate", newEvent.endDate);
+      formData.append("image", selectedImage);
       formData.append("account", account._id);
 
       if (isPostCreationDone) {
-        const response = await axios.patch(
-          `${BASE_URL}/posts/${id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-      } else {
-        const response = await axios.post(`${BASE_URL}/posts`, formData, {
+        await axios.patch(`${BASE_URL}/posts/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(response);
+      } else {
+        await axios.post(`${BASE_URL}/posts`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return (
@@ -158,9 +164,9 @@ const AddCaption = ({
                     <DatePicker
                       showIcon
                       placeholderText="Select date and time..."
-                      selected={newEvent2.startDate}
+                      selected={newEvent.startDate}
                       onChange={(startDate) => {
-                        setNewEvent2({...newEvent2, startDate});
+                        setNewEvent({...newEvent, startDate});
                       }}
                       showTimeSelect
                       minDate={new Date()}
@@ -185,32 +191,15 @@ const AddCaption = ({
                 !isPostCreationDone ? navigate("/app") : navigate(-1);
               }}
             ></NavButton>
-            {/* <NavButton
-              buttonText="Cancel"
-              variant="outlined"
-              onClick={() => navigate(-1)}
-            ></NavButton> */}
 
-            {/* <NavLink to="/app"> */}
             <NavButton
               variant="contained"
               type="submit"
               buttonText="Schedule a post"
-              // onClick={openDialog}
               onClick={() => {
                 !isPostCreationDone ? openDialog() : openAlert();
               }}
             ></NavButton>
-            {/* </NavLink> */}
-            {/* <Button onClick={handleClose}>Schedule a new post</Button>
-            <NavLink to="/app">
-              <Button onClick={handleClose} autoFocus>
-                Go to calendar
-              </Button>
-            </NavLink> */}
-            {/* <button type="submit"> */}
-            {/* onClick={(e) => submitForm(e)} */}
-            {/* </button> */}
           </div>
         </div>
       </form>
