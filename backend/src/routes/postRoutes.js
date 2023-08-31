@@ -5,7 +5,6 @@ const router = express.Router();
 router
   .route("/")
   .get(postController.getAllPosts)
-
   .post(postController.uploadPostPhoto, postController.createPost);
 
 router

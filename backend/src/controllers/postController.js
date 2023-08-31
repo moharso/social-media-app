@@ -84,13 +84,6 @@ exports.createPost = async (req, res) => {
     if (req.file) filteredBody.image = req.file.filename;
     const newPost = await Post.create(filteredBody);
 
-    console.log(newPost);
-    // await newPost.save();
-    // console.log(newPost);
-    // const account = await Account.findById({_id: newPost.account});
-    // account.publishedPosts.push(book);
-    // await account.save();
-
     res.status(201).json({
       status: "success",
       data: {
